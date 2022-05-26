@@ -27,6 +27,13 @@
 
 /********************** Global Css ********************/
 
+.no-result {
+  text-align: center;
+  img {width: 15%; height:auto;}
+
+  p {font-size: 30px; font-weight: bold;}
+}
+
 // Header hide and show
 
 @media(max-width: 1024px) {
