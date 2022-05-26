@@ -1,0 +1,128 @@
+<div class="header-mobile">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button> </ion-back-button>
+      </ion-buttons>
+  
+      <ion-menu-button slot="start"></ion-menu-button>
+  
+  
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+  
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<ion-content>
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+  <div class="test-top">
+    <div class="top-title">
+      <h3> Single choice </h3>
+      <ion-icon (click)="presentModal()"  name="help-circle-outline"></ion-icon>
+    </div>    
+  </div>
+
+
+<form [formGroup]="singleForm">
+
+  <h3 class="total-result"> {{ lengthQuestion + ' / ' + (currentIndex+1) }} </h3>
+    
+  <ion-slides [pager]="false" #slides [options]="slideOpts">
+    <ion-slide *ngFor="let singleItem of exerciseItems">
+      <ion-grid>
+        <ion-list class="single-choice">
+          <ion-grid class="sound-group">
+            <ion-row>
+            <ion-col size="4">
+                <div *ngIf="singleItem.voiceDanishPath">
+                  <div class="sound-question">
+                      <div class="img-volume">
+                        <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="!singleItem.audioElementDanish.status? 'play' : 'stop'" (click)="playAudio('',singleItem)">
+                        </ion-icon>
+                      </div>
+                    <img class="danish-flag" src="../../../assets/icon/da.png" alt="" />
+                  </div>
+                </div>
+            </ion-col>
+
+          <ion-col size="4" >
+            <div *ngIf="singleItem.singleChoiceTranslations[0]?.voicePath">
+              <div class="sound-question">
+                  <div class="img-volume">
+                    <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="!singleItem.audioElement.status? 'play' : 'stop'" (click)="playAudio('native',singleItem)">
+                    </ion-icon>
+                  </div>
+                <img class="img-lang" [src]="userInfo.languageIcon" alt="" />
+              </div>
+            </div>
+          </ion-col>
+          </ion-row>
+          </ion-grid>
+
+          <ion-radio-group formControlName="answer">
+
+            <ion-list-header>
+              <ion-text> {{ singleItem.question }} </ion-text>
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label>JA</ion-label>
+              <ion-radio [value]="true"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>NEJ</ion-label>
+              <ion-radio [value]="false"></ion-radio>
+            </ion-item>
+
+          </ion-radio-group>
+
+          <ion-grid>
+            <ion-row class="ion-padding ion-justify-content-center">
+
+              <ion-col size="12" size-lg="6">
+                <ion-button
+                  [ngClass]="{'hideButtonNext': singleForm.invalid }"
+                  (click)="slidePrev()">
+                  <ion-icon name="chevron-back-outline"></ion-icon>
+                    Prev
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="12" size-lg="6">
+                <ion-button
+                  [ngClass]="{'hideButtonNext': singleForm.invalid }"
+                  (click)="slideNext(singleItem.id,singleForm.value)">
+                    Next
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+
+            </ion-row>
+
+          </ion-grid>
+
+        </ion-list>
+      </ion-grid>
+
+    </ion-slide>
+  </ion-slides>
+  </form>
+
+</ion-content>

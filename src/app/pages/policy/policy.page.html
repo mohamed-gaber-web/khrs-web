@@ -1,0 +1,49 @@
+<!-- <div class="header-mobile">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button> </ion-back-button>
+      </ion-buttons>
+  
+      <ion-menu-button slot="start"></ion-menu-button>
+  
+  
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+  
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div> -->
+
+<div class="top-title privacy">
+  <h3> Privacy policy</h3>
+</div>
+
+<ion-content>
+
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="10">
+        <div class="privacy-policy" *ngFor="let policy of policyData">
+          <ion-text [innerHTML]="policy.content"></ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

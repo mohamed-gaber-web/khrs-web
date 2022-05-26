@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+@import '~swiper/swiper-bundle';
+
+
+/* header Top */
+ion-icon {font-size: 35px;}
+
+
+ion-header ion-img {
+  width: 35px;
+  height: auto;
+  margin-top: 10px;
+}
+
+
+.img-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-avatar {
+    width: 60px;
+    margin: 5px 0;
+    height: 60px;
+  }
+
+  ion-label {
+    font-size: 15px;
+    padding-left: 10px;
+  }
+}
+
+.img-course-intro {
+  margin-bottom: 30px;
+
+  .img-volume {
+    text-align: center;
+    margin: auto;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: 12px;
+  }
+}
+
+.icon-sound {
+  background-color: #A7F781;
+  border: 1px solid #fff;
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  line-height: 75px;
+  text-align: center;
+  margin: auto;
+  // bottom: -20px;
+
+  ion-icon {
+    font-size: 32px;
+    color: var(--ion-color-second-app)!important;
+  }
+
+}
+
+ion-slides {
+  height: 700px!important;
+}
+.course__material {
+
+  .course__material-block {
+
+    // -webkit-box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+    // box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+    padding: 30px;
+    border-radius: 10px;
+    // background-color: var(--ion-color-material-bg)!important;
+    height: 600px;
+    overflow: auto;
+    border: 1px solid #ccc;
+
+    ion-img.material-image {
+      border: 2px solid #e8e8e8;
+      width: 50%;
+      padding: 0;
+      margin: 0 auto 20px auto;
+    }
+
+  }
+
+}
+
+.slide-button {
+  ion-icon {
+    font-size: 25px;
+  }
+
+}
+
+ion-spinner{
+  margin: auto;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+
+.img-langauge {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 13px;
+  top: 14px;
+  border: 1px solid #ccc;
+}
+
+
+
+.course__sound {
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.course-material-count {
+  position: fixed;
+  left: 50px;
+  top: 200px;
+  text-align: center;
+  margin-top: 20px;
+
+  h4 {
+    color: rgb(0 49 130);
+    font-size: 18px;
+    font-weight: 500;
+
+    b {
+      background-color: rgb(33 185 68);
+      padding: 15px;
+      color: rgb(255 255 255);
+      border-radius: 50px;
+    }
+}
+}
+
+
+@media(max-width: 767px) {
+  .course-material-count {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+}

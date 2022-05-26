@@ -1,0 +1,42 @@
+<header class="top-header">
+  <div class="logo">
+    <a [routerLink]="['/']"> <img src="../../assets/images/logo.png" /> </a>
+  </div>
+
+  <nav>
+    <ul>
+      <li
+        routerLinkActive="active"
+        [routerLink]="['/courses/tabs/all-courses']"
+        [routerLinkActiveOptions]="{exact:true}"> All courses </li>
+      <li routerLinkActive="active"  [routerLink]="['/courses/tabs/my-courses']"> My courses </li>
+      <li routerLinkActive="active"  [routerLink]="['/policy']"> Privacy policy </li>
+      <li routerLinkActive="active"  [routerLink]="['/faq']"> FAQ </li>
+      <li routerLinkActive="active"  [routerLink]="['/contact-us']"> Contact us </li>
+    </ul>
+  </nav>
+  <div class="user" >
+    <ul style="margin-top: 10px;">
+      <li [matMenuTriggerFor]="menu">
+          {{ userInfo.firstname + ' ' +  userInfo.lastname }}
+        <ion-icon name="chevron-down-outline"></ion-icon>  </li>
+      <mat-menu #menu="matMenu">
+        <button *ngIf="authService.IsLoggedIn" mat-menu-item [routerLink]="['/auth/user-profile']">Profile</button>
+        <button *ngIf="authService.IsLoggedIn" mat-menu-item [routerLink]="['/course-status']">Course status</button>
+        <button (click)="logout()" *ngIf="authService.IsLoggedIn" mat-menu-item>Logout</button>
+      </mat-menu>
+    </ul>
+    <div class="user-notification">
+      <ion-icon (click)="toggleModal()" name="notifications"> </ion-icon>
+      <span> {{notifiCount}} </span>
+      <div *ngIf="toggle" class="user-noti-card">
+        <div *ngFor="let itemNotifi of listNotifi">
+          <p [routerLink]="['/courses/course-material', itemNotifi.courseId]" [queryParams]="{offset: itemNotifi.offset}" *ngIf="itemNotifi.type === 0"> {{ itemNotifi.courseName }} | You reached page {{ itemNotifi.offset }} </p>
+          <hr />
+        </div>
+      </div>
+    </div>
+      <li> <ion-toggle (ionChange)="onToggleColorTheme($event)" color="primary"></ion-toggle> </li>
+  </div>
+
+</header>

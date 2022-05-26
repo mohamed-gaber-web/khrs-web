@@ -1,0 +1,115 @@
+<ion-content class="background-image" no-scroll>
+
+  <div style="margin: 30px auto 0 auto!important; text-align: center;"> 
+    <img class="intro-logo" src="../../assets/images/logo.png" alt="logo-intro" />  
+  </div>
+
+  <div class="sign-in-form">
+
+    <div class="top-title">
+      <h3> {{ 'Log In' }} </h3>
+    </div>
+    
+    <ion-grid [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)" class="padding">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-lg="6" >
+          <ion-item #theItem>
+            <ion-label position="floating">
+              <ion-icon name="person"></ion-icon> {{ 'Email' | translate }}
+            </ion-label>
+            <ion-input type="text" formControlName="Email" required></ion-input>
+          </ion-item>
+          <ion-text class="error-input" color="danger" *ngIf="loginFormErrors.Email">{{loginFormErrors.Email}}</ion-text>
+
+          <ion-item #theItem>
+            <ion-label position="floating">
+              <ion-icon name="lock-closed-sharp"></ion-icon> {{ 'Password' | translate }}
+            </ion-label>
+            <div class="login-show-password">
+              <ion-input  [type]="showPasswordItem ? 'text' : 'password' " formControlName="Password" required></ion-input>
+              <ion-icon  (click)="showPassword()" class="icon-eye" name="eye-outline"></ion-icon>
+            </div>
+            
+          </ion-item>
+          <ion-text color="danger" *ngIf="loginFormErrors.Password">{{loginFormErrors.Password}}</ion-text>
+
+          <p> <a style="color: #003182;" href="/auth/forget-password"> {{ 'Forgotten password?' }} </a> </p>
+
+          <div style="text-align: center; margin: 30px 0;">
+            <ion-button (click)="onLoginFormSubmit(loginForm.value)" [disabled]="isLoading || !loginForm.valid">
+              {{ 'Log in' }}
+            </ion-button>
+          </div>
+          <p class="no-account">{{ 'Don’t have an account yet ?' | translate }} <span> <a [routerLink]="['/auth/sign-up']">{{ 'Signup' | translate }} </a> </span> </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <div class="nav-footer">
+    <nav>
+      <ul>
+        <li (click)="privacy()"> Privacy policy </li>
+        <li (click)="open(content)"> <span class="intro-link" 
+          mat-raised-button
+          matTooltipPosition="above"
+          matTooltip="Watch intro video"
+          aria-label="watch intro video"> Intro video </span> </li>
+      </ul>
+ 
+    </nav>
+  </div>
+
+  <div class="icon-store">
+    <a href="https://play.google.com/store/apps/details?id=app.io.easylearn"><img src="../../../assets/icon/google-play.png" alt="google play" /></a>
+    <img 
+    mat-raised-button
+    matTooltipPosition="above"
+    matTooltip="Scan android"
+    aria-label="Scan android"
+    style="cursor: pointer;" (click)="open(content_android)"  class="scan" src="../../../assets/icon/Android.png" alt="app store" />
+    
+    <a href="https://apps.apple.com/eg/app/e-asylearn/id1594343823"><img src="../../../assets/icon/app-store.png" alt="app store" /></a>
+    <img 
+    mat-raised-button
+    matTooltipPosition="above"
+    matTooltip="Scan IOS"
+    aria-label="wScan IOS"
+    style="cursor: pointer;" (click)="open(content_ios)" class="scan" src="../../../assets/icon/iOS.png" alt="app store" />
+  </div>
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="video-inro" *ngIf="introVideo">
+        <video #video width="100%" height="230" preload="metadata" poster="../../assets/images/Screenshot (54).png" controls>
+          <source [src]='introVideo.mediaPath' type="video/mp4">
+        </video>
+      </div>
+      <div *ngIf="!introVideo" style="font-size: 18px; text-align: center; font-weight: 500;"> No Intro video </div>
+    </div>
+  </ng-template>
+
+
+  <ng-template #content_ios let-modal>
+    <div class="modal-body ion-text-center">
+      <h3> IOS </h3>
+      <img class="scan" src="../../../assets/icon/iOS.png" alt="app store" />
+    </div>
+  </ng-template>
+
+  <ng-template #content_android let-modal>
+    <div class="modal-body ion-text-center">
+      <h3> android </h3>
+      <img class="scan" src="../../../assets/icon/Android.png" alt="app store" />
+    </div>
+  </ng-template>
+
+
+</ion-content>

@@ -1,0 +1,361 @@
+.ext-icon-vlume {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding: 15px 0px;
+}
+
+/* header Top */
+ion-header ion-img {
+  width: 35px;
+  height: auto;
+  margin-top: 10px;
+}
+
+
+.img-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-avatar {
+    width: 60px;
+    margin: 5px 0;
+    height: 60px;
+  }
+
+  ion-label {
+    font-size: 14 px;
+    padding-left: 10px;
+  }
+}
+
+/* end header top */
+
+.test-top{
+  margin-bottom: 30px;
+  ion-icon {
+    color: var(--ion-color-second-app);
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+    top: 13px;
+    margin-right: 20px;
+  }
+}
+
+
+ion-img.image-question {
+  width: 80px;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+
+.puzzle-answer {
+  margin-top: 20px;
+
+  .puzzle-fix {
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(255 255 255);
+    border: 1px dotted rgb(63 81 181);
+    height: 100px !important;
+    margin: 0 0 10px 0;
+    border-radius: 10px;
+    width: 100% !important;
+    padding-left: 30px;
+
+    .title {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ion-color-training-text);
+
+    }
+
+    .sound {
+      display: flex;
+      border: 2px dotted var(--ion-color-second-app);
+      border-radius:10px;
+      padding: 5px 10px;
+      margin: 0 5px;
+
+      .sound-bg {
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        border-radius: 50px;
+        margin-right: 10px;
+
+        .img-volume {
+          @extend .ext-icon-vlume;
+        }
+      }
+    }
+
+  }
+
+}
+
+
+.img-langauge {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 13px;
+  top: 14px;
+  border: 1px solid #ccc;
+}
+
+
+.drag-answer {
+
+
+  .puzzle-img ion-img{
+    width: 20px!important;
+    height: 20px!important;
+  }
+
+  .puzzle-answer{
+    margin-top: 0;
+    padding: 5px 0 !important;
+  }
+
+  .title {
+    margin-top: 0 !important;
+  }
+
+  .sound{
+    display: flex;
+
+    .sound-bg {
+
+      img {
+        width: 50px!important;
+        height: auto;
+      }
+    }
+
+    .img-volume ion-img {
+      width: 20px;
+      height: auto;
+  }
+  }
+
+
+}
+
+
+/************* DRAG AND DROP *****************/
+
+.example-box {
+  border: 1px solid #ccc!important;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: move;
+  background: white;
+  font-size: 16px;
+  height: 100px !important;
+  margin: 10px 0;
+  border-radius: 10px;
+
+  .puzzle-fix {
+    height: 50px !important;
+    padding: 15px;
+    margin: 0;
+  }
+
+
+  .sound {
+    padding: 0 5px 0 10px;
+  }
+
+  .title {margin-right: 5px;}
+
+  img.danish-flag {
+    width: 24px;
+    height: auto;
+}
+
+.drag-answer ion-img{
+  width: 50px;
+  height: auto;
+  position: relative;
+  top: -2px;
+}
+
+}
+
+.cdk-drag-preview {
+
+  border-radius: 10px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background-color: white;
+  padding: 10px!important;
+  width: 30%!important;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ion-color-second-app);
+
+  .sound-bg {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+  }
+
+  .img-volume {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    top: 15px;
+  }
+
+  .puzzle-fix {
+
+    height: 50px !important;
+
+    .title{
+      font-weight: 600!important;
+      padding: 0 5px!important;
+      width: 100%!important;
+    }
+
+    img.danish-flag {
+      width: 24px;
+      height: 24px;
+      max-width: 50%;
+    }
+
+  }
+
+}
+
+// .cdk-drop-list-receiving {
+//   background-color:rgba(167, 247, 129, 0.6);
+//   height: auto;
+//   color: var(--ion-color-second-app);
+// }
+
+// .cdk-drop-list-dragging{
+//   background-color:rgba(167, 247, 129, 0.6);
+//   height: 150px;
+//   width: 100%;
+//   border: 3px dotted var(--ion-color-second-app);
+//   color: var(--ion-color-second-app);
+// }
+
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 120ms cubic-bezier(0, 0, 0.2, 3);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+
+/************* DRAG AND DROP *****************/
+
+
+// .popover-content.sc-ion-popover-md {
+//   position: static!important;
+// }
+
+
+
+.total-result {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ion-color-second-app);
+  text-align: center;
+  background-color: #a7f781;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50px;
+  line-height: 60px ;
+  padding: 20px;
+}
+
+
+@media (max-width: 767px) {
+  // .scrollable {
+  //   height: 230px;
+  //   overflow: auto;
+  // }
+  .example-box {
+    height: 75px !important;
+  }
+
+  .puzzle-answer .puzzle-fix {
+    height: 60px !important;
+    margin: 0 0 5px 0;
+    padding: 0;
+  }
+
+}
+
+
+@media(max-width: 449px) {
+  .example-box .puzzle-answer .puzzle-fix .sound {
+    border: none!important;
+  }
+
+  .example-box .puzzle-fix .title {
+    width: 100%!important;
+}
+
+.example-box .puzzle-fix {width: 300px;}
+.example-box .puzzle-answer .puzzle-fix .sound {width: 45%; padding: 0; margin: 0;}
+.example-box .puzzle-answer .puzzle-fix .title {font-size: 13px !important;}
+.title{
+  font-size: 13px !important;
+}
+}
+
+
+@media(min-width: 420px) and (max-width: 450px) {
+
+.example-box .puzzle-fix {width: 330px;}
+}
+
+
+
+@media(min-width: 450px) and (max-width: 600px) {
+  .example-box .puzzle-answer .puzzle-fix .sound {
+    border: none!important;
+  }
+
+  .example-box .puzzle-fix {width: 400px;}
+  .example-box .puzzle-answer .puzzle-fix .sound {width: 45%; padding: 0; margin: 0;}
+  .example-box .puzzle-answer .puzzle-fix .title {font-size: 12px !important;}
+  .title{
+    font-size: 12px !important;
+  }
+
+}
+
+
+@media(min-width: 600px) and (max-width: 900px) {
+
+  .example-box .puzzle-fix {width: 600px;}
+  .example-box .puzzle-answer .puzzle-fix .sound {width: 18%;}
+}
+

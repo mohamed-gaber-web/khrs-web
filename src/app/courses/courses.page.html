@@ -1,0 +1,55 @@
+<div class="header-mobile">
+  <ion-header class="course">
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/courses/tabs/all-courses"> </ion-back-button>
+      </ion-buttons>
+  
+      <ion-menu-button slot="start"></ion-menu-button>
+  
+  
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img loading="lazy" *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img loading="lazy" *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+  
+  
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img loading="lazy" class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+  
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<ion-content>
+
+  <ion-tabs >
+
+    <!-- <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="all-courses">
+        <ion-icon name="grid-outline"></ion-icon>
+        <ion-label>All Courses</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="my-courses">
+        <ion-icon name="documents-outline"></ion-icon>
+        <ion-label>My Courses</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar> -->
+
+  </ion-tabs>
+
+</ion-content>
+
+

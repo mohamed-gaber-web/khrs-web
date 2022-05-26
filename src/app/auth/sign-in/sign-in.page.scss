@@ -1,0 +1,192 @@
+.sign-in-form {
+
+  -webkit-box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+  box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+  padding: 5px 0;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 50%;
+  margin: 50px auto 0  auto;
+  border: 1px solid #ccc;
+
+  
+  ion-item {
+    --border-color: transparent;
+    --background: #f1f1f1;
+    --border-radius: 50px;
+    margin: 15px 0;
+
+    ion-label {
+      background-color: #f1f1f1!important;
+    }
+
+    ion-input {
+      --color: #000;
+      font-size: 16px;
+    }
+
+    ion-icon {
+      font-size: 16px;
+    }
+  }
+
+  p {
+    color: #003182;
+    font-size: 16px;
+    padding-top: 20px;
+  }
+
+  ion-button {
+    --background : var(--ion-color-second-app);
+    --border-radius: 50px!important;
+    font-size: 18px !important;
+    font-weight: 400;
+    width: 100%;
+    height: 45px;
+    margin: auto;
+    --box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.16);
+    text-transform: none;
+  }
+
+}
+
+p.no-account {
+  color: #003182;
+  font-size: 16px;
+  text-align: center;
+
+  span {
+    color: #003182;
+    font-weight: 800;
+    a {
+      color: #003182;
+      text-decoration: none;
+    }
+  }
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      font-size: 16px;
+      display: inline-block;
+      flex-direction: row;
+      padding: 0 10px;
+      color: #003182;
+      cursor: pointer;
+    }
+  }
+}
+
+.icon-store {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+  
+  img {
+    max-width: 50px;
+    height: auto;
+    padding: 0 5px;
+  }
+}
+
+.modal-header {
+  padding: 5px 10px !important; 
+  border: none !important;
+}
+
+.inro-screen {
+  margin: 30px 0 0 0;
+
+  .video-inro {
+    margin: 50px 0;
+  }
+
+  img.intro-logo {
+    max-width: 200px;
+    height:auto;
+  }
+
+}
+
+img.intro-logo {
+  max-width: 100%;
+  width: 200px;
+  height:auto;
+}
+
+
+@media(min-width: 550px) and (max-width: 2000px) {
+  .background-image{
+    --background: ;
+  }
+
+  ion-button {
+    --background : #003182;
+  }
+}
+
+@media(max-width: 1024px) {
+  .sign-in-form {
+    width: 90%;
+    margin: 100px auto 0  auto;
+  }
+
+  .icon-store {
+    width: 80%;
+  }
+
+  
+}
+
+@media(max-width: 480px) {
+  .sign-in-form {
+    padding: 20px 0;
+    margin: 50px auto 0  auto;
+
+    ion-button {
+      width: 80%;
+    } 
+  }
+
+
+}
+.intro-link {
+  background-color: rgb(0 49 130);
+  color: rgb(255 255 255);
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 600 !important;
+  border-radius: 10px;
+}
+
+h4.modal-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgb(0 49 130);
+  margin: auto;
+}
+
+
+.login-show-password {
+  ion-input {
+    position: relative; 
+  }
+  
+  ion-icon.icon-eye {
+    color: #000;
+    font-size: 20px!important;
+    position: absolute;
+    right: 30px;
+    top: 22px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,84 @@
+<ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar class="ios-toolbar" color="primary">
+      <ion-title style="text-align:center!important;">Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
+    <ion-list class="ion-margin-top">
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/courses/tabs/all-courses']">
+          <ion-icon color="primary" slot="start" name="grid-outline"></ion-icon>
+        All courses
+      </ion-item>
+      <ion-item [routerLink]="['/courses/tabs/my-courses']">
+        <ion-icon color="primary" slot="start" name="documents-outline"></ion-icon>
+        My courses
+      </ion-item>
+      <ion-item [routerLink]="['/policy']">
+        <ion-icon color="primary" slot="start" name="document-text-outline"></ion-icon>
+        Privacy policy
+      </ion-item>
+      <ion-item [routerLink]="['/faq']">
+        <ion-icon color="primary" slot="start" name="chatbox-ellipses-outline"></ion-icon>
+        FAQS
+      </ion-item>
+      <ion-item *ngIf="authService.IsLoggedIn" [routerLink]="['/auth/user-profile']">
+        <ion-icon color="primary" slot="start" name="settings-outline"></ion-icon>
+        Settings
+      </ion-item>
+      <ion-item *ngIf="authService.IsLoggedIn" (click)="logout()">
+        <ion-icon color="primary" slot="start" name="log-out-outline"></ion-icon>
+        Logout
+      </ion-item>
+      </ion-menu-toggle>
+
+    </ion-list>
+
+    <ion-list class="ion-margin-top info">
+      <ion-item>
+        <ion-icon name="map-outline"></ion-icon>
+        <ion-text> Vibevej 20, 3tv
+          <br />2400 København NV </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="phone-portrait-outline"></ion-icon>
+        <ion-text> + 45 35 36 22 09 </ion-text>
+      </ion-item>
+      <ion-item><ion-icon name="mail-outline"></ion-icon>
+       <a href="mailto:academy@khrs.dk"> <ion-text> academy@khrs.dk </ion-text> </a>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="social-media">
+      <ul>
+        <li> <a target="_blank" href="https://www.facebook.com/KHRS-Academy-105538624980761/"> <ion-img src="../assets/icon/facebook.png"></ion-img></a> </li>
+        <li> <a target="_blank" href="https://www.linkedin.com/company/72077685/admin/"> <ion-img src="../assets/icon/linkedin.png"></ion-img></a> </li>
+        <li> <a target="_blank" href="https://www.youtube.com/channel/UC6-wBAZmymU8F3zivjC9VVQ">
+          <ion-img src="../assets/icon/youtube (1) 1.png">
+          </ion-img></a>
+        </li>
+          <li> <a target="_blank" href="https://www.instagram.com/khrsacademy/">
+            <ion-img src="../assets/icon/instagram.png">
+            </ion-img></a>
+          </li>
+        </ul>
+
+        <ul>
+          <li> <a href="https://play.google.com/store/apps/details?id=app.io.easylearn"><img src="../../../assets/icon/google-play.png" alt="google play" /></a> </li>
+          <li>  <a href="https://apps.apple.com/eg/app/e-asylearn/id1594343823"><img src="../../../assets/icon/app-store.png" alt="app store" /></a>
+          </li>
+        </ul>
+    </div>
+
+  </ion-content>
+</ion-menu>
+
+
+
+<ion-app>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

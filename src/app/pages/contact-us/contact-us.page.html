@@ -1,0 +1,59 @@
+<div class="header-mobile">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button> </ion-back-button>
+      </ion-buttons>
+
+      <ion-menu-button slot="start"></ion-menu-button>
+
+
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<div class="top-title">
+  <h3> Contact us </h3>
+</div>
+
+<ion-content>
+  <div class="contact-us">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-lg="6" size-md="8" size-sm="12" size-xs="12">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <ion-icon name="mail-outline"></ion-icon>
+            <a href="mailto:academy@khrs.dk"> <ion-text> academy@khrs.dk </ion-text> </a>
+          </li>
+          <li class="list-group-item">
+            <ion-icon name="phone-portrait-outline"></ion-icon>
+            <ion-text> + 45 35 36 22 09 </ion-text>
+          </li>
+          <li class="list-group-item">
+            <ion-icon name="map-outline"></ion-icon>
+            <ion-text> Vibevej 20, 3tv <p> 2400 København NV </p> </ion-text>
+          </li>
+        </ul>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </div>
+</ion-content>
+

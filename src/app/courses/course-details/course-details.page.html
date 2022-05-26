@@ -1,0 +1,93 @@
+<ion-content class="ion-margin-bottom">
+
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+  <ion-grid class="course_details">
+    <ion-row>
+      <ion-col size-lg="7" size-md="8" size-sm="6" size-xs="12" *ngIf="courseDetails" class="course-details_left">
+          <h2 id="title" class="font-title-desktop">
+            {{ courseDetails.courseTranslations[0]?.title }}
+          </h2>
+
+          <p class="course-details-descr" *ngIf="courseDetails.courseTranslations[0]?.description !== null">
+            <ion-text>
+              {{courseDetails.courseTranslations[0]?.description}}
+            </ion-text>
+          </p>
+
+          <div *ngIf="courseDetails">
+
+          <div *ngIf="courseDetails.courseTranslations[0]?.introVoicePath" class="sound-inro">
+              <div class="img-person">
+                <img class="intro-logo" src="../../assets/images/char-person.png" />
+              </div>
+              <div class="icon-sound">
+                <div class="img-volume">
+                  <ion-img
+                  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-3" (click)="startAudio(courseDetails.courseTranslations[0]?.introVoicePath)" src="../../../assets/icon/Vector.png">
+                </ion-img>
+                </div>
+              </div>
+          </div>
+          <div class="no-voice" *ngIf="!courseDetails.courseTranslations[0]?.introVoicePath"> No voice in this course </div>
+        </div>
+
+
+      </ion-col>
+
+      <ion-col size-lg="3" size-md="4" size-sm="6" size-xs="12" class="course-right-block">
+        <div class="course-block">
+          <div *ngIf="courseDetails" class="course-info">
+              <ion-img loading="lazy" [src]="courseDetails?.imagePath"></ion-img>
+
+              <ul>
+                  <li> <ion-icon slot="start" name="alarm-outline"></ion-icon> <strong> Valid for: </strong> {{ courseDetails.duration }} day </li>
+              </ul>
+
+              <hr />
+
+              <ion-grid *ngIf="courseDetails" class="ion-margin-top ion-margin-bottom">
+                <ion-row class="ion-justify-content-center">
+                  <ion-col size="12" size-md="8" size-lg="8">
+                    <ion-button (click)="sendData($event, courseDetails.id)" *ngIf="courseDetails.statusName === null"> Apply </ion-button>
+                    <ion-button class="btn-outline" *ngIf="courseDetails.status == 2"> Expired Without Taking The Exam   </ion-button>
+                    <ion-button class="btn-outline" *ngIf="courseDetails.status == 3"> Failed  </ion-button>
+                    <button class="btn-outline" *ngIf="courseDetails.status == 4"> Applied And Waiting For Approval </button>
+                    <button class="btn-outline" *ngIf="courseDetails.status == 5"> In progress </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+              <ion-grid *ngIf="courseDetails" class="ion-margin-top ion-margin-bottom">
+                <ion-row class="ion-justify-content-center">
+                  <ion-col size="3" size-lg="3">
+                    <ion-text class="passed" *ngIf="courseDetails.status == 1">
+                      Passed
+                    </ion-text>
+                  </ion-col>
+
+                  <ion-col size="9" size-lg="3">
+                    <ion-text (click)="downloadCertificate()" class="statusMsg" *ngIf="courseDetails.status == 1">
+                      Certificate
+                      <ion-icon name="download-outline"></ion-icon>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </div>
+      </div>
+
+      <div class="course-block">
+        <div *ngIf="courseDetails" class="video-inro">
+          <video *ngIf="courseDetails.courseTranslations[0]?.introVideoPath" width="100%" height="200" controls>
+            <source [src]="courseDetails.courseTranslations[0]?.introVideoPath" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

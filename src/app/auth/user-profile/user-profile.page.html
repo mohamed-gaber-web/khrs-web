@@ -1,0 +1,186 @@
+<div class="header-mobile">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button> </ion-back-button>
+      </ion-buttons>
+
+      <ion-menu-button slot="start"></ion-menu-button>
+
+
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img *ngIf="userInfo.imagePath === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/img-profile.png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+
+<ion-content>
+
+  <div class="top-title profile">
+    <h3> User Profile </h3>
+  </div>
+
+<ion-grid class="user-profie">
+  <ion-row>
+    <ion-col size-lg="6" size-xs="12" size-sm="12" class="user-info">
+      <div class="card-block">
+        <div *ngIf="userInfo">
+          <ion-item>
+            <div class="user-img-profile">
+              <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+              <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+              src="../../../assets/images/image profille (1).png">
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary"> Firstname : {{ userInfo.firstname }} </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary"> Lastname : {{ userInfo.lastname }} </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary"> Phone Number : {{ userInfo.phoneNumber }} </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary"> Email : {{ userInfo.email }} </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary"> Gender : {{ userInfo.gender === '0' ? 'male' : 'female' }} </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary"> Birthday : {{ userInfo.birthdate }} </ion-label>
+          </ion-item>
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-lg="8" size-md="8">
+                <ion-button (click)="goToEditUser()"> <ion-icon name="create-outline"></ion-icon> Edit </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </div>
+      </div>
+    </ion-col>
+
+    <ion-col size-lg="6" size-xs="12" size-sm="12">
+      <div class="card-block">
+        <form class="user-info" [formGroup]="passwordForm" (ngSubmit)="updatedPassword()">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-lg="12" size-md="8">
+                <ion-item lines="none">
+                  <ion-label position="floating" color="primary">Current Password</ion-label>
+                  <ion-input formControlName='currentPassword' type="password" minlength="6" required></ion-input>
+                </ion-item>
+
+                <ion-text color="danger" *ngIf="passwordFormErrors.currentPassword">
+                  {{ passwordFormErrors.currentPassword }}
+                </ion-text>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-lg="12" size-md="8">
+                <ion-item lines="none">
+                  <ion-label position="floating" color="primary">New Password</ion-label>
+                  <ion-input formControlName='newPassword' type="password" required></ion-input>
+                </ion-item>
+                <ion-text color="danger" *ngIf="passwordFormErrors.newPassword">
+                  {{ passwordFormErrors.newPassword }}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-lg="12" size-md="8">
+                <ion-item lines="none">
+                  <ion-label position="floating" color="primary">Confirm Password</ion-label>
+                  <ion-input formControlName='confirmPassword' type="password" required></ion-input>
+                </ion-item>
+                <ion-text color="danger" *ngIf="passwordFormErrors.confirmPassword">
+                  {{ passwordFormErrors.confirmPassword }}
+                </ion-text>
+                <ion-text color="danger" *ngIf="passwordForm.controls.confirmPassword.hasError('mismatchedPasswords')">{{ 'notMatch' | translate }}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-lg="8" size-md="8">
+                <ion-button (click)="updatedPassword()">
+                  <ion-icon name="checkmark-outline"></ion-icon>
+                  Save
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </form>
+      </div>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<ion-grid class="user-data">
+  <ion-row>
+    <ion-col>
+      <div class="top-title profile">
+        <h3> User Data </h3>
+      </div>
+      <table class="table table-light table-striped table-hover">
+        <thead>
+          <th> Course name </th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Status name</th>
+          <th>Total Time Taken</th>
+          <th>Download Certificate</th>
+
+        </thead>
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+        <tbody>
+          <tr *ngFor="let userList of userDataList">
+            <td> {{userList.courseName}} </td>
+            <td> {{userList.startDate | date}} </td>
+            <td> {{userList.endDate | date}} </td>
+            <td> {{userList.statusName}} </td>
+            <td> {{userList.totalTimeTaken}} </td>
+            <td *ngIf="userList.certificateLink !== null"> <a [href]="userList.certificateLink" target="_blank"> Download </a> </td>
+            <td *ngIf="userList.certificateLink == null"> No Certificate Link </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>
+
