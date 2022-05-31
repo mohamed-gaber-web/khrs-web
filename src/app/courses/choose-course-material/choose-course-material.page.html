@@ -51,11 +51,11 @@
           </div>
 
           <ul *ngIf="userCourseDetails">
-            <li> <ion-icon slot="start" name="alarm-outline"></ion-icon> <strong> From: </strong> {{ userCourseDetails['startDate'] | date }}  </li>
+            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> From: </strong> {{ userCourseDetails['startDate'] | date }}  </li>
             <hr />
-            <li> <ion-icon slot="start" name="alarm-outline"></ion-icon> <strong> To: </strong> {{ userCourseDetails['endDate'] | date }}  </li>
+            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> To: </strong> {{ userCourseDetails['endDate'] | date }}  </li>
             <hr />
-            <li> <ion-icon slot="start" name="alarm-outline"></ion-icon> <strong> Valid For: </strong> {{ validCourse }} day </li>
+            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Valid For: </strong> {{ validCourse }} day </li>
           </ul>
 
           <div class="btn-button" *ngIf="CourseDetails">
@@ -65,7 +65,7 @@
               <ion-button (click)="sendIdToExercisePage()"> Exercise </ion-button>
 
               <ion-button (click)="sendIdToFinalTestPage()">
-                <ion-icon name="lock-closed-outline"></ion-icon>
+                <ion-icon name="lock-closed-outline" class="final"></ion-icon>
                   Final Test
               </ion-button>
           </div>

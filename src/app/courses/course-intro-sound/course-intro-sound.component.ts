@@ -20,10 +20,11 @@ export class CourseIntroSoundComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.getLang = localStorage.getItem('languageId');
+    this.getLang = localStorage.getItem('languageId') || '2';
     this.sub.push(
-      this.appService.getVidoes('Courses', this.getLang).subscribe((response) => {
-        this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
+      this.appService.getVidoes('Courses', this.getLang)
+        .subscribe((response) => {
+          this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
       })
     );
   }
@@ -35,7 +36,7 @@ export class CourseIntroSoundComponent implements OnInit {
   ngOnDestroy(): void {
     this.sub.forEach(el => {
       el.unsubscribe();
-    })    
+    })
   }
 
 }

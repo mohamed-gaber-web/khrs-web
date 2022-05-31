@@ -61,7 +61,7 @@ export class TrainingPage implements OnInit {
       courseId: JSON.parse(this.route.snapshot.paramMap.get('courseId')),
     }
   ];
-  
+
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
     if(!this.route.snapshot.paramMap.get('courseId')){
@@ -72,7 +72,7 @@ export class TrainingPage implements OnInit {
     this.getTextExerciseCount();
     this.getImageExerciseCount();
   }
-  
+
   goToCatExercise(url, exerciseId, courseId) {
     this.router.navigate([url, {exerciseId, courseId}]);
   }
@@ -114,6 +114,7 @@ export class TrainingPage implements OnInit {
       this.imageExerciseCount = response['length'];
     })
   }
+
 
   ngOnDestroy(): void {}
 

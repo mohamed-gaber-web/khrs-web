@@ -2,11 +2,11 @@
 <ion-content>
 
   <div class="language">
-        
+
     <div class="top-title">
       <h3> Choose Language </h3>
     </div>
-    
+
     <ion-spinner *ngIf="isLoading"></ion-spinner>
     <ion-grid class="lang-bg">
       <ion-row>
@@ -19,16 +19,16 @@
         </ion-col>
         <!-- [ngClass]="isSelected ? 'flag-border' : 'flag-unborder'" -->
       </ion-row>
-  
+
     </ion-grid>
-  
+
     <ion-grid>
       <ion-row class='ion-justify-content-center'>
         <ion-col size="12" size-lg="6" >
           <div class="button-start">
             <ion-button class="start-btn" [disabled]='!selected' (click)="chooseLanguage()">
-              <ion-img src="../../assets/images/hand.png" class="img-hover"></ion-img>
-              <ion-img src="../../assets/images/logo-hand-2.png" class="img-hover-2"></ion-img>
+              <!-- <ion-img src="../../assets/images/hand.png" class="img-hover"></ion-img>
+              <ion-img src="../../assets/images/logo-hand-2.png" class="img-hover-2"></ion-img> -->
               START
             </ion-button>
           </div>

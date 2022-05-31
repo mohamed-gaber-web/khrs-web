@@ -10,7 +10,7 @@
         <div>
           <div *ngIf="course.courseTranslations[0]?.introVoicePath">
             <div class="icon-sound-course">
-                <ion-icon class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                <ion-icon class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2"
                 [name]="!course.audioElement.status? 'play' : 'stop'" (click)="playIntroHTML(course)">
                 </ion-icon>
               </div>

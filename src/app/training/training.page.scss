@@ -103,13 +103,17 @@ ion-tab-button.tab-selected ion-icon {
   color: #A7F781!important;
 }
 
-h3.training-title {
-  font-size: 22px;
-  color: var(--ion-color-second-app);
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-  text-transform: normal;
+// h3.training-title {
+//   font-size: 22px;
+//   color: var(--ion-color-second-app);
+//   font-weight: 600;
+//   margin: 30px 0  0 0;
+//   text-align: center;
+//   text-transform: normal;
+// }
+
+.training {
+  margin-bottom: 40px;
 }
 
 .col-block {
@@ -144,7 +148,7 @@ h3.training-title {
   ion-text {
     color: var(--ion-color-training-text) ;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .exercice-count {

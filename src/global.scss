@@ -26,6 +26,67 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 /********************** Global Css ********************/
+.required {
+  color: red;
+  font-size: 20px;
+}
+
+.mat-menu-panel {
+    min-width: 215px !important;
+    margin-top: 10px;
+    border-radius: 20px !important;
+    padding: 20px 0;
+    border: 2px solid rgb(6 47 135);
+
+    .mat-menu-item {
+      text-align: center !important;
+      background: transparent;
+      color: #BED3FF;
+      font-size: 18px;
+      font-weight: 500;
+
+    }
+}
+
+
+// #triangle {
+//     width: 0;
+//     height: 0;
+//     border-left: 15px solid transparent;
+//     border-right: 15px solid transparent;
+//     border-bottom: 30px solid red;
+//     position: absolute;
+//     top: 0;
+// }
+
+// .mat-menu-ripple:first-child .mat-ripple::after {
+//     content: 'ddddddddddddddddddd' !important;
+//     position: absolute;
+//     left: 30px;
+//     top: -8px;
+//     width: 0;
+//     height: 0;
+//     border-left: 5px solid transparent;
+//     border-right: 5px solid transparent;
+//     border-bottom: 8px solid #444;
+// }
+
+.mat-menu-item:hover {
+    background: rgb(138 250 111) !important;
+    color: #fff;
+    font-weight: bold;
+    width: 80%;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+.alert-wrapper {
+  max-width: 400px !important;
+}
 
 .no-result {
   text-align: center;

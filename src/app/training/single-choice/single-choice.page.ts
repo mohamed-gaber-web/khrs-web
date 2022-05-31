@@ -103,7 +103,7 @@ export class SingleChoicePage implements OnInit {
             this.errorMessage("There are no available questions in this exercise");
             setTimeout(() => {
               this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
-            }, 100)
+            }, 300)
           }
           if(this.exerciseItems[0].singleChoiceTranslations[0].voicePath != null && this.exerciseItems[0].singleChoiceTranslations[0].voicePath != "" ){
             this.exerciseItems[0].audioElement = new AudioElement();
@@ -198,7 +198,7 @@ export class SingleChoicePage implements OnInit {
           if(this.resultAnswer === true) {
 
             // message and voice success
-            this.successMessage('The answer is correct');
+            this.successMessage('Correct answer !');
             this.currentIndex += 1;
             if(this.exerciseItems[0].audioElement){
               this.exerciseItems[0].audioElement.audio.pause();
@@ -224,7 +224,7 @@ export class SingleChoicePage implements OnInit {
 
           } else if(this.resultAnswer === false) {
             // message and voice error
-            this.errorMessage('The answer is wrong and please choose correct answer');
+            this.errorMessage('Wrong answer !');
           }
 
           }
@@ -249,7 +249,7 @@ export class SingleChoicePage implements OnInit {
     this.audio.play()
     const toast = await this.toastController.create({
       message: msg,
-      duration: 500,
+      duration: 4000,
       cssClass:'ion-error',
       color: 'danger',
     });

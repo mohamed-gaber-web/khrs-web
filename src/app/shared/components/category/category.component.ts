@@ -16,13 +16,12 @@ export class CategoryComponent implements OnInit {
   categories: ICategory[];
 
   slideOpts = {
-    initialSlide: 0,
+    initialSlide: 1,
     speed: 400,
-    slidesPerView: 4,
-    scrollbar: true,
-    autoplay: {
-      delay: 3000,
-    },
+    // slidesPerView: 4,
+    pagination: { el: '.swiper-pagination', type: 'bullets', clickable: true},
+    scrollbar: false,
+    autoplay: false,
     breakpoints: {
       // when window width is >= 320px
       320: {
@@ -44,15 +43,16 @@ export class CategoryComponent implements OnInit {
 
   constructor(private courseService: CourseService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
 
     this.sub.push(
-      this.courseService.getCourseCategories(0, 10).subscribe(response => {
+      this.courseService.getCourseCategories(0, 50)
+      .subscribe(response => {
         this.categories = response['result'];
       })
     );
   }
-  
+
   ngOnDestroy(): void {
     this.sub.forEach(el => {
       el.unsubscribe();

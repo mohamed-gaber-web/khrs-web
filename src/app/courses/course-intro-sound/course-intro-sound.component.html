@@ -6,7 +6,8 @@
         <div class="img-intro">
           <ion-img loading="lazy" src="../../../assets/images/img-intro.png"></ion-img>
         </div>
-        <div style="cursor: pointer;" class="icon-sound animate__animated animate__heartBeat animate__delay-1s animate__repeat-3" (click)="startAudio()">
+        <div *ngIf="courseAudio !== undefined" style="cursor: pointer;" class="icon-sound animate__animated animate__heartBeat animate__delay-1s animate__repeat-3"
+          (click)="startAudio()">
           <div class="img-volume">
             <ion-img src="../../../assets/icon/Vector.png">
           </ion-img>

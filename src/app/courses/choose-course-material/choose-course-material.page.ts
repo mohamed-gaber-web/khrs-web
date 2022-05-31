@@ -79,7 +79,7 @@ export class ChooseCourseMaterialPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirm!',
-      message: 'sure you want start the test?',
+      message: 'Are you sure you want to start the test ?',
       buttons: [
         {
           text: 'Cancel',

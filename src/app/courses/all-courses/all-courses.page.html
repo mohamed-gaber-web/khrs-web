@@ -2,7 +2,7 @@
   <app-course-intro-sound (courseIntroSound)="startAudio($event)"></app-course-intro-sound>
   <app-category></app-category>
   <app-course-item [loading]="isLoading" [courseItem]="courses" (getData)="getCourse($event)" (playSound)="playIntroHTML($event)"></app-course-item>
-  
+
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"

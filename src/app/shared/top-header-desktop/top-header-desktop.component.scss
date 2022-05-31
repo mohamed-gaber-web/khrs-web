@@ -1,12 +1,12 @@
 .top-header {
-    -webkit-box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%);
-    box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%);
+    -moz-box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     padding: 0 100px;
     background-color: #fff;
     width: 100%;
-    margin: 0 0 20px 0;
-    border: 1px solid #ccc;
-    height: 100px;
+    margin: 0 0 10px 0;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,10 +42,7 @@
             border-radius: 10px;
           }
           &.active {
-            background-color: #003182;
-            color: #fff;
-            padding: 10px 10px;
-            border-radius: 10px;
+            font-weight: 800;
           }
 
 

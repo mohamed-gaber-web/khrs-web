@@ -2,8 +2,8 @@
 .all-courses {
 
   .course-block {
-    -webkit-box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%);
-    box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%);
+    // -webkit-box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%);
+    // box-shadow: 0 0 20px -10px rgb(0 0 0 / 80%);
     padding: 5px;
     border-radius: 10px;
     background-color: #fff;
@@ -11,7 +11,7 @@
     cursor: pointer;
     border: 1px solid rgb(204 204 204 / 75%);
     margin-bottom: 30px;
-    transform: scale(1);
+    transform: scale(0.9);
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
@@ -20,12 +20,12 @@
     position: relative;
 
     &:hover{
-        transform: scale(0.9); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
     }
 
     h3.course-title {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 500;
       color: #003182;
       line-height: 25px;
     }

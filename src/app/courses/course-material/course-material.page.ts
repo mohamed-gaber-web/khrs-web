@@ -186,10 +186,10 @@ export class CourseMaterialPage implements OnInit {
         if (response['success'] === true) {
           // localStorage.setItem('courseMaterialOffset', JSON.stringify(this.offset))
           const toast = await this.toastController.create({
-            message: `Your stoped in page ${ this.offset }` ,
+            message: `You paused at page ${ this.offset }` ,
             duration: 4000,
             position: 'top',
-            color: 'success'
+            color: 'success',
           });
           toast.present();
       }

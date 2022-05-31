@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 import { imagesBaseUrl } from 'src/app/api.constants';
 import { Course } from 'src/app/shared/models/course';
 import { CourseService } from 'src/app/shared/services/courses.service';
@@ -42,7 +42,7 @@ export class AllCoursesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getLang = localStorage.getItem('languageId');
+    // this.getLang = localStorage.getItem('languageId');
     // this.appService.getVidoes('Courses', this.getLang).subscribe((response) => {
     //   this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
     // })
@@ -64,6 +64,7 @@ export class AllCoursesPage implements OnInit {
     this.navCtrl.navigateBack(`/courses/tabs/${id}`);
   }
 
+  // ** get all courses
   public getCourses() {
 
     this.isLoading = true;
@@ -116,7 +117,7 @@ export class AllCoursesPage implements OnInit {
     if (this.courses.length < this.totalLength) {
       setTimeout(() => {
         this.getCourses();
-        console.log('Done');
+        // console.log('Done');
         event.target.complete();
 
         // App logic to determine if all data is loaded
@@ -172,7 +173,6 @@ export class AllCoursesPage implements OnInit {
         html5: true,
         src: voicePath,
         onplay: () => {
-
           this.isPlaying = true;
         },
         onend: () => {

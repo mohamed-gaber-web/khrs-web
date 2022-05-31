@@ -109,11 +109,9 @@ export class EditUserPage implements OnInit {
 
       this.authService.updatedUserProfile(this.userInfoForm.value).subscribe(async (response) => {
 
-        console.log(response);
-
+        // console.log(response);
 
         if (response['success'] === true) {
-
 
         // ** set localstorage [ token ]
         this.storageService.setAccessToken( response['result']);
@@ -121,7 +119,7 @@ export class EditUserPage implements OnInit {
         this.buldingForm()
 
         var toast = await this.toastController.create({
-          message: 'Update User Successful!',
+          message: 'User data updated successfully !',
           duration: 2000,
           color: 'success',
         });

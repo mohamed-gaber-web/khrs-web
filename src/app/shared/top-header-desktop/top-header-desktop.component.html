@@ -1,6 +1,6 @@
 <header class="top-header">
   <div class="logo">
-    <a [routerLink]="['/']"> <img src="../../assets/images/logo.png" /> </a>
+    <a [routerLink]="['/courses/tabs/all-courses']"> <img src="../../assets/images/logo.png" /> </a>
   </div>
 
   <nav>
@@ -16,11 +16,12 @@
     </ul>
   </nav>
   <div class="user" >
-    <ul style="margin-top: 10px;">
+    <ul style="margin-top: 8px;">
       <li [matMenuTriggerFor]="menu">
           {{ userInfo.firstname + ' ' +  userInfo.lastname }}
         <ion-icon name="chevron-down-outline"></ion-icon>  </li>
-      <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu">
+          <!-- <div id="triangle"></div> -->
         <button *ngIf="authService.IsLoggedIn" mat-menu-item [routerLink]="['/auth/user-profile']">Profile</button>
         <button *ngIf="authService.IsLoggedIn" mat-menu-item [routerLink]="['/course-status']">Course status</button>
         <button (click)="logout()" *ngIf="authService.IsLoggedIn" mat-menu-item>Logout</button>

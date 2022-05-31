@@ -243,7 +243,7 @@ export class PuzzleImagePage implements OnInit {
         const isCorrect = response['result'].isCorrect;
 
         if (isCorrect === true) {
-          this.successMessage('Thanks the answer is correct');
+          this.successMessage('Correct answer !');
           if (this.player) {
             this.player.stop();
           }
@@ -262,7 +262,7 @@ export class PuzzleImagePage implements OnInit {
           }
         } else if (isCorrect === false) {
           this.errorMessage(
-            'The answer is wrong and please choose correct answer'
+            'Wrong answer !'
           );
         }
       });
@@ -273,7 +273,7 @@ export class PuzzleImagePage implements OnInit {
     this.audio.play();
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000,
+      duration: 4000,
       cssClass: 'ion-success',
       color: 'success',
     });
@@ -285,7 +285,7 @@ export class PuzzleImagePage implements OnInit {
     this.audio.play();
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000,
+      duration: 4000,
       cssClass: 'ion-error',
       color: 'danger',
     });

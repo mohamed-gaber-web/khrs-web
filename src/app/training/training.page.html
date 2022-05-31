@@ -4,10 +4,10 @@
       <ion-buttons slot="start">
         <ion-back-button> </ion-back-button>
       </ion-buttons>
-  
+
       <ion-menu-button slot="start"></ion-menu-button>
-  
-  
+
+
       <div class="img-profile">
         <ion-avatar slot="end">
           <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
@@ -16,7 +16,7 @@
         </ion-avatar>
         <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
       </div>
-  
+
       <ion-avatar class="ion-margin-end"  slot="end">
         <img class="img-langauge" [src]="userInfo.languageIcon">
       </ion-avatar>
@@ -28,7 +28,7 @@
   <app-top-header-desktop></app-top-header-desktop>
 </div>
 
-<ion-content class="training">
+<ion-content>
 
   <ion-grid class="img-course-intro">
     <ion-row>
@@ -45,12 +45,12 @@
     </ion-row>
   </ion-grid>
 
+  <div class="top-title">
+    <h3> Please choose an exercise </h3>
+  </div>
   <ion-grid>
-    <div class="top-title">
-      <h3> Please choose an exercise </h3>
-    </div>  
-    
-    <ion-row class="ion-align-self-center">
+
+    <ion-row class="ion-align-self-center training">
       <!-- Block -->
       <ion-col
       *ngFor="let item of chooseTraining" size-lg="3" size-md="6" size-xs="12"
@@ -58,22 +58,22 @@
         <div class="col-block">
           <ion-img [src]="item.img"></ion-img>
           <ion-text><a> {{item.name}} </a></ion-text>
-          <div class="exercice-count" *ngIf="item.exerciseId === 1"> 
-            <h3> {{ singleExerciseCount }} </h3> 
+          <div class="exercice-count" *ngIf="item.exerciseId === 1">
+            <h3> {{ singleExerciseCount }} </h3>
           </div>
 
-          <div class="exercice-count" *ngIf="item.exerciseId === 2"> 
-            <h3> {{ multiExerciseCount }} </h3> 
+          <div class="exercice-count" *ngIf="item.exerciseId === 2">
+            <h3> {{ multiExerciseCount }} </h3>
           </div>
 
-          <div class="exercice-count" *ngIf="item.exerciseId === 3"> 
-            <h3> {{ textExerciseCount }} </h3> 
+          <div class="exercice-count" *ngIf="item.exerciseId === 3">
+            <h3> {{ textExerciseCount }} </h3>
           </div>
 
-          <div class="exercice-count" *ngIf="item.exerciseId === 4"> 
-            <h3> {{ imageExerciseCount }} </h3> 
+          <div class="exercice-count" *ngIf="item.exerciseId === 4">
+            <h3> {{ imageExerciseCount }} </h3>
           </div>
-          
+
       </div>
       </ion-col>
 

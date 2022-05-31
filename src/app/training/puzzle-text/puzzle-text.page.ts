@@ -208,7 +208,7 @@ export class PuzzleTextPage implements OnInit {
     const isCorrect = response['result'].isCorrect;
 
     if(isCorrect === true) {
-      this.successMessage('Thanks the answer is correct');
+      this.successMessage('Correct answer !');
       this.stopAllAudios();
       this.currentIndex += 1;
       this.getQuestionAndAnswer();
@@ -223,7 +223,7 @@ export class PuzzleTextPage implements OnInit {
 
 
     } else if(isCorrect === false) {
-      this.errorMessage('The answer is wrong and please choose correct answer');
+      this.errorMessage('Wrong answer !');
     }
   })
 
@@ -246,7 +246,7 @@ export class PuzzleTextPage implements OnInit {
     this.audio.play();
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000,
+      duration: 4000,
       cssClass: 'ion-error',
       color: 'danger',
     });

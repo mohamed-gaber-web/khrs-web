@@ -51,6 +51,7 @@ export class UserProfilePage implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.authService.getUser();
+    console.log(this.userInfo)
     this.getProfileDataList();
     this.passwordForm = this.formBuilder.group({
       'currentPassword': ['', Validators.required],

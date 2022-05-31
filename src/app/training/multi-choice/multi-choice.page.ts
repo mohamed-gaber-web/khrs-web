@@ -169,7 +169,7 @@ export class MultiChoicePage implements OnInit {
           if (this.resultAnswer === true) {
             // ** message and voice success
             this.currentIndex += 1;
-            this.successMessage('the answer is correct');
+            this.successMessage('Correct answer !');
             this.isLoading = true;
             this.stopAllAudios();
             this.multiForm.reset();
@@ -188,7 +188,7 @@ export class MultiChoicePage implements OnInit {
           } else if (this.resultAnswer === false) {
             // ** message and voice error
             this.errorMessage(
-              'The answer is wrong and please choose correct answer'
+              'Wrong answer !'
             );
           }
         })
@@ -212,7 +212,7 @@ export class MultiChoicePage implements OnInit {
     this.audio.play();
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000,
+      duration: 4000,
       cssClass: 'ion-error',
       color: 'danger',
     });
