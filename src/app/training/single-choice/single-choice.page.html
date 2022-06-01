@@ -1,27 +1,6 @@
 <div class="header-mobile">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button> </ion-back-button>
-      </ion-buttons>
-  
-      <ion-menu-button slot="start"></ion-menu-button>
-  
-  
-      <div class="img-profile">
-        <ion-avatar slot="end">
-          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
-          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
-          src="../../../assets/images/image profille (1).png">
-        </ion-avatar>
-        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
-      </div>
-  
-      <ion-avatar class="ion-margin-end"  slot="end">
-        <img class="img-langauge" [src]="userInfo.languageIcon">
-      </ion-avatar>
-    </ion-toolbar>
-  </ion-header>
+  <app-top-menu-mobile></app-top-menu-mobile>
+
 </div>
 
 <div class="header-desktop">
@@ -35,14 +14,14 @@
     <div class="top-title">
       <h3> Single choice </h3>
       <ion-icon (click)="presentModal()"  name="help-circle-outline"></ion-icon>
-    </div>    
+    </div>
   </div>
 
 
 <form [formGroup]="singleForm">
 
-  <h3 class="total-result"> {{ lengthQuestion + ' / ' + (currentIndex+1) }} </h3>
-    
+  <h3 class="total-result"> {{ (currentIndex+1)  + ' / ' + lengthQuestion }} </h3>
+
   <ion-slides [pager]="false" #slides [options]="slideOpts">
     <ion-slide *ngFor="let singleItem of exerciseItems">
       <ion-grid>

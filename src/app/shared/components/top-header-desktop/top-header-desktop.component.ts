@@ -3,8 +3,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { StorageService } from '../services/storage.service';
-import { TrackingUserService } from '../services/tracking-user.service';
+import { StorageService } from '../../services/storage.service';
+import { TrackingUserService } from '../../services/tracking-user.service';
 
 @Component({
   selector: 'app-top-header-desktop',

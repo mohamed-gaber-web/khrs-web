@@ -1,27 +1,5 @@
 <div class="header-mobile">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button> </ion-back-button>
-      </ion-buttons>
-
-      <ion-menu-button slot="start"></ion-menu-button>
-
-
-      <div class="img-profile">
-        <ion-avatar slot="end">
-          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
-          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
-          src="../../../assets/images/image profille (1).png">
-        </ion-avatar>
-        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
-      </div>
-
-      <ion-avatar class="ion-margin-end"  slot="end">
-        <img class="img-langauge" [src]="userInfo.languageIcon">
-      </ion-avatar>
-    </ion-toolbar>
-  </ion-header>
+<app-top-menu-mobile></app-top-menu-mobile>
 </div>
 
 <div class="header-desktop">
@@ -33,7 +11,7 @@
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
 
   <div class="course-material-count">
-    <h4> <b>  {{ offset }} - {{ materialCourseLength }} Pages </b>   </h4>
+    <h4> <b>  {{ materialCourseLength }} / {{ offset }}   </b>   </h4>
   </div>
 
   <ion-slides (ionSlideWillChange)="doCheck()" #slides pager="false" [options]="slideOpts">

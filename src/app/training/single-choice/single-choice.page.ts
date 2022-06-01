@@ -84,9 +84,7 @@ export class SingleChoicePage implements OnInit {
 
     // ** Get Question Data
     this.getQuestion();
-
     this.audio = new Audio('../../../assets/iphone_ding.mp3' );
-
   }
 
   // ** Get Question Data
@@ -282,14 +280,3 @@ export class SingleChoicePage implements OnInit {
 
 }
 
-
-/**
- * [*] => don't show next button before answer on first quetion
- * [*] => if is question is last question hide next button
- * [*] => if person answer not correct hide button check
- * [] => get sound
- * [*] fix rest form
- * [*] fix typo in choise to be choice
- * [*] add current and total number of questions
- * [*] remove check and replace its logic with next and the aswer must be correct to move to the next question
- */

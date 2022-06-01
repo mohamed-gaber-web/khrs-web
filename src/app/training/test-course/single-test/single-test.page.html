@@ -1,7 +1,7 @@
 <ion-content>
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
   <!-- Single final Test -->
-  <form [formGroup]="singleForm" >
+  <form [formGroup]="singleForm" *ngIf="lengthItems !== pageNumber">
   <ion-slides *ngIf="lengthItems != pageNumber" [pager]="false" #slides [options]="slideOpts">
     <ion-slide>
 

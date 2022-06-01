@@ -6,9 +6,6 @@ import { TopHeaderDesktopComponent } from './top-header-desktop.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { IonicModule } from '@ionic/angular';
 
-
-
-
 @NgModule({
   imports: [CommonModule, RouterModule, MatMenuModule, IonicModule],
   declarations: [TopHeaderDesktopComponent],

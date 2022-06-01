@@ -2,7 +2,7 @@
 
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
 
-<form [formGroup]="multiForm">
+<form [formGroup]="multiForm" *ngIf="lengthItems !== pageNumber">
 
   <ion-slides *ngIf="lengthItems != pageNumber"  [pager]="false" #slides [options]="slideOpts">
     <ion-slide>
