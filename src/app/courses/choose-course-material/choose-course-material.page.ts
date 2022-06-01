@@ -30,6 +30,7 @@ export class ChooseCourseMaterialPage implements OnInit {
   redOffset: any;
   offset: number;
   limit: number;
+  isOpen:boolean = false;
 
   constructor(
     private courseService: CourseService,
@@ -147,6 +148,15 @@ export class ChooseCourseMaterialPage implements OnInit {
       })
     })
 }
+
+  // ** open course rating component
+  toggleModal() {
+    this.isOpen = true;
+  }
+
+  closeModal() {
+    this.isOpen = false;
+  }
 
   openCourseDetails(ofst:number){
     this.router.navigate([`courses/course-material/${this.courseId}`, {ofst}])

@@ -1,20 +1,16 @@
 <ion-content>
 
-  <ion-card>
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+  <ion-card size="6">
     <img src="../../../assets/images/finish-line-black.png" alt="">
     <ion-card-content>
       Thank you for finishing the test , Do you want to submit your answers?
     </ion-card-content>
-
-    <!-- <ion-grid>
-      <ion-row>
-        <ion-col size="6"> <ion-button (click)="prev()" fill="outline">Previous</ion-button></ion-col>
-        <ion-col size="6"><ion-button (click)="finishedTest()" fill="outline">Finished</ion-button></ion-col>
-
-      </ion-row>
-    </ion-grid> -->
-
+      <!-- <ion-button (click)="prev()">Previous</ion-button> -->
+      <ion-button (click)="finishedTest()">Finished</ion-button>
   </ion-card>
-
+  </ion-row>
+</ion-grid>
 </ion-content>
 

@@ -24,8 +24,8 @@ export class FaqPage implements OnInit {
     private appServ: AppService, ) { }
 
   ngOnInit() {
-    this.isLoading = true;
     this.userInfo = this.authService.getUser();
+    this.isLoading = true;
     this.appServ.getFaqPage(this.offset, this.limit)
     .subscribe(response => {
       this.isLoading = false;

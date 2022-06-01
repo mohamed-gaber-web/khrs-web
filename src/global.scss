@@ -26,6 +26,26 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 /********************** Global Css ********************/
+
+.success-block {
+  background-color: #fff;
+  border-radius: 40px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px 20px;
+  height: 70vh;
+  overflow-y: auto;
+
+  h3 {
+    color: #062F87;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px;
+  }
+}
+
+
 .required {
   color: red;
   font-size: 20px;
@@ -600,6 +620,12 @@ ion-radio {
 
 @media(min-width: 1260px){
   ion-menu{display: none}
+}
+
+// success board
+@media(max-width: 1281px){
+  .success-button-play {width: 100% !important; height: auto !important;}
+  .success-photos img {max-width: 100% !important; width: 100% !important;}
 }
 
 /************* Media Query Desktop *****************/

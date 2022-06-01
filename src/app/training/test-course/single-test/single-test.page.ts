@@ -124,7 +124,7 @@ slideNext(answerId) {
       puzzleWithTextAnswers: null, puzzleWithImageAnswers: null})
       .subscribe(response => {
       console.log("from single test", response);
-        
+
       // !! this issue here *************************** userTestId
       this.userTestId = response['result'].userTestId;
         this.pageNumber += 1;

@@ -1,0 +1,45 @@
+<div class="header-mobile">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button> </ion-back-button>
+      </ion-buttons>
+
+      <ion-menu-button slot="start"></ion-menu-button>
+
+
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<div class="top-title faq">
+  <h3> Success board </h3>
+</div>
+
+<ion-content class="ion-padding">
+
+  <ion-grid class="success-board">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12"> <app-videos [successData]="allData" [isLoadingData]="isLoading"></app-videos> </ion-col>
+      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12"> <app-reviews></app-reviews> </ion-col>
+      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12"> <app-images [successData]="allData" [isLoadingData]="isLoading"></app-images> </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

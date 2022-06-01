@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { ChooseCourseMaterialPageRoutingModule } from './choose-course-material-routing.module';
 
 import { ChooseCourseMaterialPage } from './choose-course-material.page';
+import { CourseRatingComponent } from './course-rating/course-rating/course-rating.component';
+import { NgbModule }from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChooseCourseMaterialPageRoutingModule
+    ChooseCourseMaterialPageRoutingModule,
+    NgbModule
   ],
-  declarations: [ChooseCourseMaterialPage]
+  declarations: [ChooseCourseMaterialPage, CourseRatingComponent]
 })
 export class ChooseCourseMaterialPageModule {}

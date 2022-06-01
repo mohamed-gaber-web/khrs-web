@@ -1,0 +1,14 @@
+<div class="success-block">
+  <h3> Images </h3>
+
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+  <ion-grid>
+    <ion-row>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size-xs="6" class="success-photos" *ngFor="let item of allSuccessData">
+            <img [src]="item.imagePath" alt="" loading="lazy" />
+        </ion-col>
+    </ion-row>
+    <!-- <p *ngIf="!allSuccessData || allSuccessData.length < 0">  No available images!  </p> -->
+  </ion-grid>
+
+</div>

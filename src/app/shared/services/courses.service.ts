@@ -1,3 +1,5 @@
+import { createUserCourseRate } from './../../api.constants';
+import { IRating } from './../models/rating.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -75,6 +77,11 @@ export class CourseService {
   // ** get courses by category
   getCoursesByCategories(offset: number, limit: number, catId: number) {
     return this.http.get(`${ getCoursesByCategory }?Offset=${offset}&Limit=${limit}&categoryId=${catId}`)
+  }
+
+    // ** rating service
+  createRatingService(rating: IRating) {
+    return this.http.post(`${createUserCourseRate}`, rating)
   }
 
 }

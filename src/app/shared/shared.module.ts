@@ -5,6 +5,7 @@ import { TopHeaderDesktop } from './top-header-desktop/top-header-desktop.module
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { CategoryModule } from './components/category/category.module';
+import { PipeSafeUrlPipe } from './pipes/pipe-safe-url.pipe';
 
 @NgModule({
   imports: [CommonModule, TopHeaderDesktop, RouterModule, CategoryModule],

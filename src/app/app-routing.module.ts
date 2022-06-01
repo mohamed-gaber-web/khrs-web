@@ -50,6 +50,18 @@ const routes: Routes = [
     path: 'course-status',
     loadChildren: () => import('./pages/user-course-status/user-course-status.module').then( m => m.UserCourseStatusPageModule)
   },
+    {
+    path: 'contact-us',
+    loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
+  },
+  {
+    path: 'user-course-status',
+    loadChildren: () => import('./pages/user-course-status/user-course-status.module').then( m => m.UserCourseStatusPageModule)
+  },
+  {
+    path: 'success-board',
+    loadChildren: () => import('./pages/success-board/success-board.module').then( m => m.SuccessBoardPageModule)
+  },
   {
     path: 'not-found',
     component: NotFoundComponent
@@ -58,14 +70,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'not-found'
   },
-  {
-    path: 'contact-us',
-    loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
-  },
-  {
-    path: 'user-course-status',
-    loadChildren: () => import('./pages/user-course-status/user-course-status.module').then( m => m.UserCourseStatusPageModule)
-  }
 ];
 @NgModule({
   imports: [
