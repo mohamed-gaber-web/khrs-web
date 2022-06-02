@@ -11,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class SuccessBoardPage implements OnInit {
 
   userInfo: any;
-  allData: any;
+  allDataSuccess: any;
+  allDataRatng: any;
   sub: Subscription[] = [];
   isLoading: boolean = false;
+  allDataSuccessLength: number;
 
   constructor(private authService: AuthService, private successService: SuccessBoardService) { }
 
@@ -22,12 +24,19 @@ export class SuccessBoardPage implements OnInit {
     this.isLoading = true;
     this.sub.push(
       this.successService.successBoardFn(0, 20)
-        .subscribe(response => {
+      .subscribe(response => {
+          console.log(response);
           this.isLoading = false;
-          this.allData = response['result'];
-          console.log(this.allData);
+          this.allDataSuccess = response['successBoards']['result'];
+          // this.allDataSuccessLength = response['successBoards']['length'];
+          this.allDataRatng = response['ratings'];
+          console.log(this.allDataRatng.length);
         })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.forEach(e => e.unsubscribe());
   }
 
 }

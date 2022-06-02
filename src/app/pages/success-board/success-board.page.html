@@ -15,9 +15,15 @@
 
   <ion-grid class="success-board">
     <ion-row class="ion-justify-content-center">
-      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12"> <app-videos [successData]="allData" [isLoadingData]="isLoading"></app-videos> </ion-col>
-      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12"> <app-reviews></app-reviews> </ion-col>
-      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12"> <app-images [successData]="allData" [isLoadingData]="isLoading"></app-images> </ion-col>
+      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+        <app-videos [successData]="allDataSuccess" [isLoadingData]="isLoading"></app-videos>
+      </ion-col>
+      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+        <app-reviews [successRating]="allDataRatng" [isLoadingData]="isLoading"></app-reviews>
+      </ion-col>
+      <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+        <app-images [successData]="allDataSuccess" [isLoadingData]="isLoading"></app-images>
+      </ion-col>
     </ion-row>
   </ion-grid>
 

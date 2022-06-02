@@ -11,7 +11,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class VideosComponent implements OnInit {
 
   @Input('successData') allSuccessData: any;
-   @Input('isLoadingData') isLoading: boolean;
+  @Input('isLoadingData') isLoading: boolean;
   closeResult = '';
 
   constructor(private modalService: NgbModal) { }

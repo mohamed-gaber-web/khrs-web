@@ -1,51 +1,26 @@
 <div class="success-block">
   <h3> Reviews </h3>
-  <div class="success-reviews">
-  <div class="user-course-status__left">
-    <img src="../../../../assets/images/user-profile.jpg" loading="lazy" alt="" />
-  </div>
-
-  <div class="user-course-status__center">
-    <h3> khaled </h3>
-    <p> Great app at a reasonable price. So great to have such app! </p>
-  </div>
-
-  <div class="user-course-status__right">
-    <div>
-      <ngb-rating style="color: #FFCC26; font-size: 20px;" [(rate)]="rate" [max]="5" [readonly]="true" ></ngb-rating>
+    <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+    <div class="success-reviews" *ngFor="let reviewItem of allSuccessRating">
+    <div class="user-course-status__left">
+      <img [src]="reviewItem.userImage" loading="lazy" [alt]="reviewItem.courseName" />
     </div>
-  </div>
-  </div>
-  <div class="success-reviews">
-  <div class="user-course-status__left">
-    <img src="../../../../assets/images/user-profile.jpg" loading="lazy" alt="" />
-  </div>
 
-  <div class="user-course-status__center">
-    <h3> khaled </h3>
-    <p> Great app at a reasonable price. So great to have such app! </p>
-  </div>
-
-  <div class="user-course-status__right">
-    <div>
-      <ngb-rating style="color: #FFCC26; font-size: 20px;" [(rate)]="rate" [max]="5" [readonly]="true" ></ngb-rating>
+    <div class="user-course-status__center">
+      <h4> {{ reviewItem.username }} </h4>
+      <h3> {{ reviewItem.courseName }} </h3>
+      <p *ngIf="reviewItem.comment !== null">  {{ reviewItem.comment }} </p>
+      <!-- <p> this is comment for this course by user mohamed this course is very good </p> -->
     </div>
-  </div>
-  </div>
-  <div class="success-reviews">
-  <div class="user-course-status__left">
-    <img src="../../../../assets/images/user-profile.jpg" loading="lazy" alt="" />
-  </div>
 
-  <div class="user-course-status__center">
-    <h3> khaled </h3>
-    <p> Great app at a reasonable price. So great to have such app! </p>
-  </div>
-
-  <div class="user-course-status__right">
-    <div>
-      <ngb-rating style="color: #FFCC26; font-size: 20px;" [(rate)]="rate" [max]="5" [readonly]="true" ></ngb-rating>
+    <div class="user-course-status__right">
+      <div>
+        <ngb-rating style="color: #FFCC26; font-size: 20px;" [(rate)]="reviewItem.rate" [max]="5" [readonly]="true" ></ngb-rating>
+      </div>
     </div>
-  </div>
-  </div>
+    </div>
+    <!-- <div *ngIf="allSuccessRating === null || allSuccessRating === '' ">
+      <img src="../../../../assets/images/sorry.png" />
+      <p> No available data!! </p>
+    </div> -->
 </div>
