@@ -28,9 +28,9 @@ export class SuccessBoardPage implements OnInit {
           console.log(response);
           this.isLoading = false;
           this.allDataSuccess = response['successBoards']['result'];
-          // this.allDataSuccessLength = response['successBoards']['length'];
           this.allDataRatng = response['ratings'];
-          console.log(this.allDataRatng.length);
+          // this.allDataSuccessLength = response['successBoards']['length'];
+          // console.log(this.allDataRatng.length);
         })
     );
   }
