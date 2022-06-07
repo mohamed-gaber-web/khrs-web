@@ -46,7 +46,7 @@ export class MyCoursesPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.appService.getVidoes('Courses', this.getLang).subscribe((response) => {
-      this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
+      this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath || '2';
     })
     this.getUserCourses();
   }
@@ -59,6 +59,7 @@ export class MyCoursesPage implements OnInit, OnDestroy {
         .getUserCourses('', this.offset)
         .pipe(
           map((response) => {
+            console.log(response);
             Object.entries(response);
             this.isLoading = false;
             this.totalLength = response['length'];

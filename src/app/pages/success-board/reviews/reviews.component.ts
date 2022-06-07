@@ -10,6 +10,7 @@ export class ReviewsComponent implements OnInit {
   rate: number = 3;
 
   @Input('successRating') allSuccessRating: any;
+  @Input('sendReviewLength') reviewlength: number;
   @Input('isLoadingData') isLoading: boolean;
 
   constructor() { }

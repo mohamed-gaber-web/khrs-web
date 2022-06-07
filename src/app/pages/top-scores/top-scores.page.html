@@ -1,0 +1,35 @@
+
+<div class="header-mobile">
+<app-top-menu-mobile></app-top-menu-mobile>
+</div>
+
+<div class="header-desktop">
+<app-top-header-desktop></app-top-header-desktop>
+</div>
+
+
+<div class="top-title privacy">
+  <h3> Top Score </h3>
+</div>
+
+<ion-content>
+ <app-top-user-score></app-top-user-score>
+
+ <ion-grid>
+   <ion-row>
+     <ion-col size-lg="4" size-md="12" size-sm="12" size-xs="12">  <div class="top_block">
+       <h3> Students </h3>
+       <app-top-score-students></app-top-score-students>
+      </div></ion-col>
+     <ion-col> <div class="top_block">
+       <h3> Courses </h3>
+       <app-top-score-courses></app-top-score-courses>
+      </div> </ion-col>
+     <ion-col>
+       <div class="top_block">
+       <h3> Exams </h3>
+         <app-top-score-exams></app-top-score-exams>
+      </div> </ion-col>
+   </ion-row>
+ </ion-grid>
+</ion-content>

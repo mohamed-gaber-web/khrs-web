@@ -16,6 +16,7 @@ export class SuccessBoardPage implements OnInit {
   sub: Subscription[] = [];
   isLoading: boolean = false;
   allDataSuccessLength: number;
+  reviewLength: number;
 
   constructor(private authService: AuthService, private successService: SuccessBoardService) { }
 
@@ -25,12 +26,11 @@ export class SuccessBoardPage implements OnInit {
     this.sub.push(
       this.successService.successBoardFn(0, 20)
       .subscribe(response => {
-          console.log(response);
           this.isLoading = false;
           this.allDataSuccess = response['successBoards']['result'];
           this.allDataRatng = response['ratings'];
-          // this.allDataSuccessLength = response['successBoards']['length'];
-          // console.log(this.allDataRatng.length);
+          this.allDataSuccessLength = response['successBoards']['length'];
+          this.reviewLength = response['ratings'].length;
         })
     );
   }

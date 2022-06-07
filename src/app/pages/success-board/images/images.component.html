@@ -8,7 +8,10 @@
             <div class="img-block"> <img [src]="item.imagePath" alt="" loading="lazy" /> </div>
         </ion-col>
     </ion-row>
-    <!-- <p *ngIf="!allSuccessData || allSuccessData.length < 0">  No available images!  </p> -->
+    <div class="no-result" *ngIf="allSuccessDataLength <= 0">
+      <img src="../../../../assets/images/sorry.png" />
+      <p> No available images! </p>
+    </div>
   </ion-grid>
 
 </div>

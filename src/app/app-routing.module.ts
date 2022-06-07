@@ -63,6 +63,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/success-board/success-board.module').then( m => m.SuccessBoardPageModule)
   },
   {
+  path: 'top-scores',
+  loadChildren: () => import('./pages/top-scores/top-scores.module').then( m => m.TopScoresPageModule)
+},
+  {
     path: 'not-found',
     component: NotFoundComponent
   },
@@ -70,6 +74,8 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'not-found'
   },
+
+
 ];
 @NgModule({
   imports: [

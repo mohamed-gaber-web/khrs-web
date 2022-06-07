@@ -1,7 +1,7 @@
 <ion-content>
 
-  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>  
-  
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
   <app-course-intro-sound (courseIntroSound)="startAudio($event)"></app-course-intro-sound>
 
   <ion-grid class="my_courses">
@@ -23,9 +23,9 @@
         <ion-col *ngFor="let course of myCourses" size-sm="12" size-xs="12" size-md="6" size-sm="6" size-lg="4" size-xl="3">
 
           <div class="my_course_block">
-            
+
             <ion-img class="img-all-course" loading="lazy"  src="{{course.course.imagePath}}"></ion-img>
-            
+
             <h3 class="course-title"  color="primary">
               {{course.course.courseTranslations[0]?.title}}
             </h3>
@@ -60,7 +60,7 @@
               </div>
 
               <div class="certi" *ngIf="course.userCourse.status == 1">
-                <ion-button (click)="downloadCertificate(course.course.id)"> 
+                <ion-button (click)="downloadCertificate(course.course.id)">
                   Certificate
                   <ion-icon name="download-outline"></ion-icon>
                   <ion-spinner *ngIf='isLoading' name="circles"></ion-spinner> </ion-button>
@@ -91,5 +91,9 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
+    <div class="no-result" *ngIf="myCourses.length <= 0">
+      <img src="../../../../assets/images/sorry.png" />
+      <p> No available reviews ! </p>
+    </div>
 
 </ion-content>

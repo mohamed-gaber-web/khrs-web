@@ -4,18 +4,15 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" class="success-photos" *ngFor="let item of allSuccessData">
-        <!-- (click)="open(content)" -->
           <div class="success-button-play" >
-            <!-- <ion-icon name="play"></ion-icon> -->
             <iframe width="100%" height="auto" [src]="item.youTubeVideoLink | safe" allowfullscreen></iframe>
           </div>
-            <!-- <ng-template #content let-modal>
-            <div class="modal-body">
-            </div>
-          </ng-template> -->
       </ion-col>
     </ion-row>
-    <!-- <p *ngIf="!allSuccessData || allSuccessData.length <= 0">  No available images!  </p> -->
+    <div class="no-result" *ngIf="allSuccessDataLength <= 0">
+      <img src="../../../../assets/images/sorry.png" />
+      <p> No available videos! </p>
+    </div>
   </ion-grid>
 
 

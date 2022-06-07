@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class VideosComponent implements OnInit {
 
   @Input('successData') allSuccessData: any;
+  @Input('successDataLength') allSuccessDataLength: number;
   @Input('isLoadingData') isLoading: boolean;
 
   constructor() { }
