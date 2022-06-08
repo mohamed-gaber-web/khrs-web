@@ -96,6 +96,30 @@ h4.passed {
 }
 }
 
+h4.course_status {
+  font-size: 18px;
+  font-weight: 500;
+  color: #003182;
+  border: 1px solid #8AFA6F;
+  border-radius: 20px;
+  max-width: 200px;
+  height: 50px;
+  line-height: 50px;
+  margin: 10px auto;
+}
+
+h4.my-course-rating {
+  font-size: 18px;
+  font-weight: 600;
+  position: absolute;
+  top: 15px;
+  left: 13px;
+  color: #ebffe6;
+  background-color: #003182;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
 @media(max-width: 767px) {
   .my_courses {
     padding: 0;

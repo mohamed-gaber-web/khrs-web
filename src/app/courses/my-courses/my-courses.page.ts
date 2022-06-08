@@ -59,7 +59,7 @@ export class MyCoursesPage implements OnInit, OnDestroy {
         .getUserCourses('', this.offset)
         .pipe(
           map((response) => {
-            console.log(response);
+            // console.log(response);
             Object.entries(response);
             this.isLoading = false;
             this.totalLength = response['length'];

@@ -23,22 +23,17 @@
         <ion-col *ngFor="let course of myCourses" size-sm="12" size-xs="12" size-md="6" size-sm="6" size-lg="4" size-xl="3">
 
           <div class="my_course_block">
-
             <ion-img class="img-all-course" loading="lazy"  src="{{course.course.imagePath}}"></ion-img>
-
             <h3 class="course-title"  color="primary">
               {{course.course.courseTranslations[0]?.title}}
             </h3>
-
             <hr />
-
               <div  *ngIf="course.course.courseTranslations[0]?.introVoicePath">
                 <div class="icon-sound-course">
                     <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-3" [name]="!course.course.audioElement.status? 'play' : 'stop'" (click)="playIntroHTML(course.course)">
                     </ion-icon>
                   </div>
               </div>
-
 
               <div *ngIf="course.userCourse.status == 5">
                 <ion-button
@@ -49,10 +44,12 @@
               </div>
 
               <div class="applied" *ngIf="course.userCourse.status == 4">
-                <button class="btn-outline">
+                <!-- <button class="btn-outline">
                   <ion-icon name="time-outline"></ion-icon>
                   Pending
-                </button>
+                </button> -->
+                <h4 class="course_status"> Pending </h4>
+
               </div>
 
               <div *ngIf="course.userCourse.status == 1">
@@ -64,18 +61,24 @@
                   Certificate
                   <ion-icon name="download-outline"></ion-icon>
                   <ion-spinner *ngIf='isLoading' name="circles"></ion-spinner> </ion-button>
+                  <h4 (click)="goToChooseCourseMaterial(course.course.id, course.userCourse.courseId)" class="my-course-rating">
+                  Rating
+                  </h4>
               </div>
 
 
               <div class="expired" *ngIf="course.userCourse.status == 2">
-                <button class="btn-outline">
+                <!-- <button class="btn-outline">
                   <ion-icon name="lock-closed-outline"></ion-icon> Expired
-                </button>
+                </button> -->
+                <h4 class="course_status"> Expired </h4>
               </div>
               <div class="expired" *ngIf="course.userCourse.status == 3">
-                <button class="btn-outline">
+                <!-- <button class="btn-outline">
                   <ion-icon name="lock-closed-outline"></ion-icon> Failed
-                </button>
+                </button> -->
+                <h4 class="course_status"> Failed </h4>
+
               </div>
 
           </div>

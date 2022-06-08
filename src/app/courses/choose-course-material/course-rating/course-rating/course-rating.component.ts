@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/shared/services/courses.service';
@@ -12,14 +13,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CourseRatingComponent implements OnInit {
 
   @Input() courseIdRate: number;
+  @Input('courseName') courseName: string;
   rateObject: IRating;
   resultRating: any;
   subs: Subscription[] = [];
 
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(private courseService: CourseService, private router: Router, public toastController: ToastController) {}
 
   ngOnInit() {
-    // console.log(this.courseIdRate)
     this.rateObject = {
       courseId: this.courseIdRate,
       rate:  0,
@@ -30,12 +31,20 @@ export class CourseRatingComponent implements OnInit {
   addUserCourserate() {
     this.subs.push(
        this.courseService.createRatingService(this.rateObject)
-        .subscribe(response => {
+        .subscribe( async (response) => {
           console.log(this.rateObject)
           console.log(response)
           this.resultRating = response['success'];
           if(this.resultRating === true) {
             this.router.navigateByUrl('/thanks-rating');
+          } else  {
+            const errorMsg = response['arrayMessage'][0];
+            var toast = await this.toastController.create({
+              message: errorMsg,
+              duration: 2000,
+              color: 'danger',
+            });
+            toast.present();
           }
       })
     );

@@ -11,7 +11,7 @@
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
 
   <div class="course-material-count">
-    <h4> <b>  {{ materialCourseLength }} / {{ offset }}   </b>   </h4>
+    <h4> <b>  {{ offset }} / {{ materialCourseLength }}   </b>   </h4>
   </div>
 
   <ion-slides (ionSlideWillChange)="doCheck()" #slides pager="false" [options]="slideOpts">

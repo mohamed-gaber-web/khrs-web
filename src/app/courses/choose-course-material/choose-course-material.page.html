@@ -69,7 +69,7 @@
                   Final Test
               </ion-button>
 
-              <ion-button *ngIf="CourseDetails.status === 1" (click)="toggleModal()">
+              <ion-button *ngIf="CourseDetails.status === 1"  (click)="toggleModal()">
                 <img class="img-icon" src="../../../assets/images/rating.png" alt="rating" />
                 Rating
               </ion-button>
@@ -87,10 +87,10 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid>
+  <ion-grid *ngIf="CourseDetails">
     <div [ngClass]="!isOpen ? 'overlay hide' : 'overlay show' ">
       <div class="close" (click)="closeModal()"> <ion-icon name="close-circle"></ion-icon> </div>
-      <app-course-rating [courseIdRate]="courseId"></app-course-rating>
+      <app-course-rating  [courseName]="CourseDetails.courseTranslations[0].title" [courseIdRate]="courseId"></app-course-rating>
     </div>
 </ion-grid>
 

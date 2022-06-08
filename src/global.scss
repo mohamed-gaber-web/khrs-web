@@ -17,14 +17,15 @@
 /********************** Global Css ********************/
 
 .success-block {
-  background-color: #fff;
+  background-color: #F3FFF1;
   border-radius: 40px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   -moz-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 10px 20px;
+  padding: 10px;
   height: 70vh;
   overflow-y: auto;
+  width: 90%;
 
   h3 {
     color: #062F87;
@@ -59,7 +60,7 @@
 
 .mat-menu-item:hover {
     background: rgb(138 250 111) !important;
-    color: #fff;
+    color: #003182;
     font-weight: bold;
     width: 80%;
     margin: auto;

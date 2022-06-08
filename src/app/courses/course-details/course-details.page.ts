@@ -40,14 +40,14 @@ export class CourseDetailsPage implements OnInit {
 
   ngOnInit() {
 
-    // ** Get course details
+  // ** Get course details
   this.isLoading = true;
   this.subs.push(
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
           this.courseService.getCoursesDetails(+params.get('courseId')))
           ).subscribe(response => {
-          console.log('course details', response);
+          // console.log('course details', response);
           this.isLoading = false;
           this.courseDetails = response['result'];
     })
