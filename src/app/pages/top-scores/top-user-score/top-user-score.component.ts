@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { CourseService } from 'src/app/shared/services/courses.service';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-top-user-score',
@@ -7,8 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopUserScoreComponent implements OnInit {
 
-  constructor() { }
+  // @Input('topStudentData') studentsData: any
+  topStudents: any;
+  topStudent: any;
+  obj: any;
 
-  ngOnInit() {}
+  constructor(public courseService: CourseService) { }
+
+  ngOnInit() {
+    this.courseService.getTopScores()
+      .subscribe((response) => {
+        this.topStudents = response['result']['topStudents'];
+        this.topStudent = this.topStudents.slice(0, 3)
+       this.obj = Object.assign({}, this.topStudent); // {0:"a", 1:"b", 2:"c"}
+        console.log('3 values', this.obj)
+      });
+  }
 
 }

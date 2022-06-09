@@ -1,1 +1,10 @@
-<app-top-score-item></app-top-score-item>
+<div class="top_score_block" *ngFor="let item of examsData">
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+  <div class="top_score_block__image" >
+    <img [src]="item.imagePath" loading="lazy" alt=""  />
+    <span> {{ item.courseName }} </span>
+  </div>
+  <div class="top_score_block__text">
+      <h5> <b style="font-size: 20px;"> {{ item.count }} </b> points </h5>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-top-score-exams',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-score-exams.component.scss'],
 })
 export class TopScoreExamsComponent implements OnInit {
+
+  @Input('topExamsData') examsData: any;
+  @Input('loading') isLoading: boolean;
 
   constructor() { }
 

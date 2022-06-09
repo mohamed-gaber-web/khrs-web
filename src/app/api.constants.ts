@@ -60,3 +60,5 @@ export const createUserCourseRate = `${baseUrl}/api/Rate/Create`;
 // suuccess board
 export const successBoard = `${baseUrl}/api/SuccessBoard/GetSuccessBoard`;
 
+// top scores
+export const topScores = `${baseUrl}/api/UserCourse/GetTopScores`;
