@@ -8,19 +8,18 @@
 
 <ion-content>
 
-  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
-
   <div class="course-material-count">
     <h4> <b>  {{ offset }} / {{ materialCourseLength }}   </b>   </h4>
   </div>
 
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
   <ion-slides (ionSlideWillChange)="doCheck()" #slides pager="false" [options]="slideOpts">
 
     <ion-slide *ngFor="let course of courseMaterial" class="course__material">
 
-      <ion-grid class="course__sound" *ngIf="course.materialTranslations[0].voicePath">
+      <ion-grid class="course__sound" >
         <ion-row class="ion-justify-content-center">
-          <ion-col size-sm="12" size-lg="6" >
+          <ion-col size-sm="12" size-lg="6" *ngIf="course.materialTranslations[0].voicePath">
             <div class="icon-sound">
               <div class="img-volume">
                 <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="'play'" (click)="startAudio(course.materialTranslations[0].voicePath)">
@@ -29,11 +28,10 @@
              </div>
           </ion-col>
         </ion-row>
-
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" size-md="6" size-lg="7">
             <div class="course__material-block">
-              <ion-text class="material-text" [innerHTML]="course.materialTranslations[0].description"> </ion-text>
+              <div [innerHTML]="course.materialTranslations[0].description | sanitizeHtml">  </div>
               <ion-grid>
                 <ion-row>
                   <ion-col size="12" size-lg="6">
@@ -54,9 +52,7 @@
         </ion-row>
       </ion-grid>
 
-
     </ion-slide>
-
   </ion-slides>
 
 <!-- Button -->

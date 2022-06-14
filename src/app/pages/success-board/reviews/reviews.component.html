@@ -3,7 +3,8 @@
     <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
       <div class="success-reviews" *ngFor="let reviewItem of allSuccessRating">
       <div class="user-course-status__left">
-        <img [src]="reviewItem.userImage" loading="lazy" [alt]="reviewItem.courseName" />
+        <img *ngIf="reviewItem.userImage !== null" [src]="reviewItem.userImage" loading="lazy" [alt]="reviewItem.courseName" />
+        <img *ngIf="reviewItem.userImage === null" src="../../../../assets/images/img-profile.png" loading="lazy" [alt]="reviewItem.courseName" />
       </div>
 
       <div class="user-course-status__center">

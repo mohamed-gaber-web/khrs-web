@@ -7,12 +7,12 @@
 <app-top-header-desktop></app-top-header-desktop>
 </div>
 
+<ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
 <ion-content>
   <div class="top-title">
     <h3> Top Score </h3>
   </div>
-
- <app-top-user-score></app-top-user-score>
+  <app-top-user-score></app-top-user-score>
 
  <ion-grid>
    <ion-row>

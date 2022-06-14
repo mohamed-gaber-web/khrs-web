@@ -1,5 +1,5 @@
-import { HelpModalComponent } from './../help-modal/help-modal.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { HelpModalComponent } from './../help-modal/help-modal.component';
 import {
   FormBuilder,
   FormControl,
@@ -193,6 +193,9 @@ export class MultiChoicePage implements OnInit {
           }
         })
     );
+    // console.log('close sound');
+    // this.playAudio(this.exerciseItems[0].audioElementDanish, 1);
+    this.exerciseItems[0].audioElementDanish.audio.pause();
   }
 
   async successMessage(msg: string) {

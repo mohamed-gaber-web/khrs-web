@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from './auth/auth.service';
@@ -22,10 +22,15 @@ export class AppComponent {
 
   ) {
     this.updateAppLanguage();
-
+    // this.clearLocalStorage();
   }
 
   systemLanguage:any;
+
+    // @HostListener("window:onbeforeunload",["$event"])
+    // clearLocalStorage(){
+    //   localStorage.clear();
+    // }
 
   updateAppLanguage(){
     if(!localStorage.getItem('lang')){

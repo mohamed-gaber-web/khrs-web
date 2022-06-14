@@ -9,11 +9,12 @@ import { CategoryModule } from './components/category/category.module';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { IonicModule } from '@ionic/angular';
+import { SanitizeHtmlPipe } from './pipes/sanitizer.pipe';
 
 @NgModule({
   imports: [CommonModule, TopHeaderDesktop, RouterModule, CategoryModule, IonicModule, MatMenuModule],
-  declarations: [NotFoundComponent, TopMenuMobileComponent],
-  exports: [TopHeaderDesktop, CategoryModule, TopMenuMobileComponent],
+  declarations: [NotFoundComponent, TopMenuMobileComponent, SanitizeHtmlPipe],
+  exports: [TopHeaderDesktop, CategoryModule, TopMenuMobileComponent, SanitizeHtmlPipe],
   providers: [],
 })
 

@@ -23,7 +23,7 @@ export class TopScoresPage implements OnInit {
     this.courseService.getTopScores()
     .subscribe(response => {
     this.isLoading = false;
-      console.log('top scores', response);
+      // console.log('top scores', response);
       this.allTopStudents = response['result']['topStudents'];
       this.allTopCourses = response['result']['topCourses'];
       this.allTopExams = response['result']['topTests'];

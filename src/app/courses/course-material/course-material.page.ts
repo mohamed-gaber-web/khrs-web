@@ -80,24 +80,17 @@ export class CourseMaterialPage implements OnInit {
           )
         )
         .subscribe((response) => {
+          console.log('course material', response)
           this.isLoading = false;
+          this.courseMaterial = response['result'];
           this.materialCourseLength = response['length'];
           this.limit = response['limit'];
-          this.courseMaterial = response['result'];
-        },
-          (error) => {
-            console.log('exist error');
-
-          },
-          () => {
-          console.log('completed');
-          this.isLoading = false;
         })
     );
   }
 
   // ** Move to Next slide
-  slideNext() {
+  async slideNext() {
     if (this.player) {
       this.activeTrack = null;
       this.player.unload();
@@ -106,9 +99,19 @@ export class CourseMaterialPage implements OnInit {
     this.offset += 1; // get one request when add next
     this.getMaterialCourse();
     this.slides.slideNext();
+
+    if(this.offset === this.materialCourseLength) {
+      var toast = await this.toastController.create({
+      message: 'Material pages is finished !',
+      duration: 3000,
+      color: 'success',
+      });
+      toast.present();
+      // this.router.navigate(['/courses/tabs/my-courses']);
+    }
   }
 
-  // ** Move to previous slide
+  // **  previous slide
   slidePrev() {
     if (this.player) {
       this.activeTrack = null;
@@ -196,17 +199,17 @@ export class CourseMaterialPage implements OnInit {
     })
     );
   }
-startFromZero() {
-    // this.offset = 0;
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.activatedRoute,
-        queryParams: { offset: 0 },
-        queryParamsHandling: 'merge'
-      });
-    this.slides.slideTo(0)
-  }
+  startFromZero() {
+      // this.offset = 0;
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: { offset: 0 },
+          queryParamsHandling: 'merge'
+        });
+      this.slides.slideTo(0)
+    }
 
   ngOnDestroy(): void {
     this.subs.forEach((element) => {
