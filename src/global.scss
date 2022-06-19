@@ -16,6 +16,9 @@
 
 /********************** Global Css ********************/
 
+
+
+
 .success-block {
   background-color: #F3FFF1;
   border-radius: 40px;
@@ -208,15 +211,20 @@ ion-button {
 }
 
 
-ion-toast {
-
-  --color: var(--ion-color-second-app);
-  font-size: 16px;
-  font-weight: 500;
+ion-toast.success-msg,
+ion-toast.ion-error {
   text-align: center;
-  --height: 80px;
-  border-radius: 10px;
-  text-transform: capitalize;
+  --height: 300px;
+  --background: transparent ;
+  --box-shadow: none !important;
+}
+
+ion-toast.success-text {
+    text-align: center;
+  --height: 80px !important;
+  --background-color: green !important;
+  font-size: 22px !important;
+  font-weight: 600;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -720,3 +728,4 @@ ion-radio {
     border-radius: 10px;
   }
 }
+

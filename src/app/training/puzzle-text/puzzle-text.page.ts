@@ -1,14 +1,12 @@
+import { UtilityService } from './../../shared/services/utility.service';
 import { PuzzleTextTranslations } from './../../shared/models/puzzleTextTranslations';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IonSlides, ModalController, NavController, ToastController } from '@ionic/angular';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag} from '@angular/cdk/drag-drop';
-import { PuzzleText } from 'src/app/shared/models/puzzleText';
+import {CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ExerciseService } from 'src/app/shared/services/exercise.service';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { PageEvent } from '@angular/material/paginator';
 import { AudioElement } from 'src/app/shared/models/audioObject';
 import { HelpModalComponent } from '../help-modal/help-modal.component';
 
@@ -53,10 +51,11 @@ export class PuzzleTextPage implements OnInit {
   constructor(
     private storageService: StorageService,
     private route: ActivatedRoute,
-    public toastController: ToastController,
     public navController: NavController,
     private exerciseService: ExerciseService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private utilityService: UtilityService,
+
 
 
   ) { }
@@ -83,7 +82,7 @@ export class PuzzleTextPage implements OnInit {
         this.questionAndAnswerItems = response;
         this.lengthQuestion = response['length'];
         if(this.lengthQuestion ==0){
-          this.errorMessage("There are no available questions in this exercise");
+          this.utilityService.errorMessage("There are no available questions in this exercise");
           setTimeout(() => {
             this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
           }, 100)
@@ -208,14 +207,16 @@ export class PuzzleTextPage implements OnInit {
     const isCorrect = response['result'].isCorrect;
 
     if(isCorrect === true) {
-      this.successMessage('Correct answer !');
+      this.utilityService.successMessage("<img src='../../../assets/images/22.gif' />");
       this.stopAllAudios();
-      this.currentIndex += 1;
-      this.getQuestionAndAnswer();
-      this.slides.slideNext();
+      setTimeout(() => {
+        this.currentIndex += 1;
+        this.getQuestionAndAnswer();
+        this.slides.slideNext();
+      }, 3000)
 
       if(this.currentIndex === this.lengthQuestion) {
-        this.successMessage('Thanks for resolving questions');
+        this.utilityService.successMessage('Thanks for resolving questions');
         setTimeout(() => {
           this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
         }, 100)
@@ -223,35 +224,12 @@ export class PuzzleTextPage implements OnInit {
 
 
     } else if(isCorrect === false) {
-      this.errorMessage('Wrong answer !');
+      this.utilityService.errorMessage("<img src='../../../assets/images/wr.gif' />");
     }
   })
 
   }
 
-  async successMessage(msg: string) {
-    this.audio.load();
-    this.audio.play();
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 3000,
-      cssClass: 'ion-success',
-      color: 'success',
-    });
-    toast.present();
-  }
-
-  async errorMessage(msg: string) {
-    this.audio.load();
-    this.audio.play();
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 4000,
-      cssClass: 'ion-error',
-      color: 'danger',
-    });
-    toast.present();
-  }
 
   playAudio(item:any){
   this.stopAllAudios(item);

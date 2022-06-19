@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ToastController, IonSlides, NavController } from '@ionic/angular';
+import {IonSlides, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AudioElement } from 'src/app/shared/models/audioObject';
 
@@ -12,10 +12,7 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { ModalController } from '@ionic/angular';
 import { HelpModalComponent } from '../help-modal/help-modal.component';
 
-import { File } from '@ionic-native/file/ngx';
-
-
-
+import { UtilityService } from './../../shared/services/utility.service';
 @Component({
   selector: 'app-single-choice',
   templateUrl: './single-choice.page.html',
@@ -62,13 +59,13 @@ export class SingleChoicePage implements OnInit {
 
 
   constructor(
-    public toastController: ToastController,
     private storageService: StorageService,
     private exerciseService: ExerciseService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public navController: NavController,
     public modalController: ModalController,
+    private utilityService: UtilityService,
     // private file: File
     ) { }
 
@@ -98,7 +95,7 @@ export class SingleChoicePage implements OnInit {
           this.exerciseItems = response['result'];
           this.lengthQuestion = response['length'];
           if(this.lengthQuestion == 0){
-            this.errorMessage("There are no available questions in this exercise");
+            this.utilityService.successText("There are no available questions in this exercise");
             setTimeout(() => {
               this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
             }, 300)
@@ -194,10 +191,8 @@ export class SingleChoicePage implements OnInit {
 
           this.resultAnswer = response['success'];
           if(this.resultAnswer === true) {
-
             // message and voice success
-            this.successMessage('Correct answer !');
-            this.currentIndex += 1;
+            this.utilityService.successMessage("<img src='../../../assets/images/22.gif' />");
             if(this.exerciseItems[0].audioElement){
               this.exerciseItems[0].audioElement.audio.pause();
               this.exerciseItems[0].audioElement.audio = null;
@@ -208,50 +203,30 @@ export class SingleChoicePage implements OnInit {
               this.exerciseItems[0].audioElementDanish.audio = null;
 
             }
-            this.isLoading = true;
-            this.singleForm.reset();
-            this.getQuestion();
-            this.slides.slideNext();
+            setTimeout(() => {
+              this.isLoading = true;
+              this.singleForm.reset();
+              this.currentIndex += 1;
+              this.getQuestion();
+              this.slides.slideNext();
+            }, 4000)
 
             if(this.currentIndex === this.lengthQuestion) {
-              this.successMessage('Thanks for resolving questions');
+              this.utilityService.successText('Thanks for resolving questions');
+              // alert('You are exist exercise')
               setTimeout(() => {
                 this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
-              }, 100)
+              }, 1000)
             }
 
           } else if(this.resultAnswer === false) {
             // message and voice error
-            this.errorMessage('Wrong answer !');
+            this.utilityService.errorMessage("<img src='../../../assets/images/wr.gif' />");
           }
 
           }
       )
       );
-  }
-
-  async successMessage(msg: string) {
-    this.audio.load();
-    this.audio.play();
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 500,
-      cssClass:'ion-success',
-      color: 'success'
-    });
-    toast.present();
-  }
-
-  async errorMessage(msg: string) {
-    this.audio.load();
-    this.audio.play()
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 4000,
-      cssClass:'ion-error',
-      color: 'danger',
-    });
-    toast.present();
   }
 
   async presentModal() {
@@ -269,7 +244,6 @@ export class SingleChoicePage implements OnInit {
     this.currentIndex -= 1;
     this.getQuestion();
     this.slides.slidePrev();
-
   }
 
   ngOnDestroy() {

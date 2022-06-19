@@ -1,3 +1,4 @@
+import { UtilityService } from './../../shared/services/utility.service';
 import { PuzzleSoundComponent } from './puzzle-sound/puzzle-sound.component';
 import { PuzzleImageTranslations } from './../../shared/models/puzzleImageTranslation';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -68,7 +69,8 @@ export class PuzzleImagePage implements OnInit {
     public navController: NavController,
     private exerciseService: ExerciseService,
     public popoverController: PopoverController,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private utilityService: UtilityService,
 
   ) {}
 
@@ -96,12 +98,12 @@ export class PuzzleImagePage implements OnInit {
           this.limit
         )
         .subscribe((response) => {
-          console.log(response)
+          // console.log(response)
           this.questionAndAnswerItems = response;
           this.lengthQuestion = response['length'];
 
           if(this.lengthQuestion ==0){
-            this.errorMessage("There are no available questions in this exercise");
+            this.utilityService.errorMessage("There are no available questions in this exercise");
             setTimeout(() => {
               this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
             }, 100)
@@ -186,7 +188,7 @@ export class PuzzleImagePage implements OnInit {
     var currIndex =   event.currentIndex;
 
     if (event.previousContainer === event.container) {
-     console.log("same")
+    //  console.log("same");
      moveItemInArray(data, prevIndex, this.currentIndex);
 
     } else {
@@ -228,7 +230,7 @@ export class PuzzleImagePage implements OnInit {
     // ** get check
     let arrayPuzzle: any = [];
     this.questionsArray.forEach((values) => {
-      console.log('values', values);
+      // console.log('values', values);
       arrayPuzzle.push({
         puzzleWithImageQuestionId: values[0].id,
         imageGuid: values[0].guidId,
@@ -239,20 +241,22 @@ export class PuzzleImagePage implements OnInit {
     this.exerciseService
       .checkAnswerPuzzleWithImage(arrayPuzzle)
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         const isCorrect = response['result'].isCorrect;
 
         if (isCorrect === true) {
-          this.successMessage('Correct answer !');
+          this.utilityService.successMessage("<img src='../../../assets/images/22.gif' />");
           if (this.player) {
             this.player.stop();
           }
-          this.currentIndex += 1;
-          this.getQuestionAndAnswer();
-          this.slides.slideNext();
+          setTimeout(() => {
+            this.currentIndex += 1;
+            this.getQuestionAndAnswer();
+            this.slides.slideNext();
+          }, 3000)
 
           if (this.currentIndex === this.lengthQuestion) {
-            this.successMessage('Thanks for resolving questions');
+            this.utilityService.successMessage('Thanks for resolving questions');
             setTimeout(() => {
               this.navController.navigateRoot([
                 '/exercise',
@@ -261,35 +265,9 @@ export class PuzzleImagePage implements OnInit {
             }, 100);
           }
         } else if (isCorrect === false) {
-          this.errorMessage(
-            'Wrong answer !'
-          );
+          this.utilityService.errorMessage("<img src='../../../assets/images/wr.gif' />");
         }
       });
-  }
-
-  async successMessage(msg: string) {
-    this.audio.load();
-    this.audio.play();
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 4000,
-      cssClass: 'ion-success',
-      color: 'success',
-    });
-    toast.present();
-  }
-
-  async errorMessage(msg: string) {
-    this.audio.load();
-    this.audio.play();
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 4000,
-      cssClass: 'ion-error',
-      color: 'danger',
-    });
-    toast.present();
   }
 
   async presentPopover(ev: any, item: any) {
@@ -350,8 +328,4 @@ export class PuzzleImagePage implements OnInit {
     }
   }
 
-  // imageBig() {
-  //   this.image.nativeElement.style.width = '1000px'
-  //   console.log(this.image.nativeElement);
-  // }
 }
