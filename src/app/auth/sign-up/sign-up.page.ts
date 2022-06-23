@@ -47,6 +47,7 @@ export class SignUpPage implements OnInit {
     password: '',
     confirmPassword: '',
     recommendedbyId: '',
+    languageId: '',
     acceptTerms: '',
   };
 
@@ -80,6 +81,9 @@ export class SignUpPage implements OnInit {
     Birthdate: {
       required: this.translate.instant('birthdateReq'),
     },
+    languageId: {
+      required: 'Langauge is required',
+    },
     acceptTerms: {
       required: this.translate.instant('acceptTermsReq'),
     }
@@ -112,8 +116,6 @@ export class SignUpPage implements OnInit {
 
   // get all language
   this.getLanguage()
-
-  // this.getLanguageAPi(); // ** fix phone and gender in ios app
 
   // * Register Fields
   this.registerForm = this.formBuilder.group({
@@ -158,6 +160,11 @@ export class SignUpPage implements OnInit {
   public onRegisterFormSubmit(values):void {
 
     this.validateRegisterForm(true);
+
+  // this.getLanguageAPi(); // ** fix phone and gender in ios app
+  if(!localStorage.getItem('languageId')) {
+     localStorage.setItem('languageId', this.registerForm.value.languageId);
+  }
 
      if (this.registerForm.valid) {
        this.auth.registerCustomer(values).subscribe(async(response) => {
