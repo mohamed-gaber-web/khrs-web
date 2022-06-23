@@ -147,7 +147,19 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col size="12">
+        <ion-col size="6">
+          <ion-list>
+            <ion-item>
+            <ion-label>Choose Language</ion-label>
+              <ion-select formControlName="languageId" value="brown" okText="Okay" cancelText="Dismiss" required>
+                <ion-select-option *ngFor="let item of langItems" [value]="item.id"> {{ item.name }} </ion-select-option>
+              </ion-select>
+            </ion-item>
+          <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }}</ion-text>
+
+          </ion-list>
+        </ion-col>
+        <ion-col size="6">
           <ion-list>
             <ion-item>
               <ion-label>{{ 'acceptTerms' | translate }}</ion-label>

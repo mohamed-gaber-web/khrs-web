@@ -1,6 +1,61 @@
 
+    // Animation Element
+
+.select-dots {
+    background-color: #062F87;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 26px;
+    right: 143px;
+    z-index: 2000000000;
+    -webkit-animation: selectAnimate 3s ease-in 3 forwards;
+    -o-animation: selectAnimate 3s ease-in 3 forwards;
+    -moz-animation: selectAnimate 3s ease-in 3 forwards;
+    animation: selectAnimate 3s ease-in 3 forwards;
+}
+
+.select-animate {
+    position: absolute;
+    z-index: 20000000000000000;
+    bottom: 25px;
+    right: 33%;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-animation: selectAnimate 2s ease-in 4 forwards;
+    -o-animation: selectAnimate 2s ease-in 4 forwards;
+    -moz-animation: selectAnimate 2s ease-in 4 forwards;
+    animation: selectAnimate 2s ease-in 4 forwards;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+}
+
+  @keyframes selectAnimate {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    visibility: hidden;
+  }
+}
+
+// Animation Element
+
   form{
-    width: 50%;
+    width: 60%;
     -webkit-box-shadow: 0 0 15px rgb(51 51 51 / 10%);
     box-shadow: 0 0 15px rgb(51 51 51 / 10%);
     padding: 0 50px;
@@ -8,7 +63,8 @@
     background-color: var(--ion-choice-background-color);
     border: 1px solid rgb(204 204 204 / 75%);
     margin: 0px auto 0 auto;
-    height: 540px;
+    height: 600px;
+    position: relative;
   }
 
   .test-top {
@@ -52,6 +108,8 @@
       font-size: 15px;
       padding-left: 10px;
     }
+
+
   }
 
   /* end header top */
@@ -83,7 +141,7 @@
     }
 
     ion-radio {
-      --color: var(--ion-color-second-app);
+      --color: #8AFA6F;
     }
   }
 
@@ -169,6 +227,11 @@
 
   ion-item {
     --background: var(--ion-choice-background-color) !important;
+
+
+  }
+  ion-radio-group {
+    position: relative;
   }
 
   @media(max-width: 1024px) {
@@ -176,4 +239,14 @@
       width: 90%;
       padding: 0 10px;
     }
+
+  .select-animate {
+    bottom: 10px;
+    right: 120px;
   }
+  }
+
+
+
+
+

@@ -30,6 +30,7 @@
             <ion-col size="12" size-lg="6">
 
               <ion-grid class="puzzle-text">
+
                 <ion-row>
                   <ion-col size="12"
                     class="block"
@@ -73,8 +74,12 @@
                     [cdkDropListData]="answersArray"
                     (cdkDropListDropped)="drop($event)">
 
+                    <div class="puzzle_animation-element">
+                      <h1> Drag & Drop </h1>
+                      <!-- <img src="../../../assets/images/puzzle-animate.png" >
+                      text -->
+                    </div>
                     <div class="puzzle-fix" *ngFor="let item of answersArray" cdkDrag>
-
                       <div class="title"> {{ item.text }} </div>
                         <div class="sound" *ngIf="item.voicePath">
                           <div class="sound-bg">

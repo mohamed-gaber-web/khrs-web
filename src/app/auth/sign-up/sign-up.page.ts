@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import {
@@ -28,6 +29,9 @@ export class SignUpPage implements OnInit {
   showPasswordItem: boolean = false;
   allRecommended: any = [];
   progress: number = 0;
+  langItems: any;
+  subs: Subscription[] = [];
+
   gender = [
     {name: 'male', value: 0},
     {name: 'female', value: 1}
@@ -105,7 +109,12 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   // this.getLanguageAPi();
   this.getRecommendeBy();
+
+  // get all language
+  this.getLanguage()
+
   // this.getLanguageAPi(); // ** fix phone and gender in ios app
+
   // * Register Fields
   this.registerForm = this.formBuilder.group({
     'FirstName': [''], // Validators.compose([Validators.required])
@@ -118,7 +127,7 @@ export class SignUpPage implements OnInit {
     'confirmPassword': [''],
     'recommendedbyId': [0],
     'acceptTerms': [null],
-    'languageId': [JSON.parse(localStorage.getItem('languageId'))],
+    'languageId': [null, Validators.required],
     file : this.formBuilder.group({
       fieldName: ['', !Validators.required],
       filename: ['', !Validators.required],
@@ -145,7 +154,7 @@ export class SignUpPage implements OnInit {
     }
   }
 
-  // ! When resister form valid
+  // ** Register New User
   public onRegisterFormSubmit(values):void {
 
     this.validateRegisterForm(true);
@@ -177,7 +186,7 @@ export class SignUpPage implements OnInit {
      }
   }
 
-  // ** get recomended by list
+  // ** get Recomended By List
   getRecommendeBy() {
     this.auth.recommendedBy().subscribe(response => {
       const data = response['result'];
@@ -185,6 +194,17 @@ export class SignUpPage implements OnInit {
         this.allRecommended.push(rec);
       });
     })
+  }
+
+  // ** Get All Language
+  getLanguage() {
+    this.subs.push(
+      this.appService.getLanguage()
+      .subscribe(response => {
+        console.log(response)
+        this.langItems = response['result'].result;
+      })
+    );
   }
 
  // ** fix phone and gender in ios app
@@ -197,10 +217,13 @@ export class SignUpPage implements OnInit {
 //   })
 //  }
 
-  // * show and hide password
+  // * Show And Hide Input Password
   showPassword() {
     this.showPasswordItem = !this.showPasswordItem
   }
 
+  ngOnDestroy() {
+    this.subs.forEach(e => e.unsubscribe())
+  }
 
 }

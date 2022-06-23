@@ -19,6 +19,11 @@
 </div>
 
 <form *ngIf="exerciseItems" [formGroup]="multiForm">
+  <!-- Animation Element -->
+  <div class="select-animate">
+    <img src="../../../assets/images/select.png" />
+  </div>
+  <!-- Animation Element -->
 
   <h3 class="total-result"> {{ (currentIndex+1)  + ' / ' +  lengthQuestion}} </h3>
 
@@ -63,6 +68,7 @@
       </ion-list-header>
 
       <ion-radio-group formControlName="answer">
+        <div class="select-dots"></div>
         <div class="answer" *ngFor="let item of resultAnswerItems">
         <ion-item (click)="playAudio(item,2)">
           <ion-label>{{ item.answer }}</ion-label>
@@ -79,7 +85,7 @@
       </ion-item>
 
     </div>
-  </ion-radio-group>
+      </ion-radio-group>
 
   <ion-grid>
     <ion-row class="ion-padding ion-justify-content-center">
