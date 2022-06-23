@@ -110,8 +110,8 @@ ion-header ion-img {
     top: 0;
     transform: translate(0, 0);
     z-index: 2000;
-    width: 99%;
-    height: 110px;
+    width: 50%;
+    height: 100px;
     border: 5px dashed  #8AFA6F;
     border-radius: 10px;
     background-color: #fff;
@@ -119,10 +119,10 @@ ion-header ion-img {
     display: flex;
     align-items: center;
 
-    -webkit-animation: selectAnimate 6s ease-in-out 3 forwards;
-    -o-animation: selectAnimate 6s ease-in-out 3 forwards;
-    -moz-animation: selectAnimate 6s ease-in-out 3 forwards;
-    animation: selectAnimate 6s ease-in-out 3 forwards;
+    -webkit-animation: selectAnimate 4s ease-in 2 forwards;
+    -o-animation: selectAnimate 4s ease-in 2 forwards;
+    -moz-animation: selectAnimate 4s ease-in 2 forwards;
+    animation: selectAnimate 4s ease-in 2 forwards;
 }
 
 @keyframes selectAnimate {
@@ -133,10 +133,10 @@ ion-header ion-img {
   //   transform: translate(-104%, -4px);
   // }
   50% {
-    transform: translate(-104%, -4px);
+    transform: translate(-104%, 0);
   }
   100% {
-    transform: translate(-104%, -4px);
+    transform: translate(-104%, 0);
     visibility: hidden;
   }
 }
@@ -365,4 +365,8 @@ ion-header ion-img {
   margin-bottom: 0;
 }
 
+}
+
+@media(max-width: 1024px) {
+  .puzzle_animation-element {display: none;}
 }

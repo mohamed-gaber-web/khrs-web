@@ -17,6 +17,8 @@
 </div>
 
 
+<ion-content>
+
 <div class="puzzle-image" style="overflow: auto;">
 
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
@@ -56,11 +58,13 @@
 
                   <div class="drag-answer" *ngIf="item2.type === 'answer' ">
                     <ion-grid class="puzzle-answer">
+
                       <ion-row>
 
                         <ion-col
                           size="12"
                           >
+
                           <div class="puzzle-fix" cdkDrag [cdkDragDisabled]="false">
                             <div class="title"> {{ item2.keyword }}</div>
                             <div class="sound" *ngIf="item2.voicePath">
@@ -101,6 +105,9 @@
               <ion-grid class="puzzle-answer">
                 <ion-row class="ion-justify-content-center">
                   <ion-col cdkDropList [cdkDropListData]="answersArray" (cdkDropListDropped)="drop($event)">
+                  <div class="puzzle_animation-element">
+                    <h1> Drag & Drop </h1>
+                  </div>
                     <div class="puzzle-fix" *ngFor="let item of answersArray" cdkDrag>
                       <div class="title"> {{ item.keyword }}</div>
                         <div class="sound" *ngIf="item.voicePath">
@@ -160,3 +167,4 @@
 </div>
 
 
+</ion-content>

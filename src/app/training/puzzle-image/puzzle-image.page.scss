@@ -56,6 +56,47 @@ ion-img.image-question {
 
 .puzzle-answer {
   margin-top: 20px;
+  position: relative;
+
+  // Animation element
+.puzzle_animation-element {
+    position: absolute;
+    top: 2px;
+    transform: translate(0, 0);
+    z-index: 2000;
+    width: 50%;
+    height: 105px;
+    border: 5px dashed #8AFA6F;
+    border-radius: 10px;
+    background-color: #fff;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    -webkit-animation: selectAnimate 4s ease-in 2 forwards;
+    -o-animation: selectAnimate 4s ease-in 2 forwards;
+    -moz-animation: selectAnimate 4s ease-in 2 forwards;
+    animation: selectAnimate 4s ease-in 2 forwards;
+}
+
+@keyframes selectAnimate {
+  0% {
+    transform: translate(0, 0);
+  }
+  // 25% {
+  //   transform: translate(-104%, -4px);
+  // }
+  50% {
+    transform: translate(-106%, 0);
+  }
+  100% {
+    transform: translate(-106%, 0);
+    visibility: hidden;
+  }
+}
+
+// Animation element
+
 
   .puzzle-fix {
 
@@ -357,5 +398,9 @@ ion-img.image-question {
 
   .example-box .puzzle-fix {width: 600px;}
   .example-box .puzzle-answer .puzzle-fix .sound {width: 18%;}
+}
+
+@media(max-width: 1024px) {
+  .puzzle_animation-element {display: none;}
 }
 

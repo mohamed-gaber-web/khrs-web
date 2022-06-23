@@ -1,57 +1,57 @@
 
 // Animation Element
 
-.select-dots {
-    background-color: #062F87;
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    position: absolute;
-    bottom: 26px;
-    right: 21px;
-    z-index: 2000000000;
-    -webkit-animation: selectAnimate 3s ease-in 3 forwards;
-    -o-animation: selectAnimate 3s ease-in 3 forwards;
-    -moz-animation: selectAnimate 3s ease-in 3 forwards;
-    animation: selectAnimate 3s ease-in 3 forwards;
-}
+// .select-dots {
+//     background-color: #062F87;
+//     width: 10px;
+//     height: 10px;
+//     border-radius: 50px;
+//     position: absolute;
+//     bottom: 26px;
+//     right: 21px;
+//     z-index: 2000000000;
+//     -webkit-animation: selectAnimate 3s ease-in 3 forwards;
+//     -o-animation: selectAnimate 3s ease-in 3 forwards;
+//     -moz-animation: selectAnimate 3s ease-in 3 forwards;
+//     animation: selectAnimate 3s ease-in 3 forwards;
+// }
 
-.select-animate {
-    position: absolute;
-    z-index: 20000000000000000;
-    bottom: 25px;
-    right: 23%;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -webkit-animation: selectAnimate 2s ease-in 4 forwards;
-    -o-animation: selectAnimate 2s ease-in 4 forwards;
-    -moz-animation: selectAnimate 2s ease-in 4 forwards;
-    animation: selectAnimate 2s ease-in 4 forwards;
+// .select-animate {
+//     position: absolute;
+//     z-index: 20000000000000000;
+//     bottom: 25px;
+//     right: 23%;
+//     -webkit-transform: rotate(45deg);
+//     -moz-transform: rotate(45deg);
+//     -o-transform: rotate(45deg);
+//     transform: rotate(45deg);
+//     -webkit-animation: selectAnimate 2s ease-in 4 forwards;
+//     -o-animation: selectAnimate 2s ease-in 4 forwards;
+//     -moz-animation: selectAnimate 2s ease-in 4 forwards;
+//     animation: selectAnimate 2s ease-in 4 forwards;
 
-    img {
-      width: 150px;
-      height: 150px;
-    }
-}
+//     img {
+//       width: 150px;
+//       height: 150px;
+//     }
+// }
 
 
-@keyframes selectAnimate {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    visibility: hidden;
-  }
-}
+// @keyframes selectAnimate {
+//   0% {
+//     opacity: 0;
+//   }
+//   25% {
+//     opacity: 1;
+//   }
+//   50% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//     visibility: hidden;
+//   }
+// }
 // Animation Element
 
 .ext-icon-vlume {
