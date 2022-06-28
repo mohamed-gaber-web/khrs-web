@@ -174,7 +174,8 @@
 
     <div style="text-align: center; margin: 15px 0;">
       <ion-button
-      [disabled]="!registerForm.valid"
+      #signUpBtn
+      [disabled]="!registerForm.valid || disabledBtn === false "
       (click)="onRegisterFormSubmit(registerForm.value)"
       >
         {{ 'Signup' | translate}}

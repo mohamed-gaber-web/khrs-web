@@ -1,5 +1,4 @@
-import { Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import {
   FormBuilder,
@@ -16,6 +15,8 @@ import { ToastController } from '@ionic/angular';
 import { HelpersService } from 'src/app/shared/services/helpers.service';
 import { AppService } from 'src/app/shared/services/app.service';
 
+import { Subscription, Observable, fromEvent} from 'rxjs';
+import { scan, throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -31,6 +32,9 @@ export class SignUpPage implements OnInit {
   progress: number = 0;
   langItems: any;
   subs: Subscription[] = [];
+  click$: Observable<any>;
+  disabledBtn: boolean = true;
+  @ViewChild('signUpBtn', { read: ElementRef }) button: ElementRef;
 
   gender = [
     {name: 'male', value: 0},
@@ -162,35 +166,35 @@ export class SignUpPage implements OnInit {
     this.validateRegisterForm(true);
 
   // this.getLanguageAPi(); // ** fix phone and gender in ios app
-  if(!localStorage.getItem('languageId')) {
-     localStorage.setItem('languageId', this.registerForm.value.languageId);
-  }
+    //   if(!localStorage.getItem('languageId')) {
+    //     localStorage.setItem('languageId', this.registerForm.value.languageId);
+    //   }
 
-     if (this.registerForm.valid) {
-       this.auth.registerCustomer(values).subscribe(async(response) => {
-         if(response['success']) {
-          var toast = await this.toastController.create({
-            message: 'You signed up successfully!',
-            duration: 2000,
-            color: 'success',
-          });
-          toast.present();
+    //  if (this.registerForm.valid) {
+    //    this.auth.registerCustomer(values).subscribe(async(response) => {
+    //      if(response['success']) {
+    //       var toast = await this.toastController.create({
+    //         message: 'You signed up successfully!',
+    //         duration: 2000,
+    //         color: 'success',
+    //       });
+    //       toast.present();
 
-          this.router.navigate(['/auth/sign-in']);
+    //       this.router.navigate(['/auth/sign-in']);
 
-         } else {
-           response['arrayMessage'].forEach( async(element) => {
-            var toast = await this.toastController.create({
-              message: element,
-              duration: 2000,
-              color: 'danger',
-            });
-            toast.present();
-          });
-        }
+    //      } else {
+    //        response['arrayMessage'].forEach( async(element) => {
+    //         var toast = await this.toastController.create({
+    //           message: element,
+    //           duration: 2000,
+    //           color: 'danger',
+    //         });
+    //         toast.present();
+    //       });
+    //     }
 
-      });
-     }
+    //   });
+    //  }
   }
 
   // ** get Recomended By List
@@ -208,7 +212,7 @@ export class SignUpPage implements OnInit {
     this.subs.push(
       this.appService.getLanguage()
       .subscribe(response => {
-        console.log(response)
+        // console.log(response)
         this.langItems = response['result'].result;
       })
     );
@@ -228,6 +232,23 @@ export class SignUpPage implements OnInit {
   showPassword() {
     this.showPasswordItem = !this.showPasswordItem
   }
+
+  ngAfterViewInit() {
+
+    this.click$ = fromEvent(this.button.nativeElement, 'click');
+
+    this.click$.pipe(
+      throttleTime(2000),
+      scan(count => {
+        console.log(count)
+        if(count === 3) {
+          this.disabledBtn = false;
+        }
+        return count + 1
+      }, 1)
+    )
+    .subscribe(count => console.log(`Clicked ${count} times`));
+}
 
   ngOnDestroy() {
     this.subs.forEach(e => e.unsubscribe())
