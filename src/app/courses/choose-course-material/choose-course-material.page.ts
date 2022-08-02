@@ -57,7 +57,7 @@ export class ChooseCourseMaterialPage implements OnInit {
 
       this.courseService.getCoursesDetails(this.courseId)
         .subscribe(response => {
-          console.log(response)
+          // console.log(response)
         this.isLoading = false;
         this.CourseDetails = response['result'];
       })

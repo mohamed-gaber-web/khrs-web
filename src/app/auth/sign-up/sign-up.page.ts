@@ -45,6 +45,7 @@ export class SignUpPage implements OnInit {
   registerFormErrors = {
     FirstName: '',
     LastName: '',
+    Nickname: '',
     email: '',
     PhoneNumber: '',
     Birthdate: '',
@@ -59,6 +60,9 @@ export class SignUpPage implements OnInit {
   registerValidationMessages = {
     FirstName: {
       required: this.translate.instant('firstNameReq'),
+    },
+    Nickname: {
+      required: 'Nickname is required',
     },
     LastName: {
       required: this.translate.instant('lastNameReq'),
@@ -127,6 +131,7 @@ constructor(
   this.registerForm = this.formBuilder.group({
     'FirstName': [''], // Validators.compose([Validators.required])
     'LastName': [''],
+    'Nickname': [''],
     'email': [''],
     'PhoneNumber': ['', Validators.compose([Validators.minLength(11)])],
     'Birthdate': [new Date()],
@@ -166,7 +171,6 @@ constructor(
   public onRegisterFormSubmit(values):void {
 
     this.validateRegisterForm(true);
-
       // this.getLanguageAPi(); // ** fix phone and gender in ios app
         // ** check if lang is not exist in localstorage add lang
         if(!localStorage.getItem('languageId')) {
