@@ -1,3 +1,4 @@
+import { UtilityService } from './../../shared/services/utility.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import {
@@ -94,15 +95,16 @@ export class SignUpPage implements OnInit {
   };
 
 
-  constructor(
-    private auth: AuthService,
-    private translate:TranslateService,
-    public formBuilder: FormBuilder,
-    public toastController: ToastController,
-    public router: Router,
-    private helpers: HelpersService,
-    private appService: AppService
-    ) {}
+constructor(
+  private auth: AuthService,
+  private translate:TranslateService,
+  public formBuilder: FormBuilder,
+  public toastController: ToastController,
+  public router: Router,
+  private helpers: HelpersService,
+  private appService: AppService,
+  private utilitySer: UtilityService
+  ) {}
 
   async uploadImg(event) {
     const imgString: any = await this.helpers.toBase64(event.target.files[0]);
@@ -115,7 +117,7 @@ export class SignUpPage implements OnInit {
   }
 
   ngOnInit() {
-  // this.getLanguageAPi();
+  this.getLanguageAPi();
   this.getRecommendeBy();
 
   // get all language
@@ -165,37 +167,30 @@ export class SignUpPage implements OnInit {
 
     this.validateRegisterForm(true);
 
-  // this.getLanguageAPi(); // ** fix phone and gender in ios app
-    //   if(!localStorage.getItem('languageId')) {
-    //     localStorage.setItem('languageId', this.registerForm.value.languageId);
-    //   }
+      // this.getLanguageAPi(); // ** fix phone and gender in ios app
+        // ** check if lang is not exist in localstorage add lang
+        if(!localStorage.getItem('languageId')) {
+          localStorage.setItem('languageId', this.registerForm.value.languageId);
+        }
 
-    //  if (this.registerForm.valid) {
-    //    this.auth.registerCustomer(values).subscribe(async(response) => {
-    //      if(response['success']) {
-    //       var toast = await this.toastController.create({
-    //         message: 'You signed up successfully!',
-    //         duration: 2000,
-    //         color: 'success',
-    //       });
-    //       toast.present();
+        if (this.registerForm.valid) {
+          this.auth.registerCustomer(values)
+            .subscribe((response) => {
+            if(response['success']) {
+              this.utilitySer.successText('You signed up successfully!')
+              setTimeout(() => {
+                this.router.navigate(['/auth/sign-in']);
+              }, 3000)
 
-    //       this.router.navigate(['/auth/sign-in']);
+            } else {
+              response['arrayMessage'].forEach((element) => {
+                this.utilitySer.errorText(element)
+              });
+            }
 
-    //      } else {
-    //        response['arrayMessage'].forEach( async(element) => {
-    //         var toast = await this.toastController.create({
-    //           message: element,
-    //           duration: 2000,
-    //           color: 'danger',
-    //         });
-    //         toast.present();
-    //       });
-    //     }
-
-    //   });
-    //  }
-  }
+          });
+        }
+    }
 
   // ** get Recomended By List
   getRecommendeBy() {
@@ -218,37 +213,32 @@ export class SignUpPage implements OnInit {
     );
   }
 
- // ** fix phone and gender in ios app
-//  getLanguageAPi() {
-//   this.appService.getLanguage()
-//   .subscribe(response => {
-//     this.toggleInputs = response['flagSetting'];
-//     console.log(response['flagSetting']);
-
-//   })
-//  }
+  // ** fix phone and gender in ios app
+  getLanguageAPi() {
+    this.appService.getLanguage().subscribe(response => this.toggleInputs = response['flagSetting'])
+  }
 
   // * Show And Hide Input Password
   showPassword() {
     this.showPasswordItem = !this.showPasswordItem
   }
 
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
 
-    this.click$ = fromEvent(this.button.nativeElement, 'click');
+  //   this.click$ = fromEvent(this.button.nativeElement, 'click');
 
-    this.click$.pipe(
-      throttleTime(2000),
-      scan(count => {
-        console.log(count)
-        if(count === 3) {
-          this.disabledBtn = false;
-        }
-        return count + 1
-      }, 1)
-    )
-    .subscribe(count => console.log(`Clicked ${count} times`));
-}
+  //   this.click$.pipe(
+  //     throttleTime(2000),
+  //     scan(count => {
+  //       console.log(count)
+  //       if(count === 3) {
+  //         this.disabledBtn = false;
+  //       }
+  //       return count + 1
+  //     }, 1)
+  //   )
+  //   .subscribe(count => console.log(`Clicked ${count} times`));
+  // }
 
   ngOnDestroy() {
     this.subs.forEach(e => e.unsubscribe())

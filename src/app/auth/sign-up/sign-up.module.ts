@@ -15,7 +15,6 @@ import {NgxMatFileInputModule} from '@angular-material-components/file-input';
 import { MatInputModule } from '@angular/material/input';
 
 import { TranslateModule } from '@ngx-translate/core';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgxMatFileInputModule,
     TranslateModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
 
   ],
   declarations: [SignUpPage]

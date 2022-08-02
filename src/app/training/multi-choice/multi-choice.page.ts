@@ -41,6 +41,7 @@ export class MultiChoicePage implements OnInit {
   loadedCharacter: {};
   ChooseAnswerId: number;
   resultAnswerItems: any;
+  finishedQuestion: boolean = false;
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -111,7 +112,7 @@ export class MultiChoicePage implements OnInit {
           }
           this.lengthQuestion = questionAndAnswerItems['length'];
           if (this.lengthQuestion == 0) {
-            this.utilityService.errorMessage(
+            this.utilityService.errorText(
               'There are no available questions in this exercise'
             );
             setTimeout(() => {
@@ -171,26 +172,25 @@ export class MultiChoicePage implements OnInit {
           this.resultAnswer = response['success'];
           if (this.resultAnswer === true) {
             // ** message and voice success
-
             this.utilityService.successMessage("<img src='../../../assets/images/22.gif' />");
             this.stopAllAudios();
-            setTimeout(() => {
+
+              // ** check when finished question
+              if ((this.currentIndex + 1) === this.lengthQuestion) {
+                setTimeout(() => {
+                  this.utilityService.successText('Thanks for resolving questions');
+                }, 3000)
+                this.finishedQuestion = true;
+                return;
+              }
+
               this.isLoading = true;
               this.multiForm.reset();
               this.currentIndex += 1;
               this.getQuestionAndAnswerMultiChoice();
               this.slides.slideNext();
-            }, 4000)
 
-            if (this.currentIndex === this.lengthQuestion) {
-              this.utilityService.successMessage('Thanks for resolving questions');
-              setTimeout(() => {
-                this.navController.navigateRoot([
-                  '/exercise',
-                  { courseId: this.courseId },
-                ]);
-              }, 100);
-            }
+
           } else if (this.resultAnswer === false) {
             // ** message and voice error
             this.utilityService.errorMessage("<img src='../../../assets/images/wr.gif' />");
@@ -301,6 +301,11 @@ export class MultiChoicePage implements OnInit {
       }
     });
     return await modal.present();
+  }
+
+  // ** when finished question
+  onFinished() {
+    this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
   }
 
   ngOnDestroy() {

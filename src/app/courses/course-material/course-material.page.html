@@ -33,16 +33,18 @@
             <div class="course__material-block">
               <div [innerHTML]="course.materialTranslations[0].description | sanitizeHtml">  </div>
               <ion-grid>
-                <ion-row>
-                  <ion-col size="12" size-lg="6">
+                <ion-row class="ion-justify-content-center">
+                  <ion-col size="12" size-lg="10">
+                      <ion-img *ngIf="course.imagePath" loading="lazy" class="material-image" [src]="course.imagePath">
+                      </ion-img>
+                  </ion-col>
+
+                 <ion-col size="12" size-lg="10">
                     <div class="video-inro">
                       <video *ngIf="course.materialTranslations[0].videoPath" width="100%" height="230" controls>
                         <source [src]='course.materialTranslations[0].videoPath' type="video/mp4">
                       </video>
                     </div>
-                  </ion-col>
-                  <ion-col size="12" size-lg="6">
-                      <ion-img *ngIf="course.imagePath" loading="lazy" class="material-image" [src]="course.imagePath"></ion-img>
                   </ion-col>
                 </ion-row>
               </ion-grid>

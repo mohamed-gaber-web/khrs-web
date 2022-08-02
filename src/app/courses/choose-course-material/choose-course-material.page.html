@@ -55,21 +55,28 @@
             <hr />
             <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> To: </strong> {{ userCourseDetails['endDate'] | date }}  </li>
             <hr />
-            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Valid For: </strong> {{ validCourse }} day </li>
+            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Valid For: </strong>
+              {{ validCourse }} day
+            </li>
+            <hr />
+            <li>
+              <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Remaining: </strong>
+              {{ CourseDetails.remainingDayes }} days
+            </li>
           </ul>
 
           <div class="btn-button" *ngIf="CourseDetails">
-              <ion-button  [routerLink]="['/courses/course-material',
+              <ion-button  [disabled]="CourseDetails.remainingDayes === 0" [routerLink]="['/courses/course-material',
               CourseDetails.courseTranslations[0].courseId]"  (click)="startTrackUser()" [queryParams]="{offset: offset}" routerDirection="root"> Material </ion-button>
 
-              <ion-button (click)="sendIdToExercisePage()"> Exercise </ion-button>
+              <ion-button [disabled]="CourseDetails.remainingDayes === 0" (click)="sendIdToExercisePage()"> Exercise </ion-button>
 
-              <ion-button (click)="sendIdToFinalTestPage()">
+              <ion-button [disabled]="CourseDetails.remainingDayes === 0" (click)="sendIdToFinalTestPage()">
                 <ion-icon name="lock-closed-outline" class="final"></ion-icon>
                   Final Test
               </ion-button>
 
-              <ion-button *ngIf="CourseDetails.status === 1"  (click)="toggleModal()">
+              <ion-button [disabled]="CourseDetails.remainingDayes === 0" *ngIf="CourseDetails.status === 1"  (click)="toggleModal()">
                 <img class="img-icon" src="../../../assets/images/rating.png" alt="rating" />
                 Rating
               </ion-button>

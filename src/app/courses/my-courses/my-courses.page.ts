@@ -167,6 +167,7 @@ export class MyCoursesPage implements OnInit, OnDestroy {
     this.isLoading = true;
     this.testService.getCertificate(courseId)
     .subscribe((response: Blob) => {
+      console.log(response);
       this.isLoading = false;
       if(this.platform.is('mobileweb')) {
 
@@ -200,15 +201,13 @@ export class MyCoursesPage implements OnInit, OnDestroy {
 
       }
 
+      this.pdfFile = new Blob([response], {type: 'application/pdf'});
 
-
-      // this.pdfFile = new Blob([response], {type: 'application/pdf'});
-
-      // var downloadURL = window.URL.createObjectURL(response);
-      // var link = document.createElement('a');
-      // link.href = downloadURL;
-      // link.download = "Certificate.pdf";
-      // link.click();
+      var downloadURL = window.URL.createObjectURL(response);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = "Certificate.pdf";
+      link.click();
     });
   }
 

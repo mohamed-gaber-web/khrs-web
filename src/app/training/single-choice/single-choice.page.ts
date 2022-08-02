@@ -35,6 +35,7 @@ export class SingleChoicePage implements OnInit {
   isLoading: boolean = false;
   limit: number = 1;
   resultAnswer: boolean = null;
+  finishedQuestion: boolean = false;
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -91,7 +92,7 @@ export class SingleChoicePage implements OnInit {
       this.exerciseService
         .getCourseExercise(this.exerciseType, this.courseId, this.currentIndex, this.limit)
         .subscribe(response => {
-        this.isLoading = false;
+          this.isLoading = false;
           this.exerciseItems = response['result'];
           this.lengthQuestion = response['length'];
           if(this.lengthQuestion == 0){
@@ -188,7 +189,6 @@ export class SingleChoicePage implements OnInit {
       this.subs.push(
         this.exerciseService.checkAnswerSingleChoise(id, this.singleForm.value.answer)
         .subscribe(async(response) => {
-
           this.resultAnswer = response['success'];
           if(this.resultAnswer === true) {
             // message and voice success
@@ -203,21 +203,19 @@ export class SingleChoicePage implements OnInit {
               this.exerciseItems[0].audioElementDanish.audio = null;
 
             }
-            setTimeout(() => {
+            // ** check when finished question
+            if((this.currentIndex + 1) === this.lengthQuestion) {
+              setTimeout(() => {
+                this.utilityService.successText('Thanks for resolving questions');
+              }, 3000)
+              this.finishedQuestion = true;
+              return;
+              }
               this.isLoading = true;
               this.singleForm.reset();
               this.currentIndex += 1;
               this.getQuestion();
               this.slides.slideNext();
-            }, 4000)
-
-            if(this.currentIndex === this.lengthQuestion) {
-              this.utilityService.successText('Thanks for resolving questions');
-              // alert('You are exist exercise')
-              setTimeout(() => {
-                this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
-              }, 1000)
-            }
 
           } else if(this.resultAnswer === false) {
             // message and voice error
@@ -244,6 +242,11 @@ export class SingleChoicePage implements OnInit {
     this.currentIndex -= 1;
     this.getQuestion();
     this.slides.slidePrev();
+  }
+
+  // Finished question
+  onFinished() {
+    this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
   }
 
   ngOnDestroy() {

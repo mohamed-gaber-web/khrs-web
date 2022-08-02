@@ -25,7 +25,7 @@
   </div> -->
   <!-- <div class="select-dots"></div> -->
   <!-- Animation Element -->
-  <h3 class="total-result"> {{ (currentIndex+1)  + ' / ' + lengthQuestion }} </h3>
+  <h3 class="total-result"> {{ (currentIndex + 1)  + ' / ' + lengthQuestion }} </h3>
   <ion-slides [pager]="false" #slides [options]="slideOpts">
     <ion-slide *ngFor="let singleItem of exerciseItems">
       <ion-grid>
@@ -86,7 +86,7 @@
               <ion-grid>
                 <ion-row class="ion-padding ion-justify-content-center">
 
-                  <ion-col size="12" size-lg="6">
+                  <ion-col size="12" size-lg="4" *ngIf="!finishedQuestion">
                     <ion-button
                       [ngClass]="{'hideButtonNext': singleForm.invalid }"
                       (click)="slidePrev()">
@@ -95,14 +95,19 @@
                     </ion-button>
                   </ion-col>
 
-                  <ion-col size="12" size-lg="6">
+                  <ion-col size="12" size-lg="4" *ngIf="!finishedQuestion">
                     <ion-button
                       [ngClass]="{'hideButtonNext': singleForm.invalid }"
                       (click)="slideNext(singleItem.id,singleForm.value)">
                         Next
                       <ion-icon name="chevron-forward-outline"></ion-icon>
                     </ion-button>
-                  </ion-col>
+                </ion-col>
+                <ion-col size="12" size-lg="4" *ngIf="finishedQuestion">
+                  <ion-button (click)="onFinished()">
+                    Finish
+                  </ion-button>
+                </ion-col>
 
                 </ion-row>
 

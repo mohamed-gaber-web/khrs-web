@@ -41,7 +41,15 @@
               <ion-img loading="lazy" [src]="courseDetails?.imagePath"></ion-img>
 
               <ul>
-                  <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Valid for: </strong> {{ courseDetails.duration }} day </li>
+                  <li>
+                    <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Valid for: </strong>
+                    {{ courseDetails.duration }} day
+                  </li>
+                  <hr />
+                  <li>
+                    <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Remaining: </strong>
+                    {{ courseDetails.remainingDayes }} days
+                  </li>
               </ul>
 
               <hr />

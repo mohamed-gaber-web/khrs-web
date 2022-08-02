@@ -5,10 +5,10 @@
       <h3> {{ 'Signup' | translate }}</h3>
     </div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)">
+    <form *ngIf="toggleInputs" [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)">
     <ion-grid>
       <ion-row>
-        <ion-col size-md="6" size-xs="12">
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.firstnameFlag">
           <ion-item>
             <ion-label position="floating">{{ 'firstname' | translate}}</ion-label>
             <ion-input type="text" formControlName="FirstName"></ion-input>
@@ -18,7 +18,7 @@
           </ion-text>
         </ion-col>
 
-        <ion-col size-md="6" size-xs="12">
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.lastnameFlag">
           <ion-item>
             <ion-label position="floating">{{ 'lastname' | translate}}</ion-label>
             <ion-input type="text" formControlName="LastName"></ion-input>
@@ -28,7 +28,7 @@
           </ion-text>
         </ion-col>
 
-        <ion-col size-md="6" size-xs="12">
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.phonNumberFlag">
           <ion-item>
             <ion-label position="floating"> {{ 'phoneNumber' | translate}} </ion-label>
             <ion-input type="text" formControlName="PhoneNumber" minlength="11"></ion-input>
@@ -39,7 +39,7 @@
             The phone number must be 12 numbers</ion-text>
         </ion-col>
 
-        <ion-col size-md="6" size-xs="12">
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.emailFlag">
           <ion-item>
             <ion-label position="floating">{{ 'Email' | translate }}</ion-label>
             <ion-input type="text" formControlName="email"></ion-input>
@@ -52,7 +52,7 @@
 
     <!-- *ngIf="toggleInputs.toggleInputs -->
 
-    <ion-grid>
+    <ion-grid *ngIf="toggleInputs.dateOfBirthFlag">
       <ion-row>
         <ion-col size-md="12" size-xs="12">
           <ion-item>
@@ -91,7 +91,7 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col size-md="12">
+        <ion-col size-md="12" *ngIf="toggleInputs.genderFlag">
           <ion-list>
             <ion-radio-group formControlName="Gender" value="gender">
               <ion-list-header>
@@ -116,7 +116,7 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col size-md="6" size-xs="12">
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.recommendedByFlag">
           <ion-list>
             <ion-item>
               <ion-label>{{ 'Recommended' | translate}}</ion-label>
@@ -128,7 +128,7 @@
           </ion-list>
         </ion-col>
 
-        <ion-col size-md="6" size-xs="12">
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.uploadImageFlag">
           <!-- <div class="progress form-group" *ngIf="progress > 0">
             <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
             </div>
@@ -175,7 +175,7 @@
     <div style="text-align: center; margin: 15px 0;">
       <ion-button
       #signUpBtn
-      [disabled]="!registerForm.valid || disabledBtn === false "
+      [disabled]="!registerForm.valid || disabledBtn === false"
       (click)="onRegisterFormSubmit(registerForm.value)"
       >
         {{ 'Signup' | translate}}

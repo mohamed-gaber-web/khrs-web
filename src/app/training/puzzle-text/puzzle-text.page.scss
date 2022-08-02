@@ -119,10 +119,10 @@ ion-header ion-img {
     display: flex;
     align-items: center;
 
-    -webkit-animation: selectAnimate 4s ease-in 2 forwards;
-    -o-animation: selectAnimate 4s ease-in 2 forwards;
-    -moz-animation: selectAnimate 4s ease-in 2 forwards;
-    animation: selectAnimate 4s ease-in 2 forwards;
+    -webkit-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    -o-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    -moz-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    animation: selectAnimate 2s ease-in 2s 2 forwards;
 }
 
 @keyframes selectAnimate {

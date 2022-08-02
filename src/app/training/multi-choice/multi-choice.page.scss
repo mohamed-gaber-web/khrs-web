@@ -1,5 +1,5 @@
 
-    // Animation Element
+// Animation Element
 
 .select-dots {
     background-color: #062F87;
@@ -10,10 +10,10 @@
     bottom: 26px;
     right: 143px;
     z-index: 2000000000;
-    -webkit-animation: selectAnimate 3s ease-in 3 forwards;
-    -o-animation: selectAnimate 3s ease-in 3 forwards;
-    -moz-animation: selectAnimate 3s ease-in 3 forwards;
-    animation: selectAnimate 3s ease-in 3 forwards;
+    -webkit-animation: selectAnimate 2s ease-in 2 forwards;
+    -o-animation: selectAnimate 2s ease-in 2 forwards;
+    -moz-animation: selectAnimate 2s ease-in 2 forwards;
+    animation: selectAnimate 2s ease-in 2 forwards;
 }
 
 .select-animate {
@@ -25,10 +25,10 @@
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
-    -webkit-animation: selectAnimate 2s ease-in 4 forwards;
-    -o-animation: selectAnimate 2s ease-in 4 forwards;
-    -moz-animation: selectAnimate 2s ease-in 4 forwards;
-    animation: selectAnimate 2s ease-in 4 forwards;
+    -webkit-animation: selectAnimate 2s ease-in 2 forwards;
+    -o-animation: selectAnimate 2s ease-in 2 forwards;
+    -moz-animation: selectAnimate 2s ease-in 2 forwards;
+    animation: selectAnimate 2s ease-in 2 forwards;
 
     img {
       width: 150px;
@@ -40,11 +40,11 @@
   0% {
     opacity: 0;
   }
-  25% {
-    opacity: 1;
-  }
+  // 25% {
+  //   opacity: 1;
+  // }
   50% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
     opacity: 1;
@@ -227,8 +227,6 @@
 
   ion-item {
     --background: var(--ion-choice-background-color) !important;
-
-
   }
   ion-radio-group {
     position: relative;

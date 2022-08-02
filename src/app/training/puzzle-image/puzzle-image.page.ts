@@ -48,6 +48,7 @@ export class PuzzleImagePage implements OnInit {
   limit: number = 1;
   currentIndex: number = 0;
   audio = new Audio('../../../assets/iphone_ding.mp3');
+  finishedQuestion: boolean = false;
 
   @ViewChild('slides') slides: IonSlides;
   @ViewChild('image') image: ElementRef;
@@ -103,7 +104,7 @@ export class PuzzleImagePage implements OnInit {
           this.lengthQuestion = response['length'];
 
           if(this.lengthQuestion ==0){
-            this.utilityService.errorMessage("There are no available questions in this exercise");
+            this.utilityService.errorText("There are no available questions in this exercise");
             setTimeout(() => {
               this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
             }, 100)
@@ -249,21 +250,21 @@ export class PuzzleImagePage implements OnInit {
           if (this.player) {
             this.player.stop();
           }
+
+          // ** check when finished question
+          if ((this.currentIndex + 1) === this.lengthQuestion) {
+            setTimeout(() => {
+              this.utilityService.successText('Thanks for resolving questions');
+            }, 3000)
+            this.finishedQuestion = true;
+            return;
+          }
           setTimeout(() => {
             this.currentIndex += 1;
             this.getQuestionAndAnswer();
             this.slides.slideNext();
-          }, 3000)
+          }, 2000)
 
-          if (this.currentIndex === this.lengthQuestion) {
-            this.utilityService.successMessage('Thanks for resolving questions');
-            setTimeout(() => {
-              this.navController.navigateRoot([
-                '/exercise',
-                { courseId: this.courseId },
-              ]);
-            }, 100);
-          }
         } else if (isCorrect === false) {
           this.utilityService.errorMessage("<img src='../../../assets/images/wr.gif' />");
         }
@@ -316,6 +317,11 @@ export class PuzzleImagePage implements OnInit {
     this.currentIndex -= 1;
     this.getQuestionAndAnswer();
     this.slides.slidePrev();
+  }
+
+  // ** when finished question
+  onFinished() {
+    this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
   }
 
 

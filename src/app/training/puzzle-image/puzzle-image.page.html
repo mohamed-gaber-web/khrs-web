@@ -142,17 +142,23 @@
         <ion-grid>
           <ion-row class="ion-padding ion-justify-content-center">
 
-            <ion-col size="12" size-lg="6">
+            <ion-col size="12" size-lg="6" *ngIf="!finishedQuestion">
               <ion-button *ngIf="nextButton" (click)="slidePrev()">
                 Prev
                 <ion-icon name="chevron-forward-outline"></ion-icon>
               </ion-button>
             </ion-col>
 
-            <ion-col size="12" size-lg="6">
+            <ion-col size="12" size-lg="6" *ngIf="!finishedQuestion">
               <ion-button *ngIf="nextButton" (click)="slideNext()">
                 Next
                 <ion-icon name="chevron-forward-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+            <ion-col size="12" size-lg="4" *ngIf="finishedQuestion">
+              <ion-button (click)="onFinished()">
+                Finish
               </ion-button>
             </ion-col>
           </ion-row>

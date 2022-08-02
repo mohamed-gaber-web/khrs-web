@@ -212,7 +212,7 @@ ion-button {
   }
 
 }
-
+// Animation toast
 
 ion-toast.success-msg,
 ion-toast.ion-error {
@@ -225,10 +225,20 @@ ion-toast.ion-error {
 ion-toast.success-text {
     text-align: center;
   --height: 80px !important;
-  --background-color: green !important;
-  font-size: 22px !important;
+  --background-color: #009944 !important;
+  font-size: 18px !important;
   font-weight: 600;
 }
+
+ion-toast.error-text {
+    text-align: center;
+  --height: 80px !important;
+  --background-color: #cf000f !important;
+  font-size: 18px !important;
+  font-weight: 600;
+}
+
+// Animation toast
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: #ffffff;
