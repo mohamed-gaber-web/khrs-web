@@ -31,6 +31,7 @@ export class ChooseCourseMaterialPage implements OnInit {
   offset: number;
   limit: number;
   isOpen:boolean = false;
+  userType: any;
 
   constructor(
     private courseService: CourseService,
@@ -63,6 +64,8 @@ export class ChooseCourseMaterialPage implements OnInit {
       })
     );
 
+    this.userType = JSON.parse(localStorage.getItem('user')).role;
+    // console.log(this.userType);
   }
 
   // ** Send course id to exercise page
