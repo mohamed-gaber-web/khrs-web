@@ -5,7 +5,7 @@
       <h3> {{ 'Signup' | translate }}</h3>
     </div>
 
-    <form *ngIf="toggleInputs" [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)">
+    <form *ngIf="toggleInputs" [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)"  autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.firstnameFlag">
@@ -42,7 +42,7 @@
         <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.emailFlag">
           <ion-item>
             <ion-label position="floating">{{ 'Email' | translate }}</ion-label>
-            <ion-input type="text" formControlName="email"></ion-input>
+            <ion-input type="email" formControlName="email"></ion-input>
           </ion-item>
           <ion-text color="danger" *ngIf="registerFormErrors.email"> {{ registerFormErrors.email }}</ion-text>
         </ion-col>
@@ -50,30 +50,21 @@
       </ion-row>
     </ion-grid>
 
+
+
     <!-- *ngIf="toggleInputs.toggleInputs -->
 
-    <ion-grid >
+    <ion-grid>
       <ion-row>
-        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.dateOfBirthFlag">
+        <ion-col size-md="12" size-xs="12" *ngIf="toggleInputs.dateOfBirthFlag">
           <ion-item>
             <ion-input type="date" formControllName="Birthdate"></ion-input>
             <!-- <ion-label position="floating"> Birthdate </ion-label> -->
           </ion-item>
           <ion-text *ngIf="registerFormErrors.Birthdate"> {{ registerFormErrors.Birthdate }}</ion-text>
         </ion-col>
-
-        <ion-col size-md="6" size-xs="12">
-          <ion-item>
-            <ion-label position="floating"> Nickname </ion-label>
-            <ion-input type="text" formControlName="Nickname"></ion-input>
-          </ion-item>
-          <ion-text color="danger" class="error ion-padding" *ngIf="registerFormErrors.Nickname">
-            {{registerFormErrors.Nickname }}
-          </ion-text>
-        </ion-col>
       </ion-row>
     </ion-grid>
-
 
     <ion-grid>
       <ion-row>
@@ -120,6 +111,20 @@
 
             </ion-radio-group>
           </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="12" size-xs="12">
+          <ion-item>
+            <ion-label for="nickname" position="floating"> Nickname </ion-label>
+            <ion-input autocomplete="off" id="nickname" type="text" formControlName="Nickname"></ion-input>
+          </ion-item>
+          <ion-text color="danger" class="error ion-padding" *ngIf="registerFormErrors.Nickname">
+            {{registerFormErrors.Nickname }}
+          </ion-text>
         </ion-col>
       </ion-row>
     </ion-grid>

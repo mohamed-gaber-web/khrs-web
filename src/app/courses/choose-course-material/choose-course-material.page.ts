@@ -52,12 +52,12 @@ export class ChooseCourseMaterialPage implements OnInit {
         let startDate = new Date(this.userCourseDetails['startDate']);
         let endDate = new Date(this.userCourseDetails['endDate']);
          let date = endDate.getTime() - startDate.getTime();
-        this.validCourse = date/(1000 * 3600 * 24);
+        this.validCourse = date / (1000 * 3600 * 24);
       }),
 
       this.courseService.getCoursesDetails(this.courseId)
         .subscribe(response => {
-          // console.log(response)
+          console.log(response)
         this.isLoading = false;
         this.CourseDetails = response['result'];
       })

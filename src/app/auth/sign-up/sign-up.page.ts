@@ -45,10 +45,10 @@ export class SignUpPage implements OnInit {
   registerFormErrors = {
     FirstName: '',
     LastName: '',
-    Nickname: '',
-    email: '',
     PhoneNumber: '',
+    email: '',
     Birthdate: '',
+    Nickname: '',
     Gender: '',
     password: '',
     confirmPassword: '',
@@ -61,19 +61,22 @@ export class SignUpPage implements OnInit {
     FirstName: {
       required: this.translate.instant('firstNameReq'),
     },
-    Nickname: {
-      required: 'Nickname is required',
-    },
     LastName: {
       required: this.translate.instant('lastNameReq'),
+    },
+    phoneNumber: {
+    required: this.translate.instant('phoneReq'),
+    minlength: 'Phone Number is not long enough, minimum of 11 characters',
     },
     email: {
       required: this.translate.instant('emailReq'),
       invalidEmail: this.translate.instant('invalidEmail'),
     },
-    phoneNumber: {
-      required: this.translate.instant('phoneReq'),
-      minlength: 'Phone Number is not long enough, minimum of 11 characters',
+    Birthdate: {
+      required: this.translate.instant('birthdateReq'),
+    },
+    Nickname: {
+      required: 'Nickname is required',
     },
     gender: {
       required: this.translate.instant('genderReq'),
@@ -86,9 +89,6 @@ export class SignUpPage implements OnInit {
     },
     recommendedbyId: {
       required: this.translate.instant('firstNameReq'),
-    },
-    Birthdate: {
-      required: this.translate.instant('birthdateReq'),
     },
     languageId: {
       required: 'Langauge is required',
@@ -125,16 +125,16 @@ constructor(
   this.getRecommendeBy();
 
   // get all language
-  this.getLanguage()
+  this.getLanguage();
 
   // * Register Fields
   this.registerForm = this.formBuilder.group({
     'FirstName': [''], // Validators.compose([Validators.required])
     'LastName': [''],
-    'Nickname': [''],
-    'email': [''],
     'PhoneNumber': ['', Validators.compose([Validators.minLength(11)])],
+    'email': [''],
     'Birthdate': [new Date()],
+    'Nickname': [''],
     'Gender': [0 ],
     'password': [''],
     'confirmPassword': [''],
