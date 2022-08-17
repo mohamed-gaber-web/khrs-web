@@ -1,0 +1,28 @@
+<div class="success-block">
+  <h3> Reviews </h3>
+    <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+      <div class="success-reviews" *ngFor="let reviewItem of allSuccessRating">
+      <div class="user-course-status__left">
+        <img *ngIf="reviewItem.userImage !== null" [src]="reviewItem.userImage" loading="lazy" [alt]="reviewItem.courseName" />
+        <img *ngIf="reviewItem.userImage === null" src="../../../../assets/images/img-profile.png" loading="lazy" [alt]="reviewItem.courseName" />
+      </div>
+
+      <div class="user-course-status__center">
+        <h4> {{ reviewItem.username }} </h4>
+        <h3> {{ reviewItem.courseName }} </h3>
+        <p *ngIf="reviewItem.comment !== null">  {{ reviewItem.comment }} </p>
+        <!-- <p> this is comment for this course by user mohamed this course is very good </p> -->
+      </div>
+
+      <div class="user-course-status__right">
+        <div>
+          <ngb-rating style="color: #FFCC26; font-size: 20px;" [(rate)]="reviewItem.rate" [max]="5" [readonly]="true" ></ngb-rating>
+        </div>
+      </div>
+    </div>
+    <div class="no-result" *ngIf="reviewlength <= 0">
+      <img src="../../../../assets/images/sorry.png" />
+      <p> No available reviews ! </p>
+    </div>
+</div>
+

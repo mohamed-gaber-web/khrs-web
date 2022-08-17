@@ -1,0 +1,177 @@
+.course_material {
+  margin-top: 50px;
+
+  .course-details_left {
+    margin-top: 50px;
+    margin-left: 30px;
+  }
+}
+
+h2#title {
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: none;
+  text-align: left!important;
+  margin: 30px auto;
+  color: #003182;
+}
+
+.course-date ion-item {
+  margin: 0!important;
+}
+
+.icon-valid {
+  width: 30px;
+  height: 30px;
+  line-height: 37px;
+  background-color: var(--ion-color-second-app);
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 10px;
+
+  ion-icon {
+    color: #A7F781;
+    font-size: 18px;
+  }
+
+}
+
+ion-spinner{
+  margin: auto;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+
+video {
+  padding: 10px;
+}
+
+.desc {
+    font-size: 16px;
+    color: --ion-color-details-text;
+    line-height: 28px;
+}
+
+.sound-inro {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 0;
+  max-width: 50%;
+  margin-top: 30px;
+
+  .img-volume {
+
+    ion-img {
+      max-width: 45px;
+      width: 45px;
+    }
+  }
+
+  img {
+    max-width:100%;
+    height: auto;
+  }
+
+}
+.card-block {
+  -webkit-box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+  box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+  border-radius: 10px;
+  margin: 0 0 20px 0;
+  background-color: #fff;
+
+  ion-img {
+    padding: 5px;
+  }
+}
+
+
+  ul {
+    list-style: none;
+    padding: 0 0 30px 0;
+    margin: 20px 0 0 0;
+    margin-left: 20px;
+
+    li {
+      font-size: 16px;
+      color: #003182;
+      line-height: 25px;
+
+      strong {
+        font-weight: 500;
+        margin-left: 10px;
+      }
+
+      ion-icon {
+        font-size: 22px;
+        color: #003182;
+        position: relative;
+        top: 5px;
+      }
+    }
+  }
+
+  .btn-button {
+    padding: 0 20px 20px 20px;
+  }
+
+  @media(max-width: 767px) {
+    .course_material {
+      margin-top: 10px;
+    }
+
+    .course-details_left {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+
+
+ion-icon.final {
+    position: relative;
+    top: -1px;
+    right: 6px;
+}
+
+img.img-icon {
+    width: 33px;
+    margin: 0;
+    padding: 0 5px 0 0;
+    height: auto;
+}
+
+
+.overlay {
+  width: 30%;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #EBFFE6;
+  border: 6px solid #8AFA6F;
+  border-radius: 15px;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  float: right;
+
+  ion-icon {
+    font-size: 40px;
+  }
+}
+
+.show {
+  margin-top: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.hide {
+  margin-top: 700px;
+  transition: all 0.4s ease-in-out;
+}

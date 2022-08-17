@@ -1,0 +1,30 @@
+<div *ngIf="userInfo">
+  <div class="header-mobile">
+  <app-top-menu-mobile></app-top-menu-mobile>
+
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+</div>
+
+<div class="top-title privacy">
+  <h3> Privacy policy</h3>
+</div>
+
+<ion-content>
+
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="10">
+        <div class="privacy-policy" *ngFor="let policy of policyData">
+          <ion-text [innerHTML]="policy.content"></ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

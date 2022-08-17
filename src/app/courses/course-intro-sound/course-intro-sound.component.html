@@ -1,0 +1,19 @@
+<ion-grid class="img-course-intro">
+  <ion-row>
+    <ion-col>
+      <div class="img-intro-block">
+        <div class="bg-block"> <h3> {{ title }} </h3> </div>
+        <div class="img-intro">
+          <ion-img loading="lazy" src="../../../assets/images/img-intro.png"></ion-img>
+        </div>
+        <div *ngIf="courseAudio !== undefined" style="cursor: pointer;" class="icon-sound animate__animated animate__heartBeat animate__delay-1s animate__repeat-3"
+          (click)="startAudio()">
+          <div class="img-volume">
+            <ion-img src="../../../assets/icon/Vector.png">
+          </ion-img>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,75 @@
+<div class="header-mobile">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button> </ion-back-button>
+      </ion-buttons>
+
+      <ion-menu-button slot="start"></ion-menu-button>
+
+
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<div class="top-title">
+  <h3> My Courses Status </h3>
+</div>
+
+
+<ion-content>
+
+<ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size-lg="5" size-md="8" size-sm="12" size-xs="12">
+      <div class="user-course-status" *ngFor="let userList of userDataList">
+        <div class="user-course-status__left">
+          <img [src]="userList.imagePath" loading="lazy" alt="" />
+        </div>
+
+        <div class="user-course-status__center">
+          <h3> {{userList.courseName}} </h3>
+          <h4> {{userList.startDate | date}} - {{userList.endDate | date}} </h4>
+          <p *ngIf="userList.score || userList.score !== null"> score: {{userList.score}} %</p>
+          <p>  </p>
+          <h5 *ngIf="userList.status !== 3" class="user-status user-course-success"> {{userList.statusName}} </h5>
+          <h5 *ngIf="userList.status === 3" class="user-status user-course-error"> {{userList.statusName}} </h5>
+        </div>
+
+        <div class="user-course-status__right">
+          <div (click)="courseDetails(userList.courseId, userList.courseId)"> <ion-icon name="play"></ion-icon> </div>
+          <img *ngIf="userList.status === 5"  src="../../../../assets/images/inprogress.png" loading="lazy" alt="" />
+          <img *ngIf="userList.status === 1" src="../../../../assets/images/completed.png" loading="lazy" alt="" />
+          <img *ngIf="userList.status === 3" src="../../../../assets/images/fail.png" loading="lazy" alt="" />
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+  <div class="no-result" *ngIf="userDataLength <= 0">
+    <img src="../../../../assets/images/sorry.png" alt="" loading="lazy" />
+    <p> There is no data  </p>
+  </div>
+
+</ion-content>

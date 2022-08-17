@@ -1,0 +1,29 @@
+.img-course-intro {
+}
+
+.ext-icon-volume {
+    text-align: center;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .icon-sound {
+    background-color: #A7F781;
+    border: 3px dotted #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin: auto;
+    inset: 0;
+  
+    .img-volume {
+      @extend .ext-icon-volume;
+    }
+  
+  }
+  

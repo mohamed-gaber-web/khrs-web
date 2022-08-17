@@ -1,0 +1,63 @@
+<div class="header-mobile">
+  <ion-header class="course">
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/courses/tabs/all-courses"> </ion-back-button>
+      </ion-buttons>
+  
+      <ion-menu-button slot="start"></ion-menu-button>
+  
+  
+      <div class="img-profile">
+        <ion-avatar slot="end">
+          <img loading="lazy" *ngIf="userInfo.imagePath" [src]="userInfo.imagePath">
+          <img loading="lazy" *ngIf="userInfo === '' || userInfo.imagePath === null || userInfo.imagePath === undefined"
+          src="../../../assets/images/image profille (1).png">
+        </ion-avatar>
+        <ion-label>{{ userInfo.firstname + ' ' +  userInfo.lastname }}</ion-label>
+      </div>
+  
+  
+      <ion-avatar class="ion-margin-end"  slot="end">
+        <img loading="lazy" class="img-langauge" [src]="userInfo.languageIcon">
+      </ion-avatar>
+  
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<ion-content>
+  
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+  <div class="top-title dark-mode">
+    <h3> Course by category </h3>
+  </div>
+
+
+<ion-grid class="all-courses">
+  <ion-row class="ion-text-center">
+    <ion-col *ngFor="let course of coursesByCategory" size-sm="12" size-xs="12" size-md="6" size-sm="6" size-lg="4" size-xl="3">
+      <div class="course-block animate__animated animate__flash  hvr-grow">
+        <ion-img [routerLink]="['/courses/tabs/', course.id]" class="img-all-course" loading="lazy" src="{{course.imagePath}}"></ion-img>
+        <h3 class="course-title"> {{course.courseTranslations[0]?.title}} </h3>
+
+        <!-- <div *ngIf="course.courseTranslations[0]?.introVoicePath">
+          <div class="icon-sound-course">
+              <ion-icon class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+              [name]="!course.audioElement.status ? 'play' : 'stop'" (click)="playIntroHTML(course)">
+              </ion-icon>
+            </div>
+        </div> -->
+        </div>
+    </ion-col>
+    <div class="alert alert-danger" *ngIf="courseCategoryLength <= 0"> No courses is this category  </div>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

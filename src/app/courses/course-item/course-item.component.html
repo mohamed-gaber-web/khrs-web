@@ -1,0 +1,22 @@
+<ion-grid class="all-courses">
+  <div class="top-title">
+    <h3> All courses </h3>
+  </div>
+  <ion-row class="ion-text-center">
+    <ion-col *ngFor="let course of courseItem" size-sm="12" size-xs="12" size-md="6" size-sm="6" size-lg="4" size-xl="2">
+      <div class="course-block animate__animated animate__flash  hvr-grow">
+        <ion-img (click)="getCourse(course.id)" class="img-all-course" loading="lazy" src="{{course.imagePath}}"></ion-img>
+        <h3 (click)="getCourse(course.id)" class="course-title"> {{course.courseTranslations[0]?.title}} </h3>
+        <div>
+          <div *ngIf="course.courseTranslations[0]?.introVoicePath">
+            <div class="icon-sound-course">
+                <ion-icon class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2"
+                [name]="!course.audioElement.status? 'play' : 'stop'" (click)="playIntroHTML(course)">
+                </ion-icon>
+              </div>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

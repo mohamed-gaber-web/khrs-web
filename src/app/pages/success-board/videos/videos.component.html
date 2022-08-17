@@ -1,0 +1,20 @@
+<div class="success-block">
+  <h3> Videos </h3>
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" class="success-photos" *ngFor="let item of allSuccessData">
+          <div class="success-button-play" >
+            <iframe width="100%" height="auto" [src]="item.youTubeVideoLink | safe" allowfullscreen></iframe>
+          </div>
+      </ion-col>
+    </ion-row>
+    <div class="no-result" *ngIf="allSuccessDataLength <= 0">
+      <img src="../../../../assets/images/sorry.png" />
+      <p> No available videos! </p>
+    </div>
+  </ion-grid>
+
+
+
+</div>

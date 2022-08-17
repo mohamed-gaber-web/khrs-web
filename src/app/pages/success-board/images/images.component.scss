@@ -1,0 +1,46 @@
+
+.img-block {
+
+  // width: 200px;
+  // min-height: 200px;
+  // max-width: auto;
+  // margin: auto;
+
+  img {
+    max-width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20%;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 20px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 20px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #062f87;
+  border-radius: 20px !important;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8AFA6F;
+}
+
+@media(min-width: 995px) and (max-width: 1200px) {
+//   img {
+//   max-width: 100%;
+//   height: auto;
+// }
+}

@@ -1,0 +1,122 @@
+.form {
+
+    -webkit-box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+    box-shadow: 0 0 15px rgb(51 51 51 / 10%);
+    padding: 5px 50px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 60%;
+    margin: 20px auto;
+
+  ion-item {
+    --border-color: transparent;
+    --background: #f1f1f1;
+    --border-radius: 50px;
+
+    ion-label {
+      font-size: 14px;
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  ion-button {
+    --background : var(--ion-color-second-app);
+    border-radius: 50px!important;
+    font-size: 18px !important;
+    font-weight: 400;
+    width: 50%;
+    height: 45px;
+    margin: auto;
+    --box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.16);
+    text-transform: none;
+  }
+
+  p.no-account {
+    color: var(--ion-color-second-app)!important;
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 0px;
+
+    span {
+      color: #A7F781;
+
+      a {
+        color: var(--ion-color-second-app)!important;
+        font-weight: 600;
+        text-decoration: none;
+      }
+    }
+  }
+
+  ion-list {
+    background-color: #fff!important;
+  }
+}
+
+// .custom-file-input {
+//   font-size: 12px;
+//   padding-left: 50px!important;
+// }
+
+// .custom-file-input::-webkit-file-upload-button {
+//   visibility: hidden;
+// }
+// .custom-file-input::before {
+//   content: 'Select some files';
+//   display: inline-block;
+//   background: linear-gradient(top, #f9f9f9, #e3e3e3);
+//   border: 1px solid #999;
+//   border-radius: 3px;
+//   padding: 5px 8px;
+//   outline: none;
+//   white-space: nowrap;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -webkit-user-select: none;
+//   user-select: none;
+//   cursor: pointer;
+//   text-shadow: 1px 1px #fff;
+//   font-weight: 700;
+//   font-size: 10pt;
+// }
+// .custom-file-input:hover::before {
+//   border-color: black;
+// }
+// .custom-file-input:active::before {
+//   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+// }
+
+
+ion-input {
+  position: relative;
+}
+
+ion-icon.icon-eye {
+  color: #000;
+  font-size: 20px!important;
+  position: absolute;
+  right: 30px;
+  top: 22px;
+  z-index: 2000;
+  cursor: pointer;
+}
+
+
+@media(max-width: 1024px) {
+  .form {
+    width: 90%;
+  }
+}
+
+@media(max-width: 480px) {
+  .form {
+    padding: 20px 0;
+
+    ion-button {
+      width: 80%;
+    }
+  }
+
+
+}

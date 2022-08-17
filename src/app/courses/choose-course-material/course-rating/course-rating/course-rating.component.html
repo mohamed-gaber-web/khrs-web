@@ -1,0 +1,11 @@
+<div class="rating">
+  <h3> Rate </h3>
+  <p> {{ courseName }} </p>
+  <div class="add-rate">
+    <div><ngb-rating style="color: #FFCC26; font-size: 50px;" [(rate)]="rateObject.rate" [max]="5"></ngb-rating></div>
+    <textarea class="form-control" type="text" name="comment" [(ngModel)]="rateObject.comment" placeholder="add feedback"></textarea>
+    <!-- {{ rateObject.rate }} -->
+    <button class="btn btn-primary" [disabled]="rateObject.comment === '' " (click)="addUserCourserate()"> Submit </button>
+  </div>
+
+</div>

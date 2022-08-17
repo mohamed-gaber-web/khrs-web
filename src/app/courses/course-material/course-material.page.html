@@ -1,0 +1,104 @@
+<div class="header-mobile">
+<app-top-menu-mobile></app-top-menu-mobile>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<ion-content>
+
+  <div class="course-material-count">
+    <h4> <b>  {{ offset }} / {{ materialCourseLength }}   </b>   </h4>
+  </div>
+
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+  <ion-slides (ionSlideWillChange)="doCheck()" #slides pager="false" [options]="slideOpts">
+
+    <ion-slide *ngFor="let course of courseMaterial" class="course__material">
+
+      <ion-grid class="course__sound" >
+        <ion-row class="ion-justify-content-center">
+          <ion-col size-sm="12" size-lg="6" *ngIf="course.materialTranslations[0].voicePath">
+            <div class="icon-sound">
+              <div class="img-volume">
+                <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="'play'" (click)="startAudio(course.materialTranslations[0].voicePath)">
+                </ion-icon>
+              </div>
+             </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-md="6" size-lg="7">
+            <div class="course__material-block">
+              <div [innerHTML]="course.materialTranslations[0].description | sanitizeHtml">  </div>
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-col size="12" size-lg="10">
+                      <ion-img *ngIf="course.imagePath" loading="lazy" class="material-image" [src]="course.imagePath">
+                      </ion-img>
+                  </ion-col>
+
+                 <ion-col size="12" size-lg="10">
+                    <div class="video-inro">
+                      <video *ngIf="course.materialTranslations[0].videoPath" width="100%" height="230" controls>
+                        <source [src]='course.materialTranslations[0].videoPath' type="video/mp4">
+                      </video>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-slide>
+  </ion-slides>
+
+<!-- Button -->
+  <ion-grid>
+    <ion-row class="ion-justify-content-center slide-button">
+      <ion-col size="3">
+        <ion-button *ngIf="offset > 0" (click)="slidePrev()"> <ion-icon name="chevron-back-outline"></ion-icon> previous </ion-button>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-button *ngIf="!disableNextBtn" (click)="slideNext()">  next <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center slide-button">
+      <ion-col size="3">
+        <ion-button *ngIf="offset > 0" (click)="amDoneToday()"> Pause </ion-button>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-button *ngIf="offset !== 0" (click)="startFromZero()"> Start over </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+<!-- Button -->
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar *ngIf="activeTrack">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-range #range [(ngModel)]="progress" max="100" color="success" (touhend)="seek()" (mouseup)="seek()"></ion-range>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button fill="clear" (click)="toogleAudio(false)" *ngIf="!isPlaying">
+          <ion-icon slot="icon-only" color="light" name="play"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="toogleAudio(true)" *ngIf="isPlaying" >
+          <ion-icon slot="icon-only" color="light" name="pause"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

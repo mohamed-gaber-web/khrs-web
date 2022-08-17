@@ -1,0 +1,27 @@
+<div class="top_score_user">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center" *ngIf="obj">
+      <ion-col  size-lg="1" size-md="4" size-sm="3" size-xs="3"  class="top_score_user__second">
+        <img  *ngIf="obj[1].imagePath !== null" [src]="obj[1].imagePath" />
+        <img *ngIf="obj[1].imagePath === null" src="../../../../assets/images/img-profile.png" />
+        <h3> 2 </h3>
+        <h4> {{ obj[1].userName }} </h4>
+        <p> {{ obj[1].finalResult  }} </p>
+      </ion-col>
+      <ion-col size-lg="1" size-md="4" size-sm="3" size-xs="3" class="top_score_user__first">
+        <img  *ngIf="obj[0].imagePath !== null" [src]="obj[0].imagePath" />
+        <img *ngIf="obj[0].imagePath === null" src="../../../../assets/images/img-profile.png" />
+        <h3> 1 </h3>
+        <h4> {{ obj[0].userName }}  </h4>
+        <p> {{ obj[0].finalResult }} </p>
+      </ion-col>
+      <ion-col size-lg="1" size-md="4" size-sm="3" size-xs="3" class="top_score_user__third">
+        <img  *ngIf="obj[2].imagePath !== null" [src]="obj[2].imagePath" />
+        <img *ngIf="obj[2].imagePath === null" src="../../../../assets/images/img-profile.png" />
+        <h3> 3 </h3>
+        <h4> {{ obj[2].userName }} </h4>
+        <p> {{ obj[2].finalResult  }} </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

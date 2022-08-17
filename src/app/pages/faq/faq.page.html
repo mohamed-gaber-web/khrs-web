@@ -1,0 +1,37 @@
+<div class="header-mobile">
+  <app-top-menu-mobile></app-top-menu-mobile>
+
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+<div class="top-title faq">
+  <h3> FAQ </h3>
+</div>
+
+
+<ion-content>
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+
+    <ion-grid *ngIf="allFaq">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-lg="6">
+      <mat-accordion>
+
+        <mat-expansion-panel *ngFor="let f of allFaq" (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header >
+            <mat-panel-title>
+              {{ f.faqTranslations[0].questions }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{ f.faqTranslations[0].answer }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

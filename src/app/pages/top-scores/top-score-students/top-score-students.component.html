@@ -1,0 +1,11 @@
+<div class="top_score_block" *ngFor="let item of studentsData">
+  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+  <div class="top_score_block__image" >
+    <img *ngIf="item.imagePath !== null " [src]="item.imagePath" loading="lazy" alt=""  />
+    <img *ngIf="item.imagePath == null " src="../../../../assets/images/img-profile.png" loading="lazy" alt=""  />
+    <span> {{ item.userName }} </span>
+  </div>
+  <div class="top_score_block__text">
+      <h5> <b style="font-size: 18px;">  {{ item.finalResult }}</b> points </h5>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="header-mobile">
+  <app-top-menu-mobile></app-top-menu-mobile>
+</div>
+
+<div class="header-desktop">
+  <app-top-header-desktop></app-top-header-desktop>
+</div>
+
+
+<ion-content>
+
+  <div class="card-block">
+
+    <div class="top-title">
+      <h3> Edit user</h3>
+    </div>
+    <form [formGroup]="userInfoForm" (ngSubmit)="updatedUserInfo()">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">{{ 'First Name' | translate}}</ion-label>
+              <ion-input  type="text" formControlName="FirstName" required></ion-input>
+            </ion-item>
+            <ion-text color="danger" class="error ion-padding" *ngIf="userInfoFormErrors.FirstName">
+              {{userInfoFormErrors.FirstName }}
+            </ion-text>
+
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">{{ 'Last Name' | translate}}</ion-label>
+              <ion-input type="text" formControlName="LastName" required></ion-input>
+            </ion-item>
+            <ion-text color="danger" class="error ion-padding" *ngIf="userInfoFormErrors.LastName">
+              {{ userInfoFormErrors.LastName }}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating"> {{ 'phoneNumber' | translate}} </ion-label>
+              <ion-input  type="text" formControlName="PhoneNumber" minlength="11" required></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="userInfoFormErrors.PhoneNumber">{{ userInfoFormErrors.PhoneNumber }}
+            </ion-text>
+            <ion-text color="danger" *ngIf="userInfoFormErrors.PhoneNumber">{{ userInfoFormErrors.PhoneNumber }}</ion-text>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">{{ 'Email' | translate }}</ion-label>
+              <ion-input type="text" formControlName="email" required></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="userInfoFormErrors.email"> {{ userInfoFormErrors.email }}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">  </ion-label>
+              <ion-input value="{{ userInfo.birthdate  }}" type="date" formControllName="birthdate" required></ion-input>
+            </ion-item>
+            <ion-text  *ngIf="userInfoFormErrors.Birthdate"> {{ userInfoFormErrors.Birthdate }}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-list>
+              <ion-radio-group  formControlName="Gender">
+                <ion-list-header>
+                  <ion-label>{{ 'gender' | translate}}</ion-label>
+                </ion-list-header>
+
+                  <ion-row>
+                    <ion-col size="6" *ngFor="let genderItem of gender">
+                      <ion-item >
+                        <ion-label>{{ genderItem.name }}</ion-label>
+                        <ion-radio slot="start" [value]="genderItem.value"></ion-radio>
+                      </ion-item>
+                    </ion-col>
+
+                  </ion-row>
+
+              </ion-radio-group>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <div style="text-align: center; margin: 20px 0;" >
+
+        <ion-button [disabled]="!userInfoForm.valid" (click)="updatedUserInfo()">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          Update
+        </ion-button>
+
+      </div>
+
+
+    </form>
+  </div>
+
+
+
+</ion-content>

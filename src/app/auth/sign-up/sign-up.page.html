@@ -1,0 +1,216 @@
+<ion-content>
+  <div class="form">
+
+    <div class="top-title">
+      <h3> {{ 'Signup' | translate }}</h3>
+    </div>
+
+    <form *ngIf="toggleInputs" [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit(registerForm.value)"  autocomplete="off">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.firstnameFlag">
+          <ion-item>
+            <ion-label position="floating">{{ 'firstname' | translate}}</ion-label>
+            <ion-input type="text" formControlName="FirstName"></ion-input>
+          </ion-item>
+          <ion-text color="danger" class="error ion-padding" *ngIf="registerFormErrors.FirstName">
+            {{registerFormErrors.FirstName }}
+          </ion-text>
+        </ion-col>
+
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.lastnameFlag">
+          <ion-item>
+            <ion-label position="floating">{{ 'lastname' | translate}}</ion-label>
+            <ion-input type="text" formControlName="LastName"></ion-input>
+          </ion-item>
+          <ion-text color="danger" class="error ion-padding" *ngIf="registerFormErrors.LastName">
+            {{ registerFormErrors.LastName }}
+          </ion-text>
+        </ion-col>
+
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.phonNumberFlag">
+          <ion-item>
+            <ion-label position="floating"> {{ 'phoneNumber' | translate}} </ion-label>
+            <ion-input type="text" formControlName="PhoneNumber" minlength="11"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="registerFormErrors.PhoneNumber">{{ registerFormErrors.PhoneNumber }}
+          </ion-text>
+          <ion-text color="danger" *ngIf="registerForm.controls.PhoneNumber.hasError('minlength')">
+            The phone number must be 12 numbers</ion-text>
+        </ion-col>
+
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.emailFlag">
+          <ion-item>
+            <ion-label position="floating">{{ 'Email' | translate }}</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="registerFormErrors.email"> {{ registerFormErrors.email }}</ion-text>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+
+
+    <!-- *ngIf="toggleInputs.toggleInputs -->
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="12" size-xs="12" *ngIf="toggleInputs.dateOfBirthFlag">
+          <ion-item>
+            <ion-input type="date" formControllName="Birthdate"></ion-input>
+            <!-- <ion-label position="floating"> Birthdate </ion-label> -->
+          </ion-item>
+          <ion-text *ngIf="registerFormErrors.Birthdate"> {{ registerFormErrors.Birthdate }}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" size-xs="12">
+          <ion-item>
+            <ion-label position="floating">{{ 'Password' | translate }}</ion-label>
+            <ion-input [type]="showPasswordItem ? 'text' : 'password' " formControlName="password"></ion-input>
+            <ion-icon  (click)="showPassword()" class="icon-eye" name="eye-outline"></ion-icon>
+          </ion-item>
+          <ion-text *ngIf="registerFormErrors.password">{{ registerFormErrors.password }}</ion-text>
+          <ion-text *ngIf="registerForm.controls.password.hasError('minlength')">{{ 'passMin' | translate }}</ion-text>
+        </ion-col>
+
+        <ion-col size-md="6" size-xs="12">
+          <ion-item>
+            <ion-label position="floating">{{ 'Confirm Password' | translate }}</ion-label>
+            <ion-input formControlName="confirmPassword" [type]="showPasswordItem ? 'text' : 'password' "></ion-input>
+            <ion-icon  (click)="showPassword()" class="icon-eye" name="eye-outline"></ion-icon>
+          </ion-item>
+          <ion-text color="danger" *ngIf="registerFormErrors.confirmPassword">{{registerFormErrors.confirmPassword }}</ion-text>
+          <ion-text color="danger" *ngIf="registerForm.controls.confirmPassword.hasError('mismatchedPasswords')"> Password Not Match  </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="12" *ngIf="toggleInputs.genderFlag">
+          <ion-list>
+            <ion-radio-group formControlName="Gender" value="gender">
+              <ion-list-header>
+                <ion-label>{{ 'gender' | translate}}</ion-label>
+              </ion-list-header>
+
+                <ion-row>
+                  <ion-col size-md="6" *ngFor="let genderItem of gender">
+                    <ion-item >
+                      <ion-label>{{ genderItem.name }}</ion-label>
+                      <ion-radio slot="start" [value]="genderItem.value"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+
+                </ion-row>
+
+            </ion-radio-group>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="12" size-xs="12">
+          <ion-item>
+            <ion-label for="nickname" position="floating"> Nickname </ion-label>
+            <ion-input autocomplete="off" id="nickname" type="text" formControlName="Nickname"></ion-input>
+          </ion-item>
+          <ion-text color="danger" class="error ion-padding" *ngIf="registerFormErrors.Nickname">
+            {{registerFormErrors.Nickname }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.recommendedByFlag">
+          <ion-list>
+            <ion-item>
+              <ion-label>{{ 'Recommended' | translate}}</ion-label>
+              <ion-select formControlName="recommendedbyId" value="brown" okText="Okay" cancelText="Dismiss">
+                <ion-select-option *ngFor="let item of allRecommended" [value]="item.id"> {{ item.recommendedByTranslations[0].description }} </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+
+        <ion-col size-md="6" size-xs="12" *ngIf="toggleInputs.uploadImageFlag">
+          <!-- <div class="progress form-group" *ngIf="progress > 0">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+            </div>
+          </div> -->
+          <ion-item>
+            <ion-label> upload image </ion-label>
+            <ion-input
+              type="file"
+              multiple="false"
+              accept="image/*"
+              (change)="uploadImg($event)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-list>
+            <ion-item>
+            <ion-label>Choose Language</ion-label>
+              <ion-select formControlName="languageId" value="brown" okText="Okay" cancelText="Dismiss" required>
+                <ion-select-option *ngFor="let item of langItems" [value]="item.id"> {{ item.name }} </ion-select-option>
+              </ion-select>
+            </ion-item>
+          <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }}</ion-text>
+
+          </ion-list>
+        </ion-col>
+        <ion-col size="6">
+          <ion-list>
+            <ion-item>
+              <ion-label>{{ 'acceptTerms' | translate }}</ion-label>
+              <ion-checkbox formControlName="acceptTerms" slot="start"></ion-checkbox>
+            </ion-item>
+            <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }}</ion-text>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div style="text-align: center; margin: 15px 0;">
+      <ion-button
+      #signUpBtn
+      [disabled]="!registerForm.valid || disabledBtn === false"
+      (click)="onRegisterFormSubmit(registerForm.value)"
+      >
+        {{ 'Signup' | translate}}
+      </ion-button>
+    </div>
+
+    <ion-grid>
+      <ion-row ion-align-items-center>
+        <ion-col size="12">
+          <p class="no-account">
+            Already has an account <span>
+              <a [routerLink]="['/auth/sign-in']"> {{ 'signIn' | translate}} </a>
+            </span>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+  </div>
+
+</ion-content>
