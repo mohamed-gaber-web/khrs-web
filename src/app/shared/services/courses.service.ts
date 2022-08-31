@@ -19,7 +19,7 @@ import { MyCourse } from '../models/myCourse';
   providedIn: 'root',
 })
 export class CourseService {
-  limit: number = 6;
+  limit: number = 10;
   offset: number = 0;
 
   queryParams = `?Offset=${this.offset}&Limit=${this.limit}`;

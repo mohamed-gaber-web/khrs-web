@@ -1,4 +1,3 @@
-import { UtilityService } from './../../shared/services/utility.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HelpModalComponent } from './../help-modal/help-modal.component';
 import {
@@ -8,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UtilityService } from './../../shared/services/utility.service';
 import { IonSlides, NavController, ToastController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AudioElement } from 'src/app/shared/models/audioObject';
@@ -59,7 +59,7 @@ export class MultiChoicePage implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public navController: NavController,
-    private router: Router,
+    // private router: Router,
     public modalController: ModalController,
     private utilityService: UtilityService,
 
@@ -67,15 +67,11 @@ export class MultiChoicePage implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
-
     // ** get courseId And exerciseId
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.exerciseType = +this.route.snapshot.paramMap.get('exerciseId');
     // ** get all items question
     this.getQuestionAndAnswerMultiChoice();
-    // ** get all answers by multiChoiceId
-    // this.getAnswersMultiChoice();
-
     this.buildMultiForm();
   }
 
@@ -91,6 +87,7 @@ export class MultiChoicePage implements OnInit {
           this.limit
         )
         .subscribe((questionAndAnswerItems) => {
+          console.log(questionAndAnswerItems)
           this.isLoading = false;
           this.exerciseItems = questionAndAnswerItems['result'];
 
@@ -129,6 +126,7 @@ export class MultiChoicePage implements OnInit {
               element.multiChoiceAnswerTranslations[0].voicePath != null &&
               element.multiChoiceAnswerTranslations[0].voicePath != ''
             ) {
+              console.log(element)
               element.audioElement.id = element.id;
               element.audioElement.audio = new Audio(
                 `${element.multiChoiceAnswerTranslations[0].voicePath}`

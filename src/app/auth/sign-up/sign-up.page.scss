@@ -5,7 +5,7 @@
     padding: 5px 50px;
     border-radius: 10px;
     background-color: #fff;
-    width: 60%;
+    width: 70%;
     margin: 20px auto;
 
   ion-item {
@@ -103,7 +103,7 @@ ion-icon.icon-eye {
 }
 
 
-@media(max-width: 1024px) {
+@media(max-width: 1200px) {
   .form {
     width: 90%;
   }
@@ -119,4 +119,42 @@ ion-icon.icon-eye {
   }
 
 
+}
+
+ion-img.flags {
+  width: 50px;
+  height: auto;
+}
+
+.lang-bg {
+
+  margin: 30px 0;
+
+  .lang-img {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 40px;
+    -web-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  h3 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px 0;
+    text-transform: capitalize;
+  }
+}
+
+.active{
+  -moz-transform: scale(1.3);
+  -webkit-transform: scale(1.3);
+  -o-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
 }

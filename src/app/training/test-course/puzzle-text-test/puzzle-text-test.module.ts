@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { PuzzleTextTestPageRoutingModule } from './puzzle-text-test-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PuzzleTextTestPageRoutingModule
+    PuzzleTextTestPageRoutingModule,
+    SharedModule
   ],
   declarations: []
 })

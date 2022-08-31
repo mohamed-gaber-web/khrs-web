@@ -165,22 +165,31 @@
         <ion-col size="6">
           <ion-list>
             <ion-item>
-            <ion-label>Choose Language</ion-label>
-              <ion-select formControlName="languageId" value="brown" okText="Okay" cancelText="Dismiss" required>
-                <ion-select-option *ngFor="let item of langItems" [value]="item.id"> {{ item.name }} </ion-select-option>
-              </ion-select>
+            <ion-label style="cursor: pointer;" (click)="openChooseLanguage(content)">Choose Language: <b> {{ languageTitle }} </b></ion-label>
+            <!-- <p (click)="openChooseLanguage(content)"> choose language </p> -->
+              <!-- <ion-select formControlName="languageId" value="brown" okText="Okay" cancelText="Dismiss" required>
+                <ion-select-option 
+                  *ngFor="let item of langItems" [value]="item.id"> 
+                   {{ item.name }} 
+                </ion-select-option>
+              </ion-select> -->
             </ion-item>
-          <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }}</ion-text>
+          <!-- <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }}</ion-text> -->
 
           </ion-list>
         </ion-col>
         <ion-col size="6">
           <ion-list>
             <ion-item>
-              <ion-label>{{ 'acceptTerms' | translate }}</ion-label>
+              <ion-label>I agree to</ion-label>
               <ion-checkbox formControlName="acceptTerms" slot="start"></ion-checkbox>
+                <ion-text
+                style="cursor: pointer; 
+                z-index: 20000000000;" (click)="open(contentTerms)"> Terms & Conditions 
+                </ion-text>
+
             </ion-item>
-            <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }}</ion-text>
+            <ion-text *ngIf="registerFormErrors.acceptTerms"> {{ registerFormErrors.acceptTerms }} </ion-text>
 
           </ion-list>
         </ion-col>
@@ -209,8 +218,48 @@
       </ion-row>
     </ion-grid>
 
+    <!-- Choose language -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Choose Language </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <ion-grid class="lang-bg">
+          <ion-row>
+            <ion-col *ngFor="let item of langItems; let i = index"  size-xs="4" size-md="3">
+              <ion-img
+                [ngClass]="{'active': isActive(item)}"
+                (click)="getLanguageId(item)"
+                [src]="item.icon" class="lang-img"></ion-img>
+              <h3> <ion-text color="primary"> {{ item.name }} </ion-text> </h3>
+            </ion-col>
+          </ion-row>
+    
+        </ion-grid>
+      </div>
+    </ng-template>
+    <!-- Choose language -->
+
   </form>
 
   </div>
 
 </ion-content>
+
+  <!-- Terms And Condition -->
+  <ng-template #contentTerms let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Terms & Conditions</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <ion-text 
+      [innerHTML]="termsAndConditionsText['termsAndConditionsTranslation'][0].content | sanitizeHtml" >
+      </ion-text>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Agr</button>
+    </div> -->
+  </ng-template>
+  <!-- Terms And Condition -->

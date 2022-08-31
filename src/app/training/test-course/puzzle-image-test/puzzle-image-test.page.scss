@@ -1,4 +1,3 @@
-
 .ext-icon-vlume {
   width: 24px;
   height: 24px;
@@ -12,10 +11,6 @@ ion-header ion-img {
   width: 35px;
   height: auto;
   margin-top: 10px;
-}
-
-.drag-group {
-  width: 100%;
 }
 
 
@@ -38,56 +33,111 @@ ion-header ion-img {
 
 /* end header top */
 
-ion-toolbar {
-
+.test-top{
+  margin-bottom: 30px;
   ion-icon {
     color: var(--ion-color-second-app);
-    font-size: 30px;
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+    top: 13px;
     margin-right: 20px;
-    margin-top: 24px;
   }
 }
 
-  ion-img.image-question {
-    width: 80px;
-    height: 80px;
-    padding: 0;
-    margin: 0;
-  }
 
-  @media (min-width: 768px) {
-    ion-img {
-      width: 70%;
-      height: auto;
-      margin: auto;
-    }
-  }
+ion-img.image-question {
+  width: 80px;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
 
 
 .puzzle-answer {
-
   margin-top: 20px;
+  position: relative;
+
+  // Animation element
+.puzzle_animation-element {
+
+    position: absolute;
+    top: 2px;
+    transform: translate(0, 0);
+    z-index: 2000;
+    width: 50%;
+    height: 105px;
+    border: 5px dashed #8AFA6F;
+    border-radius: 10px;
+    background-color: #fff;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    -webkit-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    -o-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    -moz-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    animation: selectAnimate 2s ease-in 2s 2 forwards;
+}
+
+@keyframes selectAnimate {
+  0% {
+    transform: translate(0, 0);
+  }
+  // 25% {
+  //   transform: translate(-104%, -4px);
+  // }
+  50% {
+    transform: translate(-106%, 0);
+  }
+  100% {
+    transform: translate(-106%, 0);
+    visibility: hidden;
+  }
+}
+
+// Animation element
+
 
   .puzzle-fix {
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    padding: 5px 10px;
-    margin: 10px 0;
+    background-color: rgb(255 255 255);
+    border: 1px dotted rgb(63 81 181);
+    height: 100px !important;
+    margin: 0 0 10px 0;
     border-radius: 10px;
-    border: 1px dotted #003182a6;
-    height: 50px;
+    width: 100% !important;
+    padding-left: 30px;
 
     .title {
-      font-size: 14px;
+      font-size: 22px;
       font-weight: 500;
-      color: var(--ion-color-second-app);
+      color: var(--ion-color-training-text);
 
-      // margin-top: 17px;
     }
 
+    .sound {
+      display: flex;
+      border: 2px dotted var(--ion-color-second-app);
+      border-radius:10px;
+      padding: 5px 10px;
+      margin: 0 5px;
+
+      .sound-bg {
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        border-radius: 50px;
+        margin-right: 10px;
+
+        .img-volume {
+          @extend .ext-icon-vlume;
+        }
+      }
+    }
 
   }
 
@@ -121,28 +171,49 @@ ion-toolbar {
     margin-top: 0 !important;
   }
 
+  .sound{
+    display: flex;
+
+    .sound-bg {
+
+      img {
+        width: 50px!important;
+        height: auto;
+      }
+    }
+
+    .img-volume ion-img {
+      width: 20px;
+      height: auto;
+  }
+  }
+
 
 }
 
 
 /************* DRAG AND DROP *****************/
 
-
 .example-box {
-  border: 2px dotted #003182a6!important;
-  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #ccc!important;
+  color: #000;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  box-sizing: border-box;
   cursor: move;
   background: white;
   font-size: 16px;
-  border-radius: 0;
-  margin: 5px 0;
-  height: auto;
-  padding: 0;
+  height: 100px !important;
+  margin: 10px 0;
+  border-radius: 10px;
+
+  .puzzle-fix {
+    height: 50px !important;
+    padding: 15px;
+    margin: 0;
+  }
+
 
   .sound {
     padding: 0 5px 0 10px;
@@ -156,58 +227,59 @@ ion-toolbar {
 }
 
 .drag-answer ion-img{
-  width: 20px;
+  width: 50px;
   height: auto;
   position: relative;
   top: -2px;
 }
+
 }
 
 .cdk-drag-preview {
 
-
-  box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
   background-color: white;
   padding: 10px!important;
-  width: 80%!important;
-  margin: auto;
-  height: auto!important;
-  font-size: 13px;
-  font-weight: 600;
+  width: 30%!important;
+  font-size: 18px;
+  font-weight: 500;
   color: var(--ion-color-second-app);
 
+  .sound-bg {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+  }
 
+  .img-volume {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    top: 15px;
+  }
 
   .puzzle-fix {
+
+    height: 50px !important;
+
     .title{
       font-weight: 600!important;
       padding: 0 5px!important;
+      width: 100%!important;
     }
 
     img.danish-flag {
       width: 24px;
-      height: auto;
-      max-width: 70%;
-}
+      height: 24px;
+      max-width: 50%;
+    }
 
   }
 
 }
-
-.cdk-drop-list-receiving {
-  background-color:rgba(167, 247, 129, 0.6);
-  color: var(--ion-color-second-app);
-}
-
-.cdk-drop-list-dragging{
-  background-color:rgba(167, 247, 129, 0.6);
-  color: var(--ion-color-second-app);
-}
-
 
 .cdk-drag-placeholder {
   opacity: 0;
@@ -225,194 +297,68 @@ ion-toolbar {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-
-
-
 /************* DRAG AND DROP *****************/
 
 .total-result {
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--ion-color-second-app);
   text-align: center;
-  margin-left: 50px;
+  background-color: #a7f781;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50px;
+  line-height: 60px ;
+  padding: 20px;
 }
 
-.popover-content.sc-ion-popover-md {
-  position: static!important;
+
+@media (max-width: 767px) {
+  .example-box {
+    height: 75px !important;
   }
 
-  .drag-group {
-    width: 100%;
+  .puzzle-answer .puzzle-fix {
+    height: 60px !important;
+    margin: 0 0 5px 0;
+    padding: 0;
   }
 
+}
+@media(max-width: 449px) {
+  .example-box .puzzle-answer .puzzle-fix .sound {
+    border: none!important;}
 
-  @media (min-width: 767px) {
-    .cdk-drag-preview {
-      width: 30%!important;
-      }
+  .example-box .puzzle-fix .title {
+    width: 100%!important;
+}
 
-  }
+.example-box .puzzle-fix {width: 300px;}
+.example-box .puzzle-answer .puzzle-fix .sound {width: 45%; padding: 0; margin: 0;}
+.example-box .puzzle-answer .puzzle-fix .title {font-size: 13px !important;}
+.title{font-size: 13px !important;}
 
+}
 
+@media(min-width: 420px) and (max-width: 450px) {
+.example-box .puzzle-fix {width: 330px;}
+}
 
-  @media(max-width: 370px) {
-    ion-img.image-question{
-      width: 70px;
-      height: auto;
-    }
-
-    .title {
-      font-size: 16px!important;
-    }
-
-
-  .ion-text-center {
-    font-size: 14px;
-  }
-
-
-    .cdk-drag-preview {
-
-      box-sizing: border-box;
-      width: 80%!important;
-
-      .sound-bg {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        margin: 0;
-      }
-
-      .img-volume {
-        width: 20px;
-        height: 20px;
-        padding: 10px 0;
-      }
-
-      .puzzle-fix {
-
-
-        .title{
-          font-weight: 600!important;
-          padding: 0 5px!important;
-          width: 30%!important;
-          font-size: 16px;
-        }
-
-        img.danish-flag {
-          width: 24px;
-          height: 24px;
-          max-width: 50%;
-        }
-
-      }
-
-    }
-
-    .example-box {
-      margin: 10px 0;
-
-      .puzzle-answer .puzzle-fix {
-        padding: 5px 0px!important;
-      }
-
-      .puzzle-answer .puzzle-fix .sound {
-        display: flex;
-        border: 2px dotted var(--ion-color-second-app);
-        border-radius: 10px;
-        padding: 5px 0px;
-        margin: 0;
-  }
-
-      .title {
-        // margin-right: 5px;
-        width: 35%!important;
-      }
-    }
-
-    .cdk-drop-list-receiving {
-      // background-color:rgba(167, 247, 129, 0.6);
-      height: auto;
-      color: var(--ion-color-second-app);
-    }
-
-    .cdk-drop-list-dragging{
-      background-color:rgba(167, 247, 129, 0.6);
-      height: 150px;
-      width: 100%;
-      border: 3px dotted var(--ion-color-second-app);
-      color: var(--ion-color-second-app);
-    }
-
-
-
-
-  }
-
-  @media(min-width: 768px) and (max-width: 2000px) {
-    .example-box {
-      height: 90px;
-    }
-  }
-
-  @media (max-width: 500px) {
-    .scrollable {
-      height: 230px;
-      overflow: auto;
-    }
-  }
-
-
-  @media(max-width: 449px) {
-    .example-box .puzzle-answer .puzzle-fix .sound {
-      border: none!important;
-    }
-
-    .example-box .puzzle-fix .title {
-      width: 100%!important;
-  }
-
-  .example-box .puzzle-fix {width: 280px;}
-  .example-box .puzzle-answer .puzzle-fix .sound {width: 45%; padding: 0; margin: 0;}
-  .example-box .puzzle-answer .puzzle-fix .title {font-size: 16px !important;}
-  .title{
-    font-size: 16px !important;
-  }
-  }
-
-
-  @media(min-width: 420px) and (max-width: 450px) {
-
-  .example-box .puzzle-fix {width: 300px;}
-  }
-
-
-
-  @media(min-width: 450px) and (max-width: 600px) {
-    .example-box .puzzle-answer .puzzle-fix .sound {
-      border: none!important;
-    }
-
-    .example-box .puzzle-fix .title {
-      width: 100%!important;
-  }
-
+@media(min-width: 450px) and (max-width: 600px) {
+  .example-box .puzzle-answer .puzzle-fix .sound {border: none!important;}
   .example-box .puzzle-fix {width: 400px;}
   .example-box .puzzle-answer .puzzle-fix .sound {width: 45%; padding: 0; margin: 0;}
   .example-box .puzzle-answer .puzzle-fix .title {font-size: 12px !important;}
-  .title{
-    font-size: 12px !important;
-  }
-  }
+  .title{font-size: 12px !important;}
+}
 
+@media(min-width: 600px) and (max-width: 900px) {
 
-  @media(min-width: 600px) and (max-width: 900px) {
+  .example-box .puzzle-fix {width: 600px;}
+  .example-box .puzzle-answer .puzzle-fix .sound {width: 18%;}
+}
 
-    .example-box .puzzle-fix {width: 600px;}
-    .example-box .puzzle-answer .puzzle-fix .sound {width: 18%;}
-  }
+@media(max-width: 1024px) {
+  .puzzle_animation-element {display: none !important;}
+}
 
-  @media (min-width: 1200px) {
-    .puzzle-answer .puzzle-fix .title {font-size: 20px;}
-  }

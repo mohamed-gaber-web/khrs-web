@@ -1,5 +1,7 @@
 import { UtilityService } from './../../shared/services/utility.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 import {
   FormBuilder,
@@ -35,6 +37,12 @@ export class SignUpPage implements OnInit {
   subs: Subscription[] = [];
   click$: Observable<any>;
   disabledBtn: boolean = true;
+  closeResult = '';
+  termsAndConditionsText: any;
+  isSelected: boolean = false;
+  itemClass: string = '';
+  selected: any;
+  languageTitle: string = ''
   @ViewChild('signUpBtn', { read: ElementRef }) button: ElementRef;
 
   gender = [
@@ -107,7 +115,8 @@ constructor(
   public router: Router,
   private helpers: HelpersService,
   private appService: AppService,
-  private utilitySer: UtilityService
+  private utilitySer: UtilityService,
+  private modalService: NgbModal
   ) {}
 
   async uploadImg(event) {
@@ -123,6 +132,7 @@ constructor(
   ngOnInit() {
   this.getLanguageAPi();
   this.getRecommendeBy();
+  this.getTermsAndConditionText();
 
   // get all language
   this.getLanguage();
@@ -134,13 +144,13 @@ constructor(
     'PhoneNumber': ['', Validators.compose([Validators.minLength(11)])],
     'email': [''],
     'Birthdate': [new Date()],
-    'Nickname': [''],
+    'Nickname': ['', Validators.required],
     'Gender': [0 ],
     'password': [''],
     'confirmPassword': [''],
-    'recommendedbyId': [0],
+    'recommendedbyId': [0, Validators.required],
     'acceptTerms': [null],
-    'languageId': [null, Validators.required],
+    'languageId': [JSON.parse(localStorage.getItem('languageId'))],
     file : this.formBuilder.group({
       fieldName: ['', !Validators.required],
       filename: ['', !Validators.required],
@@ -170,8 +180,9 @@ constructor(
   // ** Register New User
   public onRegisterFormSubmit(values):void {
 
+    // console.log(this.registerForm.value)
     this.validateRegisterForm(true);
-      // this.getLanguageAPi(); // ** fix phone and gender in ios app
+      this.getLanguageAPi(); // ** fix phone and gender in ios app
         // ** check if lang is not exist in localstorage add lang
         if(!localStorage.getItem('languageId')) {
           localStorage.setItem('languageId', this.registerForm.value.languageId);
@@ -211,7 +222,6 @@ constructor(
     this.subs.push(
       this.appService.getLanguage()
       .subscribe(response => {
-        // console.log(response)
         this.langItems = response['result'].result;
       })
     );
@@ -244,8 +254,64 @@ constructor(
   //   .subscribe(count => console.log(`Clicked ${count} times`));
   // }
 
-  ngOnDestroy() {
-    this.subs.forEach(e => e.unsubscribe())
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  // ** get terms and conditions text
+  getTermsAndConditionText() {
+    this.auth.getTermsAndCondition()
+      .subscribe(response => {
+        this.termsAndConditionsText = response['result'];
+        // console.log(response);
+      })
+  }
+  
+  // Modal
+  openChooseLanguage(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason2(reason)}`;
+    });
+  }
+
+  private getDismissReason2(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  getLanguageId(item: any) {
+    this.registerForm.patchValue({
+      languageId: item.id
+    })
+    localStorage.setItem('languageId', item.id);
+    this.selected = item;
+    this.languageTitle = item.name;
+    // console.log(item.name)
+  }
+
+  isActive(item) {return this.selected === item;};
+
+  ngOnDestroy() {this.subs.forEach(e => e.unsubscribe())}
 
 }

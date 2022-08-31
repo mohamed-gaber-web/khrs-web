@@ -1,6 +1,92 @@
-/****************** EXERCICE COURSES *********************/
 
-/****************** SINGLE COURSES *********************/
+// Animation Element
+
+// .select-dots {
+//     background-color: #062F87;
+//     width: 10px;
+//     height: 10px;
+//     border-radius: 50px;
+//     position: absolute;
+//     bottom: 26px;
+//     right: 21px;
+//     z-index: 2000000000;
+//     -webkit-animation: selectAnimate 3s ease-in 3 forwards;
+//     -o-animation: selectAnimate 3s ease-in 3 forwards;
+//     -moz-animation: selectAnimate 3s ease-in 3 forwards;
+//     animation: selectAnimate 3s ease-in 3 forwards;
+// }
+
+// .select-animate {
+//     position: absolute;
+//     z-index: 20000000000000000;
+//     bottom: 25px;
+//     right: 23%;
+//     -webkit-transform: rotate(45deg);
+//     -moz-transform: rotate(45deg);
+//     -o-transform: rotate(45deg);
+//     transform: rotate(45deg);
+//     -webkit-animation: selectAnimate 2s ease-in 4 forwards;
+//     -o-animation: selectAnimate 2s ease-in 4 forwards;
+//     -moz-animation: selectAnimate 2s ease-in 4 forwards;
+//     animation: selectAnimate 2s ease-in 4 forwards;
+
+//     img {
+//       width: 150px;
+//       height: 150px;
+//     }
+// }
+
+
+// @keyframes selectAnimate {
+//   0% {
+//     opacity: 0;
+//   }
+//   25% {
+//     opacity: 1;
+//   }
+//   50% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//     visibility: hidden;
+//   }
+// }
+// Animation Element
+
+.ext-icon-vlume {
+  color: var(--ion-color-second-app);
+  font-size: 30px;
+  position: relative;
+  top: 3px;
+}
+
+/* header Top */
+ion-header ion-img {
+  width: 35px;
+  height: auto;
+  margin-top: 10px;
+}
+
+
+.img-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-avatar {
+    width: 60px;
+    margin: 5px 0;
+    height: 60px;
+  }
+
+  ion-label {
+    font-size: 15px;
+    padding-left: 10px;
+  }
+}
+
+/* end header top */
 
 form {
   width: 60%;
@@ -10,55 +96,44 @@ form {
   border-radius: 10px;
   background-color: var(--ion-choice-background-color);
   border: 1px solid rgb(204 204 204 / 75%);
-  margin: 50px auto 0 auto;
-  height: 500px;
+  margin: 0px auto 0 auto;
+  height: 400px;
+  position: relative;
 }
 
-ion-list {
-  background-color: var(--ion-choice-background-color) !important;
-  margin-bottom: 30px;
-}
+.test-top {
 
-ion-item {
-  --background: var(--ion-choice-background-color) !important;
-}
+  text-align: center;
 
+  ion-icon {
+    color: var(--ion-color-second-app);
+    font-size: 40px;
+    margin: 0 0 20px 0;
+    cursor: pointer;
+  }
+
+}
 
 .single-choice {
+
   ion-text{
     color: var(--ion-color-second-app);
-    font-size: 22px;
-    font-weight: 500;
-    margin: 40px 0;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 20px 0;
   }
 
   ion-label{
     color: var(--ion-color-second-app);
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
     margin: 20px auto;
   }
 
   ion-radio {
-    --color: var(--ion-color-second-app);
+    --color: #8AFA6F;
   }
 }
-
-
-
-.hideButtonNext {
-  display: none;
-}
-
-.showButtonNext {
-  display: block;
-}
-
-
-
-/****************** EXERCICE COURSES *********************/
-
-/****************** SINGLE COURSES *********************/
 
 .img-langauge {
   width: 40px;
@@ -69,7 +144,64 @@ ion-item {
   border: 1px solid #ccc;
 }
 
+.hideButtonNext {
+  display: none;
+}
+
+.showButtonNext {
+  display: block;
+}
+
+.sound-group {
+
+  .sound-question {
+    border: 2px solid var(--ion-color-second-app);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 10px;
+
+    img.img-lang {
+      width: 30px;
+      height: auto;
+    }
+
+    .img-volume {
+      @extend .ext-icon-vlume;
+    }
+  img.img-lang {
+    width: 30px;
+    height: auto;
+  }
+
+}
+
+}
+
+.block-btn {margin-top: 50px;}
+
+
+ion-list {
+  background-color: var(--ion-choice-background-color) !important;
+}
+
+ion-item {
+  --background: var(--ion-choice-background-color) !important;
+}
+
+ion-radio-group{
+  position: relative !important;
+}
+
 
 @media(max-width: 1024px) {
-  form {width: 90%; }
+  form{
+    width: 90%;
+    padding: 0 10px;
+  }
+
+  .select-animate {
+    bottom: 10px;
+    right: 0;
+  }
 }

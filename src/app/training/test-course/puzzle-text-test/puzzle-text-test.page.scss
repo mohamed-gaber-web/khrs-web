@@ -1,18 +1,44 @@
 .ext-icon-vlume {
-  color: var(--ion-color-second-app);
+  color: var(--ion-color-training-text);
   font-size: 34px;
-  position: relative;
-  top: 4px;
+}
+
+/* header Top */
+ion-header ion-img {
+  width: 35px;
+  height: auto;
+  margin-top: 10px;
 }
 
 
-ion-toolbar {
+.img-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  ion-avatar {
+    width: 60px;
+    margin: 5px 0;
+    height: 60px;
+  }
+
+  ion-label {
+    font-size: 14 px;
+    padding-left: 10px;
+  }
+}
+
+/* end header top */
+
+.test-top{
+  margin-bottom: 30px;
   ion-icon {
     color: var(--ion-color-second-app);
-    font-size: 30px;
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+    top: 13px;
     margin-right: 20px;
-    margin-top: 24px;
   }
 }
 
@@ -25,27 +51,45 @@ ion-toolbar {
   .block {
     margin-bottom: 11px;
     padding: 0 9px;
-    border: dotted 2px #3f51b5;
     color: #000000de;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
     background: #fff;
     font-size: 14px;
+    height: 100px;
+    border: 1px solid #ccc;
     border-radius: 10px;
-    height: 40px;
   }
 
+  .sound {
+
+    border: 1px solid  var(--ion-color-training-text);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+
+    .sound-bg {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+
+      .img-volume {
+        @extend .ext-icon-vlume;
+      }
+    }
+  }
 
   ion-text {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
-    text-align: center;
-    margin: auto;
-
+    margin-right: 20px;
   }
 
   @media (min-width: 768px) {
@@ -58,27 +102,97 @@ ion-toolbar {
 }
 
 .puzzle-answer {
+  position: relative;
 
-  margin-top: 20px;
+  // Animation element
+.puzzle_animation-element {
+    position: absolute;
+    top: 0;
+    transform: translate(0, 0);
+    z-index: 2000;
+    width: 50%;
+    height: 100px;
+    border: 5px dashed  #8AFA6F;
+    border-radius: 10px;
+    background-color: #fff;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    -webkit-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    -o-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    -moz-animation: selectAnimate 2s ease-in 2s 2 forwards;
+    animation: selectAnimate 2s ease-in 2s 2 forwards;
+}
+
+@keyframes selectAnimate {
+  0% {
+    transform: translate(0, 0);
+  }
+  // 25% {
+  //   transform: translate(-104%, -4px);
+  // }
+  50% {
+    transform: translate(-104%, 0);
+  }
+  100% {
+    transform: translate(-104%, 0);
+    visibility: hidden;
+  }
+}
+
+// Animation element
+
 
   .puzzle-fix {
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    padding: 15px;
+    background-color: rgb(255 255 255);
+    border: 1px dotted rgb(63 81 181);
+    height: 100px !important;
+    margin: 0 0 10px 0;
     border-radius: 10px;
-    border: 2px dotted #3f51b5;
-    height: 40px;
-    margin: 10px 0;
+    width: 100% !important;
+    padding-left: 30px;
+
 
     .title {
-      font-size: 15px;
+      font-size: 22px;
       font-weight: 500;
-      color: var(--ion-color-second-app);
+      color: var(--ion-color-training-text);
     }
 
+    .sound {
+
+      border: 2px solid  var(--ion-color-training-text);
+      border-radius:10px;
+      padding: 8px 15px;
+      max-width: 100%;
+      margin-right: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 30px;
+        height: auto;
+       }
+
+      .sound-bg {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+        margin-right: 10px;
+        text-align: center;
+
+        .img-volume {
+          @extend .ext-icon-vlume;
+        }
+      }
+    }
 
   }
 }
@@ -95,26 +209,53 @@ ion-toolbar {
 
 /************* DRAG AND DROP *****************/
 
-
 .cdk-drag-preview {
 
-
-  // box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
   background-color: white;
   padding: 10px!important;
-  width: 80%!important;
+  width: 20%!important;
   margin: auto;
   height: auto!important;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--ion-color-second-app);
 
-}
 
+  .sound {
+    max-width: 100%;
+    text-align: right;
+    margin-top: -20px;
+  }
+
+    .sound-bg {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      // text-align: center;
+      // border-radius: 50px;
+      margin-right: 10px;
+    }
+
+      .img-volume {
+        text-align: center;
+        margin: auto;
+        width: 18px;
+        height: 18px;
+        position: relative;
+        top: 9px;
+      }
+
+      img {
+        width: 30px;
+        height: auto;
+       }
+
+
+}
 
 
 .cdk-drop-list-dragging{
@@ -139,6 +280,20 @@ ion-toolbar {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+  // .example-custom-placeholder {
+  //   background: #ccc;
+  //   border: dotted 3px #999;
+  //   min-height: 60px;
+  //   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  // }
+
+  // .cdk-drag  {
+  //   background-color: #A7F781;
+  //   width: 100%;
+  //   height: 100%;
+  //   padding: 0;
+  //   color: var(--ion-color-second-app);
+  // }
 
 /************* DRAG AND DROP *****************/
 
@@ -150,10 +305,68 @@ ion-toolbar {
   display: block;
 }
 
+.ion-text-center {
+  font-size: 16px;
+}
+
 .total-result {
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--ion-color-second-app);
   text-align: center;
-  margin-left: 50px;
+  background-color: #a7f781;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50px;
+  line-height: 60px ;
+  padding: 20px;
+}
+
+
+
+
+@media(max-width: 767px) {
+  .puzzle-text .block {
+    height: 86px;
+  }
+
+  .puzzle-text ion-text {
+    font-size: 14px;
+  }
+
+  .puzzle-answer .puzzle-fix {
+    height: 45px !important;
+    padding-left: 0;
+  }
+
+  .puzzle-answer .puzzle-fix .title {
+    font-size: 16px;
+  }
+
+  .cdk-drag-preview {
+    width: 50%!important;
+    font-size: 16px;
+  }
+
+  .total-result{
+    font-size: 16px;
+    padding: 11px;
+}
+
+.puzzle-answer {
+  margin-top: 0;
+}
+
+.top-title h3 {
+  margin: 30px 0 0 0;
+}
+
+.test-top{
+  margin-bottom: 0;
+}
+
+}
+
+@media(max-width: 1024px) {
+  .puzzle_animation-element {display: none;}
 }

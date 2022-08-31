@@ -25,7 +25,7 @@ export class PolicyPage implements OnInit {
     this.appServ.getPolicyPage().subscribe(response => {
       this.isLoading = false;
       this.policyData = response['result']['policyTranslations']
-      console.log(response['result']['policyTranslations'])
+      // console.log(response['result']['policyTranslations'])
     })
   }
 

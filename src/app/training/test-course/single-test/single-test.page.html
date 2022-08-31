@@ -3,16 +3,47 @@
   <!-- Single final Test -->
   <form [formGroup]="singleForm" *ngIf="lengthItems !== pageNumber">
   <ion-slides *ngIf="lengthItems != pageNumber" [pager]="false" #slides [options]="slideOpts">
-    <ion-slide>
+    <ion-slide >
 
 
     <ion-grid>
 
       <ion-list class="single-choice">
-        <ion-radio-group   formControlName="answer">
+
+        <ion-grid class="sound-group" *ngIf="allTestData">
+          <ion-row>
+            <ion-col size="4">
+                <div *ngIf="allTestData.voiceDanishPath">
+                  <div class="sound-question">
+                      <div class="img-volume">
+                        <ion-icon 
+                          class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                          [name]="!statusVoiceDanish ? 'play' : 'stop'" (click)="playAudio('', allTestData)">
+                        </ion-icon>
+                      </div>
+                    <img class="danish-flag" src="../../../assets/icon/da.png" alt="" />
+                  </div>
+                </div>
+            </ion-col>
+
+            <ion-col size="4">
+              <div *ngIf="allTestData['singleChoiceTranslations'][0].voicePath">
+                <div class="sound-question">
+                    <div class="img-volume">
+                      <ion-icon class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                      [name]="!statusVoice? 'play' : 'stop'" (click)="playAudio('native', allTestData['singleChoiceTranslations'][0].voicePath)">
+                      </ion-icon>
+                    </div>
+                  <img class="img-lang" [src]="userInfo.languageIcon" alt="" />
+                </div>
+              </div>
+            </ion-col>
+        </ion-row>
+        </ion-grid>
+        <ion-radio-group formControlName="answer">
 
           <ion-list-header>
-            <ion-text *ngIf="allTestData"> {{ allTestData['singleChoice'].question }} </ion-text>
+            <ion-text *ngIf="allTestData"> {{ allTestData.question }} </ion-text>
           </ion-list-header>
 
           <ion-item>
@@ -30,7 +61,7 @@
 
       </ion-list>
 
-      <ion-grid *ngIf="lengthItems !== pageNumber">
+      <ion-grid class="block-btn" *ngIf="lengthItems !== pageNumber">
         <ion-row class="ion-align-items-center slide-button">
 
           <ion-col size="4">
@@ -47,7 +78,7 @@
           <ion-col size="4">
             <ion-button
               [disabled]="singleForm.invalid"
-              (click)="slideNext(allTestData['singleChoice']['singleChoiceTranslations'][0].singleChoiceId)"
+              (click)="slideNext(allTestData['singleChoiceTranslations'][0].singleChoiceId)"
               >  next <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
           </ion-col>
 

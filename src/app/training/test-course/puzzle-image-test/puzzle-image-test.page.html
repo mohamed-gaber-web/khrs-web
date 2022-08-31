@@ -1,47 +1,74 @@
-<ion-content>
+<div>
+
+<div class="puzzle-image" style="overflow: auto;">
 
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
 
-  <ion-slides *ngIf="lengthItems != pageNumber" class="swiper-no-swiping" [pager]="false" #slides [options]="slideOpts">
+
+  <ion-slides class="swiper-no-swiping" [pager]="false" #slides [options]="slideOpts">
+
     <ion-slide>
 
-    <div cdkDropListGroup class="drag-group">
+      <div cdkDropListGroup class="drag-group">
 
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-lg="6">
-            <ion-grid>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="scrollable" size="12" size-lg="6">
 
-              <ion-row>
+              <div size="12"
+              #container2
+              *ngFor="let item of questionsArray"
+                class="example-box elements"
+                cdkDropList
+                dropListScroller
 
-                <ion-col size="12"
-                  class="example-box"
-                  cdkDropList
-                  *ngFor="let item of questionsArray"
-                  [cdkDropListData]="item"
-                  cdkDropListSortingDisabled
-                  cdkDropListOrientation="horizontal"
-                  (cdkDropListDropped)="drop($event)"
+                [cdkDropListData]="item"
+                cdkDropListSortingDisabled
+                (cdkDropListDropped)="drop($event)"
                 >
                 <div *ngFor="let item2 of item">
 
                   <ion-img
-                    class="image-question"
-                    loading="lazy" *ngIf="item2.type === 'question' "
-                    (click)="presentPopover($event, item2)"
-                    [src]="item2.imagePath" cdkDrag [cdkDragDisabled]="true">
+                  class="image-question"
+                  loading="lazy" *ngIf="item2.type === 'question' "
+                  (click)="presentPopover($event, item2)"
+                  [src]="item2.imagePath" cdkDrag [cdkDragDisabled]="true">
+
                   </ion-img>
 
 
                   <div class="drag-answer" *ngIf="item2.type === 'answer' ">
                     <ion-grid class="puzzle-answer">
+
                       <ion-row>
 
                         <ion-col
                           size="12"
                           >
+
                           <div class="puzzle-fix" cdkDrag [cdkDragDisabled]="false">
                             <div class="title"> {{ item2.keyword }}</div>
+                            <div class="sound" *ngIf="item2.voicePath">
+                              <div class="sound-bg">
+                                <div class="img-volume">
+                                  <ion-img
+                                  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" src="../../../assets/icon/Vector.png" (click)="startAudio(item2.voicePath)">
+                                </ion-img>
+                                </div>
+                              </div>
+                              <img class="danish-flag" [src]="userInfo.languageIcon" alt="" />
+                            </div>
+                            <div class="sound" *ngIf="item2.voicePathDanish">
+                              <div class="sound-bg">
+                                <div class="img-volume">
+                                  <ion-img
+                                  loading="lazy"
+                                  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" src="../../../assets/icon/Vector.png" (click)="startAudio(item2.voicePathDanish)">
+                                </ion-img>
+                                </div>
+                              </div>
+                              <img loading="lazy" class="danish-flag" src="../../../assets/icon/da.png" alt="" />
+                            </div>
                           </div>
                         </ion-col>
 
@@ -51,44 +78,55 @@
                   </div>
                 </div>
 
-                </ion-col>
+              </div>
 
-              </ion-row>
+            </ion-col>
 
+            <ion-col size="12" size-lg="6">
+              <ion-grid class="puzzle-answer">
+                <ion-row class="ion-justify-content-center">
+                  <ion-col cdkDropList [cdkDropListData]="answersArray" (cdkDropListDropped)="drop($event)">
+                  <!-- <div class="puzzle_animation-element">
+                    <h1> Drag & Drop </h1>
+                  </div> -->
+                    <div class="puzzle-fix" *ngFor="let item of answersArray" cdkDrag>
+                      <div class="title"> {{ item.keyword }}</div>
+                        <div class="sound" *ngIf="item.voicePath">
+                          <div class="sound-bg">
+                            <div class="img-volume">
+                              <ion-img
+                              class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" src="../../../assets/icon/Vector.png" (click)="startAudio(item.voicePath)">
+                            </ion-img>
+                            </div>
+                          </div>
+                          <img class="danish-flag" [src]="userInfo.languageIcon" alt="" />
+                        </div>
+                        <div class="sound" *ngIf="item.voicePathDanish">
+                          <div class="sound-bg">
+                            <div class="img-volume">
+                              <ion-img
+                              loading="lazy"
+                              class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" src="../../../assets/icon/Vector.png" (click)="startAudio(item.voicePathDanish)">
+                            </ion-img>
+                            </div>
+                          </div>
+                          <img loading="lazy" class="danish-flag" src="../../../assets/icon/da.png" alt="" />
+                        </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
             </ion-grid>
-          </ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-          <ion-col size="12" size-lg="6">
-            <ion-grid class="puzzle-answer">
-              <ion-row>
-                <ion-col
-                  size="12"
-                  cdkDropList
-                  [cdkDropListData]="answersArray"
-                  (cdkDropListDropped)="drop($event)"
-                  >
-                  <div class="puzzle-fix"*ngFor="let item of answersArray" cdkDrag>
+      </div>
 
-                  <div class="title"> {{ item.keyword }}</div>
+    </ion-slide>
 
-                  </div>
-                </ion-col>
+  </ion-slides>
 
-              </ion-row>
-            </ion-grid>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-
-
-
-
-
-    </div>
-  </ion-slide>
-</ion-slides>
-<app-test-finished *ngIf="lengthItems === pageNumber"></app-test-finished>
+  <!-- <app-test-finished *ngIf="lengthItems === pageNumber"></app-test-finished> -->
 
 
   <ion-grid *ngIf="lengthItems !== pageNumber">
@@ -116,7 +154,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid style="position: relative; top: -150px;" *ngIf="lengthItems === pageNumber">
+  <ion-grid  *ngIf="lengthItems === pageNumber">
     <ion-row class="ion-align-items-center slide-button">
 
       <ion-col size="6">
@@ -136,4 +174,7 @@
   </ion-grid>
 
 
-</ion-content>
+</div>
+
+
+</div>

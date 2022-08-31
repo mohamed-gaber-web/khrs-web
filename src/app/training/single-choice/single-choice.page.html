@@ -38,7 +38,8 @@
                       <div *ngIf="singleItem.voiceDanishPath">
                         <div class="sound-question">
                             <div class="img-volume">
-                              <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="!singleItem.audioElementDanish.status? 'play' : 'stop'" (click)="playAudio('',singleItem)">
+                              <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                              [name]="!singleItem.audioElementDanish.status? 'play' : 'stop'" (click)="playAudio('',singleItem)">
                               </ion-icon>
                             </div>
                           <img class="danish-flag" src="../../../assets/icon/da.png" alt="" />
@@ -50,7 +51,8 @@
                     <div *ngIf="singleItem.singleChoiceTranslations[0]?.voicePath">
                       <div class="sound-question">
                           <div class="img-volume">
-                            <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="!singleItem.audioElement.status? 'play' : 'stop'" (click)="playAudio('native',singleItem)">
+                            <ion-icon class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                            [name]="!singleItem.audioElement.status? 'play' : 'stop'" (click)="playAudio('native',singleItem)">
                             </ion-icon>
                           </div>
                         <img class="img-lang" [src]="userInfo.languageIcon" alt="" />

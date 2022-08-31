@@ -51,9 +51,7 @@ export class ChooseLanguagePage implements OnInit {
     );
   }
 
-  ngOnDestroy() {
-  this.subs.forEach((sub) => sub.unsubscribe());
-  }
+  ngOnDestroy() {this.subs.forEach((sub) => sub.unsubscribe());}
   
   
 

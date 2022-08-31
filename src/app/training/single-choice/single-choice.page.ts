@@ -92,8 +92,10 @@ export class SingleChoicePage implements OnInit {
       this.exerciseService
         .getCourseExercise(this.exerciseType, this.courseId, this.currentIndex, this.limit)
         .subscribe(response => {
+          // console.log(response);
           this.isLoading = false;
           this.exerciseItems = response['result'];
+          // console.log('single page ', response)
           this.lengthQuestion = response['length'];
           if(this.lengthQuestion == 0){
             this.utilityService.successText("There are no available questions in this exercise");
@@ -122,8 +124,7 @@ export class SingleChoicePage implements OnInit {
   }
 
   playAudio(type?:string,item?:any){
-
-
+    // console.log(item)
     if(type == "native"){
       if(item.audioElementDanish?.status == true){
         item.audioElementDanish.audio.pause();
@@ -249,11 +250,6 @@ export class SingleChoicePage implements OnInit {
     this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
   }
 
-  ngOnDestroy() {
-    this.subs.forEach(sub => {
-      sub.unsubscribe();
-    })
-  }
+  ngOnDestroy() {this.subs.forEach(sub => sub.unsubscribe())}
 
 }
-

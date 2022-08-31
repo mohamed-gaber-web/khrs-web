@@ -1,6 +1,5 @@
 <div class="header-mobile">
   <app-top-menu-mobile></app-top-menu-mobile>
-
 </div>
 
 <div class="header-desktop">
@@ -49,7 +48,8 @@
         <div *ngIf="exerciseItems[0].multiChoiceTranslations[0]?.voicePath">
           <div class="sound-question">
               <div class="img-volume">
-                <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="!exerciseItems[0].audioElement.status? 'play' : 'stop'" (click)="playAudio(exerciseItems[0].audioElement,1,'native')">
+                <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                [name]="!exerciseItems[0].audioElement.status? 'play' : 'stop'" (click)="playAudio(exerciseItems[0].audioElement,1,'native')">
                 </ion-icon>
               </div>
             <img class="img-lang" [src]="userInfo.languageIcon" alt="" />
@@ -76,7 +76,8 @@
           <div class="sound" *ngIf="item.audioElement.audio">
             <div class="sound-bg">
               <div class="img-volume">
-                <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" [name]="!item.audioElement.status? 'play' : 'stop'" >
+                <ion-icon  class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2" 
+                [name]="!item.audioElement.status? 'play' : 'stop'" >
                 </ion-icon>
               </div>
               </div>

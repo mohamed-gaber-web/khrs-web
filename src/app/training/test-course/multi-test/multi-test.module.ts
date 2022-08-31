@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MultiTestPageRoutingModule } from './multi-test-routing.module';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MultiTestPageRoutingModule } from './multi-test-routing.module';
     FormsModule,
     IonicModule,
     MultiTestPageRoutingModule,
+    SharedModule
 
   ],
   declarations: []

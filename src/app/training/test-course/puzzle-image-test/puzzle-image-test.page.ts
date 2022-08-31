@@ -1,13 +1,26 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonSlides, NavController, PopoverController, ToastController } from '@ionic/angular';
+import {
+  IonSlides,
+  ModalController,
+  NavController,
+  PopoverController,
+  ToastController,
+} from '@ionic/angular';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { TestService } from 'src/app/shared/services/test.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+} from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
+import { Howl } from 'howler';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 import { PuzzleImageTranslations } from 'src/app/shared/models/puzzleImageTranslation';
-import { PuzzleImageZoomComponent } from './puzzle-image-zoom/puzzle-image-zoom.component';
+import { PuzzleSoundComponent } from '../../puzzle-image/puzzle-sound/puzzle-sound.component';
+import { HelpModalComponent } from '../../help-modal/help-modal.component';
+import { TestService } from 'src/app/shared/services/test.service';
 
 @Component({
   selector: 'app-puzzle-image-test',
@@ -15,32 +28,36 @@ import { PuzzleImageZoomComponent } from './puzzle-image-zoom/puzzle-image-zoom.
   styleUrls: ['./puzzle-image-test.page.scss'],
 })
 export class PuzzleImageTestPage implements OnInit {
-
   userInfo: any;
   courseId: number;
-  questionType: number;
-  testId: number;
   exerciseType: number;
-  questionItems: any;
-  answerItems: any;
+  questionAndAnswerItems: any;
   questionsArray: any[] = [];
   answersArray: any[] = [];
   nextButton: boolean = false;
+  lengthQuestion: number = 0;
+  questionType: number;
+  testId: number;
   lengthItems: number = 0;
-  questionAndAnswerItems: any;
   userTestId: number;
-
-  @Input('pageNumber') pageNumber;
-  @Output() questionData = new EventEmitter<any>();
+  //howler
+  player: Howl = null;
+  isPlaying: boolean = false;
+  voicePath: string;
+  voicePathDanish: string;
+  activeTrack: string;
 
   subs: Subscription[] = [];
   isLoading: boolean = false;
   limit: number = 1;
   currentIndex: number = 0;
   audio = new Audio('../../../assets/iphone_ding.mp3');
+  finishedQuestion: boolean = false;
 
   @ViewChild('slides') slides: IonSlides;
   @ViewChild('image') image: ElementRef;
+  @Input('pageNumber') pageNumber;
+  @Output() questionData = new EventEmitter<any>();
 
   slideOpts = {
     initialSlide: 0,
@@ -59,11 +76,18 @@ export class PuzzleImageTestPage implements OnInit {
     public navController: NavController,
     private testService: TestService,
     public popoverController: PopoverController,
-    private navCtrl: NavController,
-  ) { }
+    public modalController: ModalController,
+    private utilityService: UtilityService,
+
+  ) {}
 
   ngOnInit() {
+    this.userInfo = this.storageService.getUser();
+
+    // ** get courseId And exerciseId
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
+    this.exerciseType = +this.route.snapshot.paramMap.get('exerciseId');
+
     this.getQuestionAndAnswer();
   }
 
@@ -80,7 +104,7 @@ getQuestionAndAnswer() {
       )
       .subscribe((response) => {
         this.isLoading = false;
-        // console.log('puzzle image response', response)
+        // console.log('puzzle test image response', response)
         this.questionType = response['questionType'];
         this.testId = response['testId'];
         this.lengthItems = response['length'];
@@ -108,6 +132,8 @@ getQuestionAndAnswer() {
             qpz.guidId =
               this.questionAndAnswerItems.puzzleImages[index].imageGuidId;
             qpz.type = 'question';
+            qpz.voicePath=null;
+            qpz.voicePathDanish=null;
             qpz.keyword = null;
             qpz.disabled = true;
             arr.push(qpz);
@@ -136,12 +162,27 @@ getQuestionAndAnswer() {
               ].imageGuidId;
             apz.type = 'answer';
             apz.disabled = false;
+            apz.voicePath =
+              this.questionAndAnswerItems.puzzleImagesTranslation[
+                index
+              ].voicePath;
+            apz.voicePathDanish =
+              this.questionAndAnswerItems.puzzleImagesTranslation[
+                index
+              ].voicePathDanish;
 
             this.answersArray.push(apz);
           }
       })
   );
 }
+
+  // ** Get Current Index
+  getCurrentIndex() {
+    this.slides
+      .getActiveIndex()
+      .then((current) => (this.currentIndex = current));
+  }
 
 // ** Drop Function
 drop(event: CdkDragDrop<any>) {
@@ -179,6 +220,7 @@ drop(event: CdkDragDrop<any>) {
         );
       }
     }
+    
   }
 
   if (this.answersArray.length === 0) {
@@ -230,69 +272,100 @@ slideNext() {
     });
 }
 
-slidePrev() {
-
-  this.pageNumber -= 1;
-  this.getQuestionAndAnswer();
-  this.slides.slidePrev();
-}
-
-ScapeSlidePrev() {
-  this.pageNumber += 1;
-  if(this.lengthItems === this.pageNumber) { // length item = 5 // page numer = 5
-    console.log('this is last number');
-    localStorage.setItem('userTestId', JSON.stringify(this.userTestId))
-    localStorage.setItem('courseId', JSON.stringify(this.courseId))
-    localStorage.setItem('pageNumber', JSON.stringify(this.pageNumber))
-    return;
+  async presentPopover(ev: any, item: any) {
+    const popover = await this.popoverController.create({
+      component: PuzzleSoundComponent,
+      componentProps: {
+        voicePath: item.voicePath,
+        voicePathDanish: item.voicePathDanish,
+        imagePath: item.imagePath,
+      },
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+    });
+    await popover.present();
   }
-  this.getQuestionAndAnswer();
-  this.slides.slideNext();
-}
 
-finishSlidePrev() {
-  this.pageNumber -= 1;
-}
+  startAudio(voicePath: string) {
+    if (this.player) {
+      this.player.stop();
+    }
+    this.player = new Howl({
+      html5: true,
+      src: voicePath,
+      onplay: () => {
+        this.activeTrack = voicePath;
+        this.isPlaying = true;
+      },
+      onend: () => {},
+    });
+    this.player.play();
+  }
 
-// ** when to zoom image
-async presentPopover(ev: any, item: any) {
-  const popover = await this.popoverController.create({
-    component: PuzzleImageZoomComponent,
-    componentProps: {
-      imagePath: item.imagePath,
-    },
-    cssClass: 'my-custom-class',
-    event: ev,
-    translucent: true,
-  });
-  await popover.present();
-}
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: HelpModalComponent,
+      componentProps: {
+        "modalLink": "https://khrs-admin.sdex.online/assets/tutorials/single_choice_tutorial.mp4",
+        "modalTitle": "Puzzle Wiith Image Tutorial"
+      }
+    });
+    return await modal.present();
+  }
 
-finishedTest() {
-  this.testService.finishedTest(this.userTestId)
-  .subscribe(response => {
-    console.log(response)
-    localStorage.removeItem('courseId')
-    localStorage.removeItem('pageNumber')
-    // this.router.navigate(['/courses/tabs/my-courses']).then(() => {
-    //   window.location.reload();
-    // });
-    // this.navCtrl.navigateRoot('/courses/tabs/my-courses').then(() => {
-    //   window.location.reload();
-    //    });
-    // this.router.navigateByUrl('/courses/tabs/my-courses', { skipLocationChange: true });
-    // this.navCtrl.navigateRoot('/courses/tabs/my-courses')
-    this.router.navigate(['/courses/tabs/my-courses'])
+  slidePrev() {
+    this.currentIndex -= 1;
+    this.getQuestionAndAnswer();
+    this.slides.slidePrev();
+  }
 
-  })
-}
+  // ** when finished question
+  onFinished() {
+    this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
+  }
 
+  finishedTest() {
+    this.testService.finishedTest(this.userTestId)
+    .subscribe(response => {
+      console.log(response)
+      localStorage.removeItem('courseId')
+      localStorage.removeItem('pageNumber')
+      // this.router.navigate(['/courses/tabs/my-courses']).then(() => {
+      //   window.location.reload();
+      // });
+      // this.navCtrl.navigateRoot('/courses/tabs/my-courses').then(() => {
+      //   window.location.reload();
+      //    });
+      // this.router.navigateByUrl('/courses/tabs/my-courses', { skipLocationChange: true });
+      // this.navCtrl.navigateRoot('/courses/tabs/my-courses')
+      this.router.navigate(['/courses/tabs/my-courses'])
+  
+    })
+  }
+  
+  finishSlidePrev() {
+    this.pageNumber -= 1;
+  }
 
-
-ngOnDestroy() {
-  this.subs.forEach(e => {
-    e.unsubscribe();
-  })
-}
+  ScapeSlidePrev() {
+    this.pageNumber += 1;
+    if(this.lengthItems === this.pageNumber) { // length item = 5 // page numer = 5
+      console.log('this is last number');
+      localStorage.setItem('userTestId', JSON.stringify(this.userTestId))
+      localStorage.setItem('courseId', JSON.stringify(this.courseId))
+      localStorage.setItem('pageNumber', JSON.stringify(this.pageNumber))
+      return;
+    }
+    this.getQuestionAndAnswer();
+    this.slides.slideNext();
+  }
+  
+  ngOnDestroy() {
+    this.subs.forEach((sub) => {sub.unsubscribe(); });
+    if (this.player) {
+      this.player.stop();
+    }
+  }
 
 }
