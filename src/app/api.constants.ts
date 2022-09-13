@@ -2,8 +2,8 @@
 
 // export const baseUrl = `https://khrs-api.sdex.online`;
 // test url
-// export const baseUrl = `https://dev-khrs-api.sdex.online`;
-export const baseUrl = `https://api.e-asylearn.dk`;
+export const baseUrl = `https://dev-khrs-api.sdex.online`;
+// export const baseUrl = `https://api.e-asylearn.dk`;
 // export const baseUrl = `https://khrs-api-test.sdex.online`;
 export const imagesBaseUrl = 'https://khrs-admin.sdex.online';
 

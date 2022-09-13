@@ -324,11 +324,8 @@ export class PuzzleImagePage implements OnInit {
     this.navController.navigateRoot(['/exercise', {courseId: this.courseId}]);
   }
 
-
   ngOnDestroy() {
-    this.subs.forEach((sub) => {
-      sub.unsubscribe();
-    });
+    this.subs.forEach((sub) => sub.unsubscribe());
     if (this.player) {
       this.player.stop();
     }

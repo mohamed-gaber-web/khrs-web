@@ -253,7 +253,10 @@ slideNext() {
       }
     )
     .subscribe((response) => {
-      console.log(response)
+      // console.log(response)
+      if (this.player) {
+        this.player.stop();
+      }
       this.userTestId = response['result'].userTestId;
       this.pageNumber += 1;
       // ** check last question
@@ -267,8 +270,10 @@ slideNext() {
         // {userTestId: this.userTestId, courseId: this.courseId, offset: this.pageNumber}]);
         return;
       }
+
       this.getQuestionAndAnswer();
       this.slides.slideNext();
+
     });
 }
 
@@ -316,6 +321,9 @@ slideNext() {
 
   slidePrev() {
     this.currentIndex -= 1;
+    if (this.player) {
+      this.player.stop();
+    }
     this.getQuestionAndAnswer();
     this.slides.slidePrev();
   }

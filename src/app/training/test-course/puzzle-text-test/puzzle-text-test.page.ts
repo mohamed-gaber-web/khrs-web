@@ -72,7 +72,6 @@ export class PuzzleTextTestPage implements OnInit {
       (this.courseId, this.pageNumber)
       .subscribe(response => {
         this.isLoading = false;
-        console.log('puzzle with text', response);
         this.questionType = response['questionType'];
         this.testId = response['testId'];
         this.lengthItems = response['length'];
@@ -93,8 +92,19 @@ export class PuzzleTextTestPage implements OnInit {
           qpz.id = this.questionAndAnswerItems.puzzleText[index].id;
           qpz.text = this.questionAndAnswerItems.puzzleText[index].text;
           qpz.type = "question";
+          qpz.flag = "../../../assets/icon/da.png";
           qpz.disabled = true;
 
+          // Sound Question
+          qpz.voicePath = this.questionAndAnswerItems.puzzleText[index].voicePath;
+          if(this.questionAndAnswerItems.puzzleText[index].voicePath != null && this.questionAndAnswerItems.puzzleText[index].voicePath != "" ){
+            qpz.audioElement = new AudioElement();
+            qpz.audioElement.status = false;
+            var audio = new Audio(`${qpz.voicePath}`);
+            qpz.audioElement.audio = audio;
+            qpz.audioElement.audio.load();
+          }
+          
           arr.push(qpz);
           this.questionsArray.push(arr);
         }
@@ -106,50 +116,20 @@ export class PuzzleTextTestPage implements OnInit {
         apz.id = this.questionAndAnswerItems.puzzleTextTranslations[index].id;
         apz.text = this.questionAndAnswerItems.puzzleTextTranslations[index].text;
         apz.type = "answer";
+        apz.flag = this.userInfo.languageIcon;
         apz.disabled = false;
+        // sound answer
+        apz.voicePath = this.questionAndAnswerItems.puzzleTextTranslations[index].voicePath;
+        if(this.questionAndAnswerItems.puzzleTextTranslations[index].voicePath != null && this.questionAndAnswerItems.puzzleTextTranslations[index].voicePath != "" ){
+          apz.audioElement = new AudioElement();
+          apz.audioElement.status = false;
+          var audio = new Audio(`${apz.voicePath}`);
+          apz.audioElement.audio = audio;
+          apz.audioElement.audio.load();
+
+        }
         this.answersArray.push(apz);        
-        //Questions
-        for (let index = 0; index < this.questionAndAnswerItems.puzzleText.length; index++) {
-          let arr = [];
-          let qpz : PuzzleTextTranslations = new PuzzleTextTranslations();
-          qpz.id = this.questionAndAnswerItems.puzzleText[index].id;
-          qpz.text = this.questionAndAnswerItems.puzzleText[index].text;
-          qpz.type = "question";
-          qpz.flag = "../../../assets/icon/da.png";
-          qpz.disabled = true;
-          qpz.voicePath = this.questionAndAnswerItems.puzzleText[index].voicePath;
-          if(this.questionAndAnswerItems.puzzleText[index].voicePath != null && this.questionAndAnswerItems.puzzleText[index].voicePath != "" ){
-            qpz.audioElement = new AudioElement();
-            qpz.audioElement.status = false;
-            var audio = new Audio(`${qpz.voicePath}`);
-            qpz.audioElement.audio = audio;
-            qpz.audioElement.audio.load();
 
-          }
-          arr.push(qpz);
-          this.questionsArray.push(arr);
-        }
-
-        //Answers
-        for (let index = 0; index < this.questionAndAnswerItems.puzzleTextTranslations.length; index++) {
-          let arr = [];
-          let apz : PuzzleTextTranslations  = new PuzzleTextTranslations();
-          apz.id = this.questionAndAnswerItems.puzzleTextTranslations[index].id;
-          apz.text = this.questionAndAnswerItems.puzzleTextTranslations[index].text;
-          apz.type = "answer";
-          apz.flag = this.userInfo.languageIcon;
-          apz.disabled = false;
-          apz.voicePath = this.questionAndAnswerItems.puzzleTextTranslations[index].voicePath;
-          if(this.questionAndAnswerItems.puzzleTextTranslations[index].voicePath != null && this.questionAndAnswerItems.puzzleTextTranslations[index].voicePath != "" ){
-            apz.audioElement = new AudioElement();
-            apz.audioElement.status = false;
-            var audio = new Audio(`${apz.voicePath}`);
-            apz.audioElement.audio = audio;
-            apz.audioElement.audio.load();
-
-          }
-          this.answersArray.push(apz);
-        }
       }
 
       })
@@ -208,6 +188,9 @@ this.testService.sendAnswerTesting({
   .subscribe(response => {
     this.userTestId = response['result'].userTestId;
     this.pageNumber += 1;
+    
+    // Stop sound
+    this.stopAllAudios();
     // ** check last question
     if(this.lengthItems === this.pageNumber) { // length item = 5 // page numer = 5
       console.log('this is last number');
@@ -224,6 +207,8 @@ this.testService.sendAnswerTesting({
 
 slidePrev() {
   this.pageNumber -= 1;
+  // Stop sound
+  this.stopAllAudios();
   this.getQuestionAndAnswer();
   this.slides.slidePrev();
 }

@@ -262,6 +262,8 @@ export class MultiTestPage implements OnInit {
         console.log(response)
         this.userTestId = response['result'].userTestId;
         this.pageNumber += 1;
+        // Stop voice when next question
+        this.stopAllAudios();
 
         // ** check last question
         if(this.lengthItems === this.pageNumber) { // length item = 5 // page numer = 5
@@ -278,6 +280,8 @@ export class MultiTestPage implements OnInit {
 
   slidePrev() {
     this.pageNumber -= 1;
+    // Stop voice when next question
+    this.stopAllAudios();
     this.getTestType();
     this.slides.slidePrev();
   }
