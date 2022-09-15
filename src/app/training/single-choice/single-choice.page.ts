@@ -36,6 +36,7 @@ export class SingleChoicePage implements OnInit {
   limit: number = 1;
   resultAnswer: boolean = null;
   finishedQuestion: boolean = false;
+  courseName: string;
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -71,9 +72,10 @@ export class SingleChoicePage implements OnInit {
     ) { }
 
   ngOnInit() {
-
     // ** get info user from localstorage
     this.userInfo = this.storageService.getUser();
+    this.courseName = localStorage.getItem('courseName');
+  
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.exerciseType = +this.route.snapshot.paramMap.get('exerciseId');
 

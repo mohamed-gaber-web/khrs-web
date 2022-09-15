@@ -1,5 +1,5 @@
-<div>
 
+<div>
 <div class="puzzle-image" style="overflow: auto;">
 
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
@@ -21,12 +21,11 @@
                 class="example-box elements"
                 cdkDropList
                 dropListScroller
-
                 [cdkDropListData]="item"
                 cdkDropListSortingDisabled
                 (cdkDropListDropped)="drop($event)"
                 >
-                <div *ngFor="let item2 of item">
+                <div *ngFor="let item2 of item" cdkDrag [cdkDragDisabled]="true">
 
                   <ion-img
                   class="image-question"
@@ -39,13 +38,8 @@
 
                   <div class="drag-answer" *ngIf="item2.type === 'answer' ">
                     <ion-grid class="puzzle-answer">
-
                       <ion-row>
-
-                        <ion-col
-                          size="12"
-                          >
-
+                        <ion-col size="12">
                           <div class="puzzle-fix" cdkDrag [cdkDragDisabled]="false">
                             <div class="title"> {{ item2.keyword }}</div>
                             <div class="sound" *ngIf="item2.voicePath">
@@ -177,6 +171,5 @@
 
 
 </div>
-
 
 </div>

@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { ExersiceCountService } from 'src/app/training/exersice-count.service';
 import { TrackingUserService } from 'src/app/shared/services/tracking-user.service';
 import { IStartTracking } from 'src/app/shared/models/tracking.model';
+import { LocationStrategy } from '@angular/common';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { IStartTracking } from 'src/app/shared/models/tracking.model';
 export class ChooseCourseMaterialPage implements OnInit {
 
   userId: number;
+  coursesName: any;
   courseId: any;
   subs: Subscription[] = [];
   userCourseDetails: userCourse[];
@@ -32,24 +34,31 @@ export class ChooseCourseMaterialPage implements OnInit {
   limit: number;
   isOpen:boolean = false;
   userType: any;
+  btnDisabled: string = 'open';
 
   constructor(
     private courseService: CourseService,
     private route: ActivatedRoute,
     private router: Router,
     public alertController: AlertController,
-    private trackingService: TrackingUserService
+    private trackingService: TrackingUserService,
+    private testService: TestService,
+    private locationStrategy: LocationStrategy
     ) { }
 
   ngOnInit() {
+    
     this.isLoading = true;
     this.courseId = JSON.parse(this.route.snapshot.paramMap.get('courseId'));
     this.redOffset = this.route.snapshot.paramMap.get('testOffset');
     this.subs.push(
       this.courseService.getUserCoursesDetails(this.courseId)
       .subscribe(response => {
+        console.log('course material name', response)
         this.isLoading = false;
         this.userCourseDetails = response['result'].userCourse;
+        // get and send course name in exercise
+        this.coursesName = response['result'].course['courseTranslations'][0].title;
         let startDate = new Date(this.userCourseDetails['startDate']);
         let endDate = new Date(this.userCourseDetails['endDate']);
          let date = endDate.getTime() - startDate.getTime();
@@ -58,7 +67,6 @@ export class ChooseCourseMaterialPage implements OnInit {
 
       this.courseService.getCoursesDetails(this.courseId)
         .subscribe(response => {
-          // console.log(response)
         this.isLoading = false;
         this.CourseDetails = response['result'];
       })
@@ -68,16 +76,20 @@ export class ChooseCourseMaterialPage implements OnInit {
     // console.log(this.userType);
   }
 
+
   // ** Send course id to exercise page
   sendIdToExercisePage() {
     const courseId = this.courseId;
     localStorage.setItem('courseId', courseId);
+    localStorage.setItem('courseName', this.coursesName);
     this.router.navigate(['/exercise', {courseId: this.courseId}])
   }
 
   // ** Send course id to final test page_event
   sendIdToFinalTestPage() {
-   this.presentAlertConfirm();
+    this.presentAlertConfirm();
+    localStorage.setItem('courseName', this.coursesName);
+  
   }
 
   async presentAlertConfirm() {
@@ -91,12 +103,21 @@ export class ChooseCourseMaterialPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'start',
           handler: () => {
-            this.router.navigate(['/exercise/test-course', {courseId: this.courseId}])
+            // add request final test
+            this.testService.startTest(this.courseId)
+            .subscribe(response => {
+              console.log(response)
+              if(response['success'] === false) {
+                console.log(response)
+                this.btnDisabled = 'close';
+              }
+              this.router.navigate(['/exercise/test-course', {courseId: this.courseId}])
+            })
           }
         }
       ]
@@ -105,14 +126,9 @@ export class ChooseCourseMaterialPage implements OnInit {
     await alert.present();
   }
 
-  ngOnDestroy() {
-    this.subs.forEach(element => element.unsubscribe())
-  }
-
   startAudio(x) { }
 
   // ** start tracking
-
   startTrackUser() {
     const startDate = new Date();
     console.log(this.courseId);
@@ -151,12 +167,10 @@ export class ChooseCourseMaterialPage implements OnInit {
         }
       })
     })
-}
+  }
 
   // ** open course rating component
-  toggleModal() {
-    this.isOpen = true;
-  }
+  toggleModal() {this.isOpen = true;}
 
   closeModal() {
     this.isOpen = false;
@@ -165,5 +179,7 @@ export class ChooseCourseMaterialPage implements OnInit {
   openCourseDetails(ofst:number){
     this.router.navigate([`courses/course-material/${this.courseId}`, {ofst}])
   }
+
+  ngOnDestroy() {this.subs.forEach(element => element.unsubscribe())}
 
 }

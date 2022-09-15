@@ -80,7 +80,7 @@ export class CourseMaterialPage implements OnInit {
           )
         )
         .subscribe((response) => {
-          console.log('course material', response);
+          // console.log('course material', response);
           this.isLoading = false;
           this.courseMaterial = response['result'];
           this.materialCourseLength = response['length'];

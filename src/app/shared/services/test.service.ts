@@ -7,7 +7,8 @@ import {
   finishedTest,
   getUserActiveTest,
   sendAnswerTest,
-  getCertificate}
+  getCertificate,
+  startTest}
 from './../../api.constants';
 
 import { AnswerTestModel } from '../models/answerTestModel';
@@ -60,6 +61,15 @@ export class TestService {
     finishedTest(userTestId: number) {
       const params = `?userTestId=${userTestId}`;
       return this.http.post(`${finishedTest}` + params, {});
+    }
+
+    /**
+   * send answer question
+   *
+   */
+    startTest(courseId: number) {
+      const params = `?courseId=${courseId}`;
+      return this.http.post(`${startTest}` + params , {});
     }
 
     /**

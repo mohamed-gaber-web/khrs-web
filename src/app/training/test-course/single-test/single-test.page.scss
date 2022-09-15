@@ -97,7 +97,7 @@ form {
   background-color: var(--ion-choice-background-color);
   border: 1px solid rgb(204 204 204 / 75%);
   margin: 0px auto 0 auto;
-  height: 400px;
+  height: 500px;
   position: relative;
 }
 
@@ -194,7 +194,7 @@ ion-radio-group{
 }
 
 
-@media(max-width: 1024px) {
+@media(max-width: 1300px) {
   form{
     width: 90%;
     padding: 0 10px;

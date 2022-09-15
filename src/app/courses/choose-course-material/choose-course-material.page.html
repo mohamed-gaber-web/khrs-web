@@ -69,12 +69,17 @@
               <ion-button [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'" [routerLink]="['/courses/course-material',
               CourseDetails.courseTranslations[0].courseId]"  (click)="startTrackUser()" [queryParams]="{offset: offset}" routerDirection="root"> Material </ion-button>
 
-              <ion-button [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'" (click)="sendIdToExercisePage()"> Exercise </ion-button>
+              <ion-button 
+                [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'" 
+                (click)="sendIdToExercisePage()"> Exercise </ion-button>
 
-              <ion-button [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'"  (click)="sendIdToFinalTestPage()">
+              <ion-button 
+                [disabled]="btnDisabled !== 'open' || userType !== 'Admin'"  (click)="sendIdToFinalTestPage()">
                 <ion-icon name="lock-closed-outline" class="final"></ion-icon>
                   Final Test
               </ion-button>
+
+              <!-- CourseDetails.remainingDayes === 0 || -->
 
               <ion-button *ngIf="CourseDetails.status === 1"  (click)="toggleModal()">
                 <img class="img-icon" src="../../../assets/images/rating.png" alt="rating" />

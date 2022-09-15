@@ -63,12 +63,12 @@ export class SingleTestPage implements OnInit {
     private storageService: StorageService
   ) { }
 
-ngOnInit() {
-  this.userInfo = this.storageService.getUser();
-  this.buildSingleForm();
-  this.courseId = +this.route.snapshot.paramMap.get('courseId');
-  this.getTestType();
-}
+  ngOnInit() {
+    this.userInfo = this.storageService.getUser();
+    this.buildSingleForm();
+    this.courseId = +this.route.snapshot.paramMap.get('courseId');
+    this.getTestType();
+  }
 
 // ** get test type
 getTestType() {
@@ -187,7 +187,7 @@ slideNext(answerId) {
       multiChoiceAnswer: null,
       puzzleWithTextAnswers: null, puzzleWithImageAnswers: null})
       .subscribe(response => {
-      // console.log("from single test", response);
+      console.log("from single test", response);
 
       // Sound with next 
       if(this.audioVoice){
@@ -231,6 +231,7 @@ finishSlidePrev() {
     this.pageNumber -= 1;
 }
 
+// ** scape questions
 ScapeSlidePrev() {
   this.pageNumber += 1;
   if(this.lengthItems === this.pageNumber) { // length item = 5 // page numer = 5
@@ -247,6 +248,7 @@ ScapeSlidePrev() {
 finishedTest() {
     this.testService.finishedTest(this.userTestId)
     .subscribe(response => {
+      console.log(response)
       localStorage.removeItem('courseId')
       localStorage.removeItem('pageNumber')
       this.router.navigate(['/courses/tabs/my-courses']);

@@ -43,6 +43,7 @@ export const getUserActiveTest = `${baseUrl}/api/Test/GetUserActiveTest`;
 export const sendAnswerTest = `${baseUrl}/api/Test/Answer`;
 export const finishedTest = `${baseUrl}/api/Test/Finished`;
 export const getCertificate = `${baseUrl}/api/UserTest/GetCertificate`;
+export const startTest = `${baseUrl}/api/Test/StartTest`;
 
 // pages
 export const faqPage = `${baseUrl}/api/Faq/GetFaq`;

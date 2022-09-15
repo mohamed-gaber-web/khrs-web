@@ -28,6 +28,8 @@
   <app-top-header-desktop></app-top-header-desktop>
 </div>
 
+<h3 style="text-align: center; font-size: 20px; font-weight: 600; margin-top: 20px; color: #003182;"> {{ courseName }} </h3>
+
 <ion-content>
 
   <cd-timer
@@ -58,8 +60,5 @@
     <app-multi-test (questionData)="getQuestionData($event)" *ngIf="questionType === 2" [pageNumber]='pageNumber'></app-multi-test>
     <app-puzzle-text-test (questionData)="getQuestionData($event)" *ngIf="questionType === 3" [pageNumber]='pageNumber'></app-puzzle-text-test>
     <app-puzzle-image-test (questionData)="getQuestionData($event)" *ngIf="questionType === 4" [pageNumber]='pageNumber'></app-puzzle-image-test>
-
-
-
 
 </ion-content>

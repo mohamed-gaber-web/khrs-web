@@ -42,6 +42,7 @@ export class PuzzleImagePage implements OnInit {
   voicePath: string;
   voicePathDanish: string;
   activeTrack: string;
+  courseName: string;
 
   subs: Subscription[] = [];
   isLoading: boolean = false;
@@ -77,12 +78,13 @@ export class PuzzleImagePage implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
-
+    this.courseName = localStorage.getItem('courseName');
     // ** get courseId And exerciseId
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.exerciseType = +this.route.snapshot.paramMap.get('exerciseId');
 
     this.getQuestionAndAnswer();
+
   }
 
   // ** get question and answer puzzle text
@@ -99,7 +101,6 @@ export class PuzzleImagePage implements OnInit {
           this.limit
         )
         .subscribe((response) => {
-          // console.log(response)
           this.questionAndAnswerItems = response;
           this.lengthQuestion = response['length'];
 

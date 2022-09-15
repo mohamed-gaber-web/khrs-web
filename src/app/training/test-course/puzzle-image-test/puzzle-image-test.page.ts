@@ -46,6 +46,7 @@ export class PuzzleImageTestPage implements OnInit {
   voicePath: string;
   voicePathDanish: string;
   activeTrack: string;
+  courseName: string;
 
   subs: Subscription[] = [];
   isLoading: boolean = false;
@@ -83,7 +84,7 @@ export class PuzzleImageTestPage implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
-
+  
     // ** get courseId And exerciseId
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.exerciseType = +this.route.snapshot.paramMap.get('exerciseId');

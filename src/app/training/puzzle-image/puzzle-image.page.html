@@ -10,7 +10,8 @@
 
 <div class="test-top ion-text-center">
   <div class="top-title">
-    <h3>Puzzle image </h3>
+    <!-- <p style="font-size: 18px; font-weight: 600; margin-bottom: 10px; "></p> -->
+    <h3> {{ courseName }}  </h3>
     <ion-icon slot="end" (click)="presentModal()"  name="help-circle-outline"></ion-icon>
     <ion-text class="total-result"> {{  (currentIndex+1) + ' / ' + lengthQuestion}} </ion-text>
   </div>
@@ -40,18 +41,16 @@
                 class="example-box elements"
                 cdkDropList
                 dropListScroller
-
                 [cdkDropListData]="item"
                 cdkDropListSortingDisabled
                 (cdkDropListDropped)="drop($event)"
                 >
-                <div *ngFor="let item2 of item" >
-
+                <div *ngFor="let item2 of item" cdkDrag [cdkDragDisabled]="true">
                   <ion-img
                   class="image-question"
                   loading="lazy" *ngIf="item2.type === 'question' "
                   (click)="presentPopover($event, item2)"
-                  [src]="item2.imagePath" cdkDrag [cdkDragDisabled]="true">
+                  [src]="item2.imagePath">
 
                   </ion-img>
 

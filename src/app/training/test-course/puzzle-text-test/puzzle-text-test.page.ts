@@ -30,6 +30,7 @@ export class PuzzleTextTestPage implements OnInit {
   lengthQuestion: number = 0;
   isLoading: boolean = false;
   userTestId: number;
+  courseName: string;
 
   @Input('pageNumber') pageNumber;
   @Output() questionData = new EventEmitter<any>();
@@ -57,6 +58,7 @@ export class PuzzleTextTestPage implements OnInit {
 
   ngOnInit() {
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
+
     this.userInfo = this.storageService.getUser();
     this.getQuestionAndAnswer();
   }

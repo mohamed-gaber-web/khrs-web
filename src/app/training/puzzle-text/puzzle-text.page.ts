@@ -29,6 +29,7 @@ export class PuzzleTextPage implements OnInit {
   nextButton: boolean = false;
   data: any;
   lengthQuestion: number = 0;
+  courseName: string;
 
   resultAnswerItems: any;
   subs: Subscription[] = [];
@@ -63,6 +64,7 @@ export class PuzzleTextPage implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
+    this.courseName = localStorage.getItem('courseName');
     // ** get courseId And exerciseId
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.exerciseType = +this.route.snapshot.paramMap.get('exerciseId');

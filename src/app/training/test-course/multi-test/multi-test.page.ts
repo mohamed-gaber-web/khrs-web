@@ -36,6 +36,7 @@ export class MultiTestPage implements OnInit {
   audioVoice: HTMLAudioElement;
   audioVoiceDanish: HTMLAudioElement;
   statusAnswerElement: boolean = false;
+  courseName: string;
   audioAnswerElement: any = {
     id: 856,
     audio: HTMLAudioElement
@@ -69,6 +70,7 @@ export class MultiTestPage implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
+
     this.buildMultiForm();
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.getTestType();

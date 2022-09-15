@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 
@@ -6,6 +7,7 @@ import { IonSlides, NavController, ToastController } from '@ionic/angular';
 import { CdTimerComponent } from 'angular-cd-timer';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { TestService } from 'src/app/shared/services/test.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 @Component({
   selector: 'app-test-course',
   templateUrl: './test-course.page.html',
@@ -28,6 +30,8 @@ export class TestCoursePage implements OnInit {
   redQuestionType: any;
   redOffset: number;
   activeCourse: boolean;
+  courseName: string;
+  messageTest: string = '';
 
   @Output() slideData = new EventEmitter<any>();
   @ViewChild( 'basicTimer', { static: false } ) cdTimer : CdTimerComponent;
@@ -39,11 +43,16 @@ export class TestCoursePage implements OnInit {
     public toastController: ToastController,
     public navController: NavController,
     private testService: TestService,
+    private utilityService: UtilityService,
+    private locationStrategy: LocationStrategy
 
   ) { }
 
   ngOnInit() {
+    // close back arrow window when enter test
+    this.preventBackButton()
     this.userInfo = this.storageService.getUser();
+    this.courseName = localStorage.getItem('courseName');
 
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.redOffset = +JSON.parse(this.route.snapshot.paramMap.get('testOffset'));
@@ -54,6 +63,15 @@ export class TestCoursePage implements OnInit {
     // this.activeTest = JSON.parse(localStorage.getItem('activeTest'));
   }
 
+  // close back arrow window when enter test
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.locationStrategy.onPopState(() => {
+      history.pushState(null, null, location.href);
+      window.history.forward()
+    })
+  }
+
   // ** get test type
   getTestType() {
     if(this.activeCourse == true) {
@@ -61,11 +79,19 @@ export class TestCoursePage implements OnInit {
       .subscribe(response => {
         this.questionType = response['questionType'];
         this.allTestData = response;
+
       })
     } else {
 
       this.testService.getTestType(this.courseId, this.pageNumber)
       .subscribe(response => {
+
+        if(response['success'] === false) {
+          this.utilityService.errorText(response['arrayMessage'][0])
+          this.router.navigate(['courses/tabs/choose-course-material', {courseId: this.courseId}]);
+        }
+
+
         if (response['questionType'] == 0) {
           this.router.navigate(['courses/tabs/my-courses']);
         }
@@ -76,8 +102,6 @@ export class TestCoursePage implements OnInit {
       })
 
     }
-
-
   }
 
   getQuestionData(event) {
