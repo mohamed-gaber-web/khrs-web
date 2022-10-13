@@ -78,7 +78,7 @@ export class ApplyCoursePage implements OnInit {
       this.courseService.createCourseApply({...this.applyForm.value, courseId: this.id}).subscribe(async (response) => {
         if(response['arrayMessage'] === null) {
           var toast = await this.toastController.create({
-            message: 'Thanks for apply course!',
+            message: 'Thanks for applying',
             duration: 2000,
             color: 'success',
           });

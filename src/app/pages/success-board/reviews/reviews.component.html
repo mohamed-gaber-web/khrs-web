@@ -8,7 +8,7 @@
       </div>
 
       <div class="user-course-status__center">
-        <h4> {{ reviewItem.username }} </h4>
+        <h4> {{ reviewItem.nickname }} </h4>
         <h3> {{ reviewItem.courseName }} </h3>
         <p *ngIf="reviewItem.comment !== null">  {{ reviewItem.comment }} </p>
         <!-- <p> this is comment for this course by user mohamed this course is very good </p> -->
@@ -26,3 +26,4 @@
     </div>
 </div>
 
+<!-- {{ allSuccessRating | json }} -->

@@ -19,6 +19,8 @@ import { TestFinishedPage } from './test-finished/test-finished.page';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { CdTimerModule } from 'angular-cd-timer';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PuzzleSoundTestComponent } from './puzzle-image-test/puzzle-sound-test/puzzle-sound-test.component';
+import { PuzzleSoundTestModule } from './puzzle-image-test/puzzle-sound-test/puzzle-sound-test.module';
 
 
 @NgModule({
@@ -30,10 +32,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     DragDropModule,
     CdTimerModule,
-    SharedModule
+    SharedModule,
+    PuzzleSoundTestModule
 
   ],
-  entryComponents: [TestFinishedPage],
+  entryComponents: [TestFinishedPage, PuzzleSoundTestComponent],
   declarations: [
     TestCoursePage,
     SingleTestPage,

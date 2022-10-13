@@ -1,5 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+
 import {
   IonSlides,
   ModalController,
@@ -18,9 +20,9 @@ import { Subscription } from 'rxjs';
 import { Howl } from 'howler';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { PuzzleImageTranslations } from 'src/app/shared/models/puzzleImageTranslation';
-import { PuzzleSoundComponent } from '../../puzzle-image/puzzle-sound/puzzle-sound.component';
 import { HelpModalComponent } from '../../help-modal/help-modal.component';
 import { TestService } from 'src/app/shared/services/test.service';
+import { PuzzleSoundTestComponent } from './puzzle-sound-test/puzzle-sound-test.component';
 
 @Component({
   selector: 'app-puzzle-image-test',
@@ -178,12 +180,12 @@ getQuestionAndAnswer() {
   );
 }
 
-  // ** Get Current Index
-  getCurrentIndex() {
-    this.slides
-      .getActiveIndex()
-      .then((current) => (this.currentIndex = current));
-  }
+// ** Get Current Index
+getCurrentIndex() {
+  this.slides
+    .getActiveIndex()
+    .then((current) => (this.currentIndex = current));
+}
 
 // ** Drop Function
 drop(event: CdkDragDrop<any>) {
@@ -278,47 +280,47 @@ slideNext() {
     });
 }
 
-  async presentPopover(ev: any, item: any) {
-    const popover = await this.popoverController.create({
-      component: PuzzleSoundComponent,
-      componentProps: {
-        voicePath: item.voicePath,
-        voicePathDanish: item.voicePathDanish,
-        imagePath: item.imagePath,
-      },
-      cssClass: 'my-custom-class',
-      event: ev,
-      translucent: true,
-    });
-    await popover.present();
-  }
+async presentPopover(ev: any, item: any) {
+  const popover = await this.popoverController.create({
+    component: PuzzleSoundTestComponent,
+    componentProps: {
+      voicePath: item.voicePath,
+      voicePathDanish: item.voicePathDanish,
+      imagePath: item.imagePath,
+    },
+    cssClass: 'my-custom-class',
+    event: ev,
+    translucent: true,
+  });
+  await popover.present();
+}
 
-  startAudio(voicePath: string) {
-    if (this.player) {
-      this.player.stop();
+startAudio(voicePath: string) {
+  if (this.player) {
+    this.player.stop();
+  }
+  this.player = new Howl({
+    html5: true,
+    src: voicePath,
+    onplay: () => {
+      this.activeTrack = voicePath;
+      this.isPlaying = true;
+    },
+    onend: () => {},
+  });
+  this.player.play();
+}
+
+async presentModal() {
+  const modal = await this.modalController.create({
+    component: HelpModalComponent,
+    componentProps: {
+      "modalLink": "https://khrs-admin.sdex.online/assets/tutorials/single_choice_tutorial.mp4",
+      "modalTitle": "Puzzle Wiith Image Tutorial"
     }
-    this.player = new Howl({
-      html5: true,
-      src: voicePath,
-      onplay: () => {
-        this.activeTrack = voicePath;
-        this.isPlaying = true;
-      },
-      onend: () => {},
-    });
-    this.player.play();
-  }
-
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: HelpModalComponent,
-      componentProps: {
-        "modalLink": "https://khrs-admin.sdex.online/assets/tutorials/single_choice_tutorial.mp4",
-        "modalTitle": "Puzzle Wiith Image Tutorial"
-      }
-    });
-    return await modal.present();
-  }
+  });
+  return await modal.present();
+}
 
   slidePrev() {
     this.currentIndex -= 1;
@@ -337,7 +339,6 @@ slideNext() {
   finishedTest() {
     this.testService.finishedTest(this.userTestId)
     .subscribe(response => {
-      console.log(response)
       localStorage.removeItem('courseId')
       localStorage.removeItem('pageNumber')
       // this.router.navigate(['/courses/tabs/my-courses']).then(() => {
@@ -360,7 +361,6 @@ slideNext() {
   ScapeSlidePrev() {
     this.pageNumber += 1;
     if(this.lengthItems === this.pageNumber) { // length item = 5 // page numer = 5
-      console.log('this is last number');
       localStorage.setItem('userTestId', JSON.stringify(this.userTestId))
       localStorage.setItem('courseId', JSON.stringify(this.courseId))
       localStorage.setItem('pageNumber', JSON.stringify(this.pageNumber))
@@ -369,6 +369,7 @@ slideNext() {
     this.getQuestionAndAnswer();
     this.slides.slideNext();
   }
+
   
   ngOnDestroy() {
     this.subs.forEach((sub) => {sub.unsubscribe(); });

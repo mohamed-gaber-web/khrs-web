@@ -1,0 +1,43 @@
+// .ext-icon-vlume {
+//   width: 24px;
+//   height: 24px;
+// }
+
+
+
+
+// .sound-popup {
+
+
+
+//   padding: 20px;
+
+//   .sound {
+//     display: flex;
+//     border: 2px solid var(--ion-color-second-app);
+//     border-radius:10px;
+//     padding: 5px 4px;
+//     margin: 10px;
+
+//     .sound-bg {
+//       width: 20px;
+//       height: 20px;
+//       text-align: center;
+//       border-radius: 50px;
+//       margin-right: 10px;
+
+//       .img-volume {
+//         @extend .ext-icon-vlume;
+//       }
+//     }
+//   }
+// }
+
+// .danish-flag {
+//   width: 30px;
+//   height: auto;
+// }
+
+.popover-content.sc-ion-popover-md {
+  position: static!important;
+}

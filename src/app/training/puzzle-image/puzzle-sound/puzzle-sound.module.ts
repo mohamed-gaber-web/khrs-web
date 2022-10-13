@@ -8,8 +8,8 @@ import { PuzzleSoundComponent } from "./puzzle-sound.component";
     imports: [
         CommonModule,
         IonicModule,
-
     ],
-    declarations: [PuzzleSoundComponent]
+    declarations: [PuzzleSoundComponent],
+    exports: [PuzzleSoundComponent]
   })
   export class PuzzleSoundModule {}
