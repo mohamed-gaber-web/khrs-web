@@ -14,6 +14,7 @@ export const recommendedBy = `${baseUrl}/api/RecommendedBy/GetRecommendedBy`;
 export const userChangePassword = `${baseUrl}/api/Account/changePasswod`;
 export const updatedUserInfo = `${baseUrl}/api/Account/UpdateUser`;
 export const resetPassword = `${baseUrl}/api/Account/requestResetPassword`;
+export const newPassword = `${baseUrl}/api/Account/resetPassword`
 export const getProfileData = `${baseUrl}/api/Account/GetProfileData`;
 
 // get language

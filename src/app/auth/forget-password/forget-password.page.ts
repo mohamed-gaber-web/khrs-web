@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { emailValidator, matchingPasswords } from 'src/theme/app-validators';
 import { AuthService } from '../auth.service';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-forget-password',
@@ -17,11 +19,10 @@ import { AuthService } from '../auth.service';
 export class ForgetPasswordPage implements OnInit {
 
   forgetPasswordForm: FormGroup;
+  urlRequest: string = 'https://www.e-asylearn.dk/auth/new-password';
 
   forgetPasswordFormErrors = {
     Email: '',
-    // Password: '',
-    // confirmPassword: ''
   };
 
   forgetPasswordValidationMessages = {
@@ -29,15 +30,13 @@ export class ForgetPasswordPage implements OnInit {
       required: 'Email field is required',
       invalidEmail: 'Email field must be a valid email',
     },
-    // Password: {
-    //   required: 'Password field is required',
-    // },
-    // confirmPassword: {
-    //   required: 'Confirm Password field is required',
-    // },
   };
 
-  constructor(public formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(
+      public formBuilder: FormBuilder, 
+      private authService: AuthService,
+      private toastController: ToastController
+      ) { }
 
   ngOnInit() {
     this.buildForgetPasswordForm();
@@ -46,10 +45,7 @@ export class ForgetPasswordPage implements OnInit {
   buildForgetPasswordForm() {
     this.forgetPasswordForm = this.formBuilder.group({
       Email: ['', Validators.compose([Validators.required, emailValidator])],
-      // Password: ['', Validators.required],
-      // confirmPassword: ['', Validators.required],
     },
-    // {validator: matchingPasswords('Password', 'confirmPassword')}
 
     );
 
@@ -72,12 +68,23 @@ export class ForgetPasswordPage implements OnInit {
   }
 
   onResetPassword() {
-    console.log(this.forgetPasswordForm.value.Email);
+    const resetObj = {
+      email: this.forgetPasswordForm.value.Email,
+      callbackUrl: this.urlRequest
+    }
 
-    this.authService.resetPassword
-    ( this.forgetPasswordForm.value.Email, 'http://localhost:8100/auth/forget-password')
-    .subscribe(res => {
-      console.log(res);
+    this.authService.resetPassword(this.forgetPasswordForm.value.Email, this.urlRequest)
+    .subscribe(async(res) => {
+      if(res) {
+        const toast = await this.toastController.create({
+          message: 'Please check email',
+          duration: 1500,
+          position: 'top',
+          cssClass: 'reset-toast',
+        });
+    
+        await toast.present();
+      }
     })
   }
 

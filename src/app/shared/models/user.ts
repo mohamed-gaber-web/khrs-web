@@ -11,4 +11,5 @@ export class User {
     language:string;
     imagePath: string;
     languageIcon: string;
+    Role: string;
 }

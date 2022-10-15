@@ -4,11 +4,16 @@ import { HttpClient } from "@angular/common/http";
 import {loginCredentials} from "src/app/shared/models/loginCredentials";
 import { StorageService } from "src/app/shared/services/storage.service";
 import { User } from './sign-up/user.model';
-import { loginAPI, registerAPI, recommendedBy, userChangePassword, updatedUserInfo, resetPassword, getProfileData, termsAndConditions } from "src/app/api.constants";
-
-
-
-
+import { 
+  loginAPI, 
+  registerAPI, 
+  recommendedBy, 
+  userChangePassword, 
+  updatedUserInfo, 
+  resetPassword, 
+  getProfileData, 
+  termsAndConditions, 
+  newPassword } from "src/app/api.constants";
 @Injectable({
     providedIn: 'root',
   })
@@ -50,8 +55,12 @@ import { loginAPI, registerAPI, recommendedBy, userChangePassword, updatedUserIn
     return this.http.put(`${updatedUserInfo}`, userInfo);
   }
 
-  resetPassword(email: any, url: string) {
-    return this.http.post(`${resetPassword}`, {email, url})
+  resetPassword(email: any, callbackUrl: string) {
+    return this.http.post(`${resetPassword}`, {email, callbackUrl})
+  }
+
+  addNewPassword(email: string, password: string, token: string) {
+    return this.http.post(`${newPassword}`, {email, password, token})
   }
 
   getProfileDataList() {

@@ -132,7 +132,7 @@ export class StorageService {
     this.user.imagePath = value.imagePath;
     this.user.languageIcon = value.languageIcon;
     this.user.nickname = value.nickname;
-    // this.user.Role = value.role;
+    this.user.Role = value.role;
     this.user.email = value.email;
     // this.user.permissions = value.permissions;
     return this.user;
