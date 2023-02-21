@@ -67,6 +67,8 @@ export class CourseMaterialPage implements OnInit {
     .subscribe(params => {
       this.offset = +params['offset'] | 0;
     })
+
+    console.log(this.offset, this.materialCourseLength)
   }
 
   // ** Get material courses
@@ -108,6 +110,8 @@ export class CourseMaterialPage implements OnInit {
       toast.present();
       this.router.navigate(['/courses/tabs/my-courses']);
     }
+    console.log(this.offset, this.materialCourseLength)
+
   }
 
   // **  previous slide
