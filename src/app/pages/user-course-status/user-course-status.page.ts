@@ -28,7 +28,6 @@ userInfo: any;
     this.isLoading = true;
     this.sub.push(this.authService.getProfileDataList()
       .subscribe(response => {
-        // console.log(response);
         this.isLoading = false;
         this.userDataList = response['result'];
         this.userDataLength = response['length'];

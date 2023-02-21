@@ -238,7 +238,7 @@ finishedTest() {
     localStorage.removeItem('courseId')
     localStorage.removeItem('pageNumber')
     this.router.navigate(['/courses/tabs/my-courses']);
-    console.log(response);
+    console.log('finished test', response)
   })
 }
 

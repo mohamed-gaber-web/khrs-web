@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInfiniteScrollContent, NavController, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { imagesBaseUrl } from 'src/app/api.constants';
 import { AudioElement } from 'src/app/shared/models/audioObject';
 import { Course } from 'src/app/shared/models/course';
 import { MyCourse } from 'src/app/shared/models/myCourse';
@@ -45,12 +44,15 @@ export class MyCoursesPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.appService.getVidoes('Courses', this.getLang).subscribe((response) => {
-      this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath || '2';
-    })
+    this.getLang = localStorage.getItem('lang') || '2';
+    this.sub.push(
+      this.appService.getVidoes('Courses', this.getLang)
+      .subscribe((response) => {
+        this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
+      })
+    );
     this.getUserCourses();
   }
-
 
   getUserCourses() {
     this.isLoading = true;
@@ -59,7 +61,6 @@ export class MyCoursesPage implements OnInit, OnDestroy {
         .getUserCourses('', this.offset)
         .pipe(
           map((response) => {
-            // console.log(response);
             Object.entries(response);
             this.isLoading = false;
             this.totalLength = response['length'];
@@ -218,10 +219,6 @@ export class MyCoursesPage implements OnInit, OnDestroy {
     console.log('Begin async operation');
     this.getUserCourses();
     event.target.complete();
-    // setTimeout(() => {
-    //   console.log('Async operation has ended');
-    //   event.target.complete();
-    // }, 2000);
   }
 
   startAudio(voicePath: string) {
@@ -245,12 +242,11 @@ export class MyCoursesPage implements OnInit, OnDestroy {
     }
 
   }
-  ngOnDestroy() {
 
-    this.sub.forEach(e => {
-      e.unsubscribe();
-    })
+  ngOnDestroy() {
+    this.sub.forEach(e => e.unsubscribe())
   }
+  
   ionViewDidLeave():void{
     if (this.player) {
       this.player.stop();
@@ -263,5 +259,6 @@ export class MyCoursesPage implements OnInit, OnDestroy {
         }
       }
     });
+    this.sub.forEach(e => e.unsubscribe())
   }
 }

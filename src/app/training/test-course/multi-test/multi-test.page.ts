@@ -310,9 +310,9 @@ export class MultiTestPage implements OnInit {
   finishedTest() {
     this.testService.finishedTest(this.userTestId)
     .subscribe(response => {
+      console.log('finished test', response)
       localStorage.removeItem('courseId')
       localStorage.removeItem('pageNumber')
-      // this.router.navigate(['/courses/tabs/my-courses']);
       this.navCtrl.navigateForward('/courses/tabs/my-courses')
     })
   }

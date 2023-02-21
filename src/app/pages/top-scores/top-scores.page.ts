@@ -33,8 +33,6 @@ export class TopScoresPage implements OnInit {
       shareReplay()
       )
     .subscribe(
-      // () => console.log(),
-      //(err) => console.log(err),
       () => {this.isLoading = false}
     )
   }

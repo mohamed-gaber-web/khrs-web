@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import {IonSlides, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -94,10 +94,8 @@ export class SingleChoicePage implements OnInit {
       this.exerciseService
         .getCourseExercise(this.exerciseType, this.courseId, this.currentIndex, this.limit)
         .subscribe(response => {
-          // console.log(response);
           this.isLoading = false;
           this.exerciseItems = response['result'];
-          // console.log('single page ', response)
           this.lengthQuestion = response['length'];
           if(this.lengthQuestion == 0){
             this.utilityService.successText("There are no available questions in this exercise");
@@ -126,7 +124,6 @@ export class SingleChoicePage implements OnInit {
   }
 
   playAudio(type?:string,item?:any){
-    // console.log(item)
     if(type == "native"){
       if(item.audioElementDanish?.status == true){
         item.audioElementDanish.audio.pause();

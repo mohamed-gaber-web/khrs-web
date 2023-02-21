@@ -147,7 +147,6 @@ export class PuzzleTextPage implements OnInit {
   // ** Drop Function
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
-        // console.log('move');
       }
     else {
         var prevData=   event.previousContainer.data;
@@ -177,8 +176,6 @@ export class PuzzleTextPage implements OnInit {
           );
         }
       }
-
-      // console.log(event.container.data);
 
     }
 

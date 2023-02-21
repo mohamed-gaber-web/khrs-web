@@ -1,0 +1,48 @@
+.thanks-bg {
+    --background: url(../../../../../assets/images/rating-thanks.png) no-repeat fixed bottom right;
+}
+
+.rating-thanks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+    background-color: #EBFFE6;
+    padding: 30px 20px;
+    border: 2px solid #8AFA6F;
+    border-radius: 15px;
+    width: 35%;
+    margin: 250px auto 0 auto;
+    text-align: center;
+    
+
+    h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #062F87;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 25px;
+        font-weight: 800;
+        color: #062F87;    
+    }
+
+    button {
+        background-color: #062F87;
+        padding: 10px 20px;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        margin-top: 10px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .rating-thanks {
+        width: 80%;
+    }
+}

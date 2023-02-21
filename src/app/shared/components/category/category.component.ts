@@ -54,9 +54,12 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.sub.forEach(el => {
-      el.unsubscribe();
-    })
+    this.sub.forEach(el => el.unsubscribe())
+  }
+
+  ionViewDidLeave() {
+    this.sub.forEach(el => el.unsubscribe())
+
   }
 
 }

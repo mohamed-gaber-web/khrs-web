@@ -248,7 +248,7 @@ ScapeSlidePrev() {
 finishedTest() {
     this.testService.finishedTest(this.userTestId)
     .subscribe(response => {
-      console.log(response)
+      console.log('finished test', response)
       localStorage.removeItem('courseId')
       localStorage.removeItem('pageNumber')
       this.router.navigate(['/courses/tabs/my-courses']);

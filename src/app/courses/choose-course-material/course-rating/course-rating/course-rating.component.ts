@@ -32,11 +32,11 @@ export class CourseRatingComponent implements OnInit {
     this.subs.push(
        this.courseService.createRatingService(this.rateObject)
         .subscribe( async (response) => {
-          console.log(this.rateObject)
-          console.log(response)
+          // console.log(this.rateObject)
+          // console.log(response)
           this.resultRating = response['success'];
           if(this.resultRating === true) {
-            this.router.navigateByUrl('/thanks-rating');
+            this.router.navigateByUrl('/thanks');
           } else  {
             const errorMsg = response['arrayMessage'][0];
             var toast = await this.toastController.create({

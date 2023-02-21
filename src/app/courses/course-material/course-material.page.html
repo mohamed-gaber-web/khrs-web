@@ -9,7 +9,7 @@
 <ion-content>
 
   <div class="course-material-count">
-    <h4> <b>  {{ offset }} / {{ materialCourseLength }}   </b>   </h4>
+    <h4> <b>  {{ offset + 1 }} / {{ materialCourseLength }}   </b>   </h4>
   </div>
 
   <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
@@ -29,7 +29,7 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
-          <ion-col size="12" size-md="6" size-lg="7">
+          <ion-col size="12" size-md="8" size-lg="8">
             <div class="course__material-block">
               <div [innerHTML]="course.materialTranslations[0].description | sanitizeHtml">  </div>
               <ion-grid>
@@ -65,7 +65,7 @@
       </ion-col>
 
       <ion-col size="3">
-        <ion-button *ngIf="!disableNextBtn" (click)="slideNext()">  next <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
+        <ion-button [disabled]="(offset + 1) === materialCourseLength" *ngIf="!disableNextBtn" (click)="slideNext()">  next <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
       </ion-col>
 
     </ion-row>

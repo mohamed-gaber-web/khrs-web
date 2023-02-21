@@ -1,11 +1,10 @@
 import { CheckUserTest } from './../../shared/models/chekTestUser';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { NavController, Platform } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { map, share } from 'rxjs/operators';
-import { imagesBaseUrl } from 'src/app/api.constants';
+import { map, shareReplay } from 'rxjs/operators';
 import { Course } from 'src/app/shared/models/course';
 import { CourseService } from 'src/app/shared/services/courses.service';
 import { AudioElement } from 'src/app/shared/models/audioObject';
@@ -36,16 +35,18 @@ export class AllCoursesPage implements OnInit {
     private route: Router,
     private navCtrl: NavController,
     private courseService: CourseService,
-    private platform: Platform,
     private testService: TestService,
     private appService:AppService
   ) {}
 
   ngOnInit() {
-    // this.getLang = localStorage.getItem('languageId');
-    // this.appService.getVidoes('Courses', this.getLang).subscribe((response) => {
-    //   this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
-    // })
+    this.getLang = localStorage.getItem('languageId') || '2';
+    this.sub.push(
+      this.appService.getVidoes('Courses', this.getLang)
+      .subscribe((response) => {
+        this.courseAudio = response['result']?.genericAttributeMediaTranslations[0]?.mediaPath;
+      })
+    );
     this.offset = 0;
     this.getCourses();
 
@@ -197,7 +198,15 @@ export class AllCoursesPage implements OnInit {
         }
       }
     });
+
+    this.sub.forEach((element) => element.unsubscribe()) 
   }
+
+
+  ngOnDestroy() {
+   this.sub.forEach((element) => element.unsubscribe()) 
+  }
+
 }
 
 function onSuccess() {

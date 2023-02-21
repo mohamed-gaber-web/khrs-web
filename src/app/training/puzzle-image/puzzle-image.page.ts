@@ -190,7 +190,6 @@ export class PuzzleImagePage implements OnInit {
     var currIndex =   event.currentIndex;
 
     if (event.previousContainer === event.container) {
-    //  console.log("same");
      moveItemInArray(data, prevIndex, this.currentIndex);
 
     } else {
@@ -232,7 +231,6 @@ export class PuzzleImagePage implements OnInit {
     // ** get check
     let arrayPuzzle: any = [];
     this.questionsArray.forEach((values) => {
-      // console.log('values', values);
       arrayPuzzle.push({
         puzzleWithImageQuestionId: values[0].id,
         imageGuid: values[0].guidId,
@@ -243,7 +241,6 @@ export class PuzzleImagePage implements OnInit {
     this.exerciseService
       .checkAnswerPuzzleWithImage(arrayPuzzle)
       .subscribe((response) => {
-        // console.log(response);
         const isCorrect = response['result'].isCorrect;
 
         if (isCorrect === true) {

@@ -19,12 +19,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ThanksPageComponent } from './courses/choose-course-material/course-rating/thanks-page/thanks-page.component';
 
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ThanksPageComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

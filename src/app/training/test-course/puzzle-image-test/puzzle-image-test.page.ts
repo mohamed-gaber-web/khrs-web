@@ -339,16 +339,9 @@ async presentModal() {
   finishedTest() {
     this.testService.finishedTest(this.userTestId)
     .subscribe(response => {
+      console.log('finished test', response)
       localStorage.removeItem('courseId')
       localStorage.removeItem('pageNumber')
-      // this.router.navigate(['/courses/tabs/my-courses']).then(() => {
-      //   window.location.reload();
-      // });
-      // this.navCtrl.navigateRoot('/courses/tabs/my-courses').then(() => {
-      //   window.location.reload();
-      //    });
-      // this.router.navigateByUrl('/courses/tabs/my-courses', { skipLocationChange: true });
-      // this.navCtrl.navigateRoot('/courses/tabs/my-courses')
       this.router.navigate(['/courses/tabs/my-courses'])
   
     })

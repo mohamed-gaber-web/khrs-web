@@ -74,7 +74,7 @@
                 (click)="sendIdToExercisePage()"> Exercise </ion-button>
 
               <ion-button 
-                [disabled]="btnDisabled !== 'open' && userType !== 'Admin'"  (click)="sendIdToFinalTestPage()">
+                [disabled]="btnDisabled && userType !== 'Admin'"  (click)="sendIdToFinalTestPage()">
                 <ion-icon name="lock-closed-outline" class="final"></ion-icon>
                   Final Test
               </ion-button>

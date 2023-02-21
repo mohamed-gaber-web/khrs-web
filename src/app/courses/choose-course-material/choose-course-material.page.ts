@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { userCourse } from 'src/app/shared/models/userCourse';
 import { CourseService } from 'src/app/shared/services/courses.service';
 import { TestService } from 'src/app/shared/services/test.service';
 
 import { AlertController } from '@ionic/angular';
-import { ExersiceCountService } from 'src/app/training/exersice-count.service';
 import { TrackingUserService } from 'src/app/shared/services/tracking-user.service';
 import { IStartTracking } from 'src/app/shared/models/tracking.model';
-import { LocationStrategy } from '@angular/common';
 
 
 @Component({
@@ -34,7 +31,7 @@ export class ChooseCourseMaterialPage implements OnInit {
   limit: number;
   isOpen:boolean = false;
   userType: any;
-  btnDisabled: string = 'open';
+  btnDisabled: boolean;
 
   constructor(
     private courseService: CourseService,
@@ -43,20 +40,18 @@ export class ChooseCourseMaterialPage implements OnInit {
     public alertController: AlertController,
     private trackingService: TrackingUserService,
     private testService: TestService,
-    private locationStrategy: LocationStrategy
     ) { }
 
   ngOnInit() {
-    
     this.isLoading = true;
     this.courseId = JSON.parse(this.route.snapshot.paramMap.get('courseId'));
     this.redOffset = this.route.snapshot.paramMap.get('testOffset');
     this.subs.push(
       this.courseService.getUserCoursesDetails(this.courseId)
       .subscribe(response => {
-        console.log('course material name', response)
         this.isLoading = false;
         this.userCourseDetails = response['result'].userCourse;
+        this.btnDisabled = response['result'].isOwnedTest
         // get and send course name in exercise
         this.coursesName = response['result'].course['courseTranslations'][0].title;
         let startDate = new Date(this.userCourseDetails['startDate']);
@@ -73,9 +68,8 @@ export class ChooseCourseMaterialPage implements OnInit {
     );
 
     this.userType = JSON.parse(localStorage.getItem('user')).role;
-    // console.log(this.userType);
-  }
 
+  }
 
   // ** Send course id to exercise page
   sendIdToExercisePage() {
@@ -89,7 +83,6 @@ export class ChooseCourseMaterialPage implements OnInit {
   sendIdToFinalTestPage() {
     this.presentAlertConfirm();
     localStorage.setItem('courseName', this.coursesName);
-  
   }
 
   async presentAlertConfirm() {
@@ -103,21 +96,20 @@ export class ChooseCourseMaterialPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'start',
           handler: () => {
-            // add request final test
-            this.testService.startTest(this.courseId)
-            .subscribe(response => {
-              console.log(response)
-              if(response['success'] === false) {
-                console.log(response)
-                this.btnDisabled = 'close';
-              }
-              this.router.navigate(['/exercise/test-course', {courseId: this.courseId}])
-            })
+          // check user test ya man 
+          this.testService.startTest(this.courseId)
+          .subscribe(response => {
+            console.log(response)
+            if(response['success'] === false) {
+              this.btnDisabled;
+                return;
+            }
+            this.router.navigate(['/exercise/test-course', {courseId: this.courseId}])
+          })
           }
         }
       ]
@@ -131,7 +123,6 @@ export class ChooseCourseMaterialPage implements OnInit {
   // ** start tracking
   startTrackUser() {
     const startDate = new Date();
-    console.log(this.courseId);
     const data: IStartTracking = {
       courseId: this.courseId,
       limit: 1,
@@ -141,12 +132,12 @@ export class ChooseCourseMaterialPage implements OnInit {
     }
     this.trackingService.startTracking(data)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
       }, (error) => {
-        console.log(error);
+        // console.log(error);
 
       }, () => {
-        console.log('completed');
+        // console.log('completed');
 
       })
   }
@@ -181,5 +172,7 @@ export class ChooseCourseMaterialPage implements OnInit {
   }
 
   ngOnDestroy() {this.subs.forEach(element => element.unsubscribe())}
+
+  ionViewDidLeave() {this.subs.forEach(element => element.unsubscribe())}
 
 }

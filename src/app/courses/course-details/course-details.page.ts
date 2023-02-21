@@ -21,7 +21,6 @@ export class CourseDetailsPage implements OnInit {
   courseDetails: any;
   subs: Subscription[] = [];
   isLoading = false;
-  // userTestId: number = JSON.parse(localStorage.getItem('// userTestId'));
   courseId:number;
   player: Howl = null;
   isPlaying: boolean = false;
@@ -45,13 +44,11 @@ export class CourseDetailsPage implements OnInit {
   this.subs.push(
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-          this.courseService.getCoursesDetails(+params.get('courseId')))
-          ).subscribe(response => {
-          // console.log('course details', response);
-          this.isLoading = false;
-          this.courseDetails = response['result'];
+        this.courseService.getCoursesDetails(+params.get('courseId')))
+        ).subscribe(response => {
+        this.isLoading = false;
+        this.courseDetails = response['result'];
     })
-
   );
   }
 
@@ -121,10 +118,12 @@ startAudio(voicePath: string) {
   }
 
 }
+
 ionViewDidLeave():void{
   if (this.player) {
     this.player.stop();
   }
+  this.subs.forEach((element) => element.unsubscribe())
 }
 
 ngOnDestroy(): void {
@@ -135,5 +134,6 @@ ngOnDestroy(): void {
     element.unsubscribe();
   })
 }
+
 
 }

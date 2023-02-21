@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ThanksPageComponent } from './courses/choose-course-material/course-rating/thanks-page/thanks-page.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 
@@ -65,7 +66,11 @@ const routes: Routes = [
   {
   path: 'top-scores',
   loadChildren: () => import('./pages/top-scores/top-scores.module').then( m => m.TopScoresPageModule)
-},
+  },
+  {
+    path: 'thanks',
+    component: ThanksPageComponent
+  },
   {
     path: 'not-found',
     component: NotFoundComponent

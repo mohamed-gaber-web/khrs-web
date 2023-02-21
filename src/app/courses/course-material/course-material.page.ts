@@ -47,9 +47,9 @@ export class CourseMaterialPage implements OnInit {
   };
 
   constructor(
-    private router: Router,
     private courseService: CourseService,
     private route: ActivatedRoute,
+    private router: Router,
     public storageService: StorageService,
     public authService: AuthService,
     private appService: AppService,
@@ -80,7 +80,7 @@ export class CourseMaterialPage implements OnInit {
           )
         )
         .subscribe((response) => {
-          // console.log('course material', response);
+          console.log('course material', response);
           this.isLoading = false;
           this.courseMaterial = response['result'];
           this.materialCourseLength = response['length'];
@@ -97,10 +97,10 @@ export class CourseMaterialPage implements OnInit {
       this.player = null;
     }
     this.offset += 1; // get one request when add next
-    this.getMaterialCourse();
     this.slides.slideNext();
+    this.getMaterialCourse();
 
-    if(this.offset === this.materialCourseLength) {
+    if((this.offset + 1) === this.materialCourseLength) {
       var toast = await this.toastController.create({
       message: 'Material pages is finished !',
       duration: 3000,
@@ -109,6 +109,7 @@ export class CourseMaterialPage implements OnInit {
       toast.present();
       // this.router.navigate(['/courses/tabs/my-courses']);
     }
+    console.log(this.offset, this.materialCourseLength)
   }
 
   // **  previous slide
@@ -189,7 +190,7 @@ export class CourseMaterialPage implements OnInit {
         if (response['success'] === true) {
           // localStorage.setItem('courseMaterialOffset', JSON.stringify(this.offset))
           const toast = await this.toastController.create({
-            message: `You paused at page ${ this.offset }` ,
+            message: `You paused at page ${ this.offset + 1 }` ,
             duration: 4000,
             position: 'top',
             color: 'success',
