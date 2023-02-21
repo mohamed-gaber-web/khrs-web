@@ -80,7 +80,6 @@ export class CourseMaterialPage implements OnInit {
           )
         )
         .subscribe((response) => {
-          console.log('course material', response);
           this.isLoading = false;
           this.courseMaterial = response['result'];
           this.materialCourseLength = response['length'];
@@ -107,7 +106,7 @@ export class CourseMaterialPage implements OnInit {
       color: 'success',
       });
       toast.present();
-      // this.router.navigate(['/courses/tabs/my-courses']);
+      this.router.navigate(['/courses/tabs/my-courses']);
     }
   }
 

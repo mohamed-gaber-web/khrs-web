@@ -14,5 +14,6 @@ export interface User {
   Recommended: number,
   languageId: number;
   acceptTerms: string;
+  nickname: string;
   file: FileUpload[]
 }
