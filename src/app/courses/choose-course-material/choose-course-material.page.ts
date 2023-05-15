@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { ExersiceCountService } from 'src/app/training/exersice-count.service';
 import { TrackingUserService } from 'src/app/shared/services/tracking-user.service';
 import { IStartTracking } from 'src/app/shared/models/tracking.model';
+import { ExerciseService } from 'src/app/shared/services/exercise.service';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class ChooseCourseMaterialPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public alertController: AlertController,
-    private trackingService: TrackingUserService
+    private trackingService: TrackingUserService,
+    private exerciseService: ExerciseService
     ) { }
 
   ngOnInit() {
@@ -58,14 +60,12 @@ export class ChooseCourseMaterialPage implements OnInit {
 
       this.courseService.getCoursesDetails(this.courseId)
         .subscribe(response => {
-        // console.log(response)
         this.isLoading = false;
         this.CourseDetails = response['result'];
       })
     );
 
     this.userType = JSON.parse(localStorage.getItem('user')).role;
-    // console.log(this.userType);
   }
 
   // ** Send course id to exercise page
@@ -91,12 +91,17 @@ export class ChooseCourseMaterialPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'start',
           handler: () => {
-            this.router.navigate(['/exercise/test-course', {courseId: this.courseId}])
+            this.exerciseService.startCourseTest(this.courseId).subscribe(response => {
+              if(response['success'] === true) {
+                this.router.navigate(['/exercise/test-course', {courseId: this.courseId}])
+              } else {
+                return;
+              }
+            })
           }
         }
       ]
@@ -115,7 +120,6 @@ export class ChooseCourseMaterialPage implements OnInit {
 
   startTrackUser() {
     const startDate = new Date();
-    console.log(this.courseId);
     const data: IStartTracking = {
       courseId: this.courseId,
       limit: 1,
@@ -125,12 +129,8 @@ export class ChooseCourseMaterialPage implements OnInit {
     }
     this.trackingService.startTracking(data)
       .subscribe(response => {
-        console.log(response);
       }, (error) => {
-        console.log(error);
-
       }, () => {
-        console.log('completed');
 
       })
   }
@@ -140,14 +140,11 @@ export class ChooseCourseMaterialPage implements OnInit {
   this.trackingService.getAllUser(0,10)
   .subscribe(r =>
     {
-      // console.log("resssss",r['result']);
       r['result'].forEach(element => {
         if (element.courseId===course_ID){
           this.offset=element.offset
-          // console.log('yes',this.offset)
         }
         else if (element.courseId!==course_ID){
-          // console.log("no",this.offset)
         }
       })
     })

@@ -21,7 +21,7 @@ export class ExersiceCountService {
    }
 
   ngOnInit() {}
-  
+
   getExerciseSingleCount() {
     const courseId = JSON.parse(localStorage.getItem('courseId'))
     return this.exerciseService.getCourseExercise(1, courseId, 0, 100);
@@ -41,4 +41,6 @@ export class ExersiceCountService {
     const courseId = JSON.parse(localStorage.getItem('courseId'))
     return this.exerciseService.getCourseExercise(4, courseId, 0, 100)
   }
+
+
 }

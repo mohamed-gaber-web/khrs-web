@@ -1,5 +1,4 @@
 import { PuzzleWithImageAnswers } from './../models/puzzleWithImageAnswers';
-import { PuzzleImageTranslations } from './../models/puzzleImageTranslation';
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
@@ -7,14 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import {
   checkAnswerSingleChoise,
   getExercise,
-  getMultiChoiceAnswer,
   checkAnswerMultipleChoice,
   checkAnswerPuzzleText,
-  checkAnswerPuzzleImage }
+  checkAnswerPuzzleImage,
+  stratTestOnCourse}
 from './../../api.constants';
 import { PuzzleWithTextAnswer } from '../models/puzzleWithTextAnswer';
-
-
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +56,10 @@ export class ExerciseService {
 
   checkAnswerPuzzleWithImage(data: PuzzleWithImageAnswers[]) {
     return this.http.post(`${checkAnswerPuzzleImage}`, data);
+  }
+
+  startCourseTest(courseIdParam: any) {
+    return this.http.post(`${stratTestOnCourse}?courseId=${courseIdParam}`, {});
   }
 
 }

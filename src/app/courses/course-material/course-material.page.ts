@@ -67,8 +67,6 @@ export class CourseMaterialPage implements OnInit {
     .subscribe(params => {
       this.offset = +params['offset'] | 0;
     })
-
-    console.log(this.offset, this.materialCourseLength)
   }
 
   // ** Get material courses
@@ -98,8 +96,8 @@ export class CourseMaterialPage implements OnInit {
       this.player = null;
     }
     this.offset += 1; // get one request when add next
-    this.getMaterialCourse();
     this.slides.slideNext();
+    this.getMaterialCourse();
 
     if(this.offset === this.materialCourseLength) {
       var toast = await this.toastController.create({
@@ -188,7 +186,7 @@ export class CourseMaterialPage implements OnInit {
         endDate
       })
       )).subscribe(async (response) => {
-      console.log('am done today', response);
+      // console.log('am done today', response);
         if (response['success'] === true) {
           // localStorage.setItem('courseMaterialOffset', JSON.stringify(this.offset))
           const toast = await this.toastController.create({
