@@ -30,7 +30,7 @@ export class TopHeaderDesktopComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.authService.getUser();
-    this.getUserAmDoneToday();
+    // this.getUserAmDoneToday();
   }
 
   async logout() {
@@ -45,24 +45,21 @@ export class TopHeaderDesktopComponent implements OnInit {
   }
 
   // * getUserAmDoneToday
-  getUserAmDoneToday() {
-    this.sub.push(
-      this.trackingService.getAllUser(0, 10)
-      .subscribe(response => {
-      // console.log('getAllUerToday', response);
-      this.listNotifi = response['result'];
-      this.notifiCount = response['length'];
-      })
-    );
-  }
+  // getUserAmDoneToday() {
+  //   this.sub.push(
+  //     this.trackingService.getAllUser(0, 10)
+  //     .subscribe(response => {
+  //     this.listNotifi = response['result'];
+  //     this.notifiCount = response['length'];
+  //     })
+  //   );
+  // }
 
 
   onToggleColorTheme(event) {
     if(event.detail.checked) {
-      // document.body.setAttribute('color-theme', 'dark');
       this.renderer.setAttribute(document.body, 'color-theme', 'dark');
     } else {
-      // document.body.setAttribute('color-theme', 'light');
       this.renderer.setAttribute(document.body, 'color-theme', 'light');
     }
   }

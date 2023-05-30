@@ -1,16 +1,26 @@
-
 <ion-content>
-
-  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
+  <ion-spinner *ngIf="isLoading" color="primary" name="crescent"></ion-spinner>
 
   <ion-grid class="course_material">
     <ion-row>
       <!-- Start Details content -->
-      <ion-col ion-col size-lg="7" size-md="8" size-sm="6" size-xs="12" *ngIf="CourseDetails" class="course-details_left">
+      <ion-col
+        ion-col
+        size-lg="7"
+        size-md="8"
+        size-sm="6"
+        size-xs="12"
+        *ngIf="CourseDetails"
+        class="course-details_left"
+      >
         <!-- title -->
-          <h2 *ngIf="CourseDetails.courseTranslations" id="title" class="font-title-desktop ion-text-center">
-            {{ CourseDetails.courseTranslations[0].title }}
-          </h2>
+        <h2
+          *ngIf="CourseDetails.courseTranslations"
+          id="title"
+          class="font-title-desktop ion-text-center"
+        >
+          {{ CourseDetails.courseTranslations[0].title }}
+        </h2>
         <!-- title -->
 
         <!-- Content -->
@@ -24,71 +34,121 @@
         <!-- Content -->
 
         <!-- Start sound voice -->
-        <div *ngIf="CourseDetails.courseTranslations[0]?.introVoicePath" class="sound-inro">
+        <div
+          *ngIf="CourseDetails.courseTranslations[0]?.introVoicePath"
+          class="sound-inro"
+        >
           <div class="img-person">
             <img class="intro-logo" src="../../assets/images/char-person.png" />
           </div>
-        <div class="icon-sound">
-          <div class="img-volume">
-            <ion-img
-            class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-3"
-            (click)="startAudio(CourseDetails.courseTranslations[0]?.introVoicePath)" src="../../../assets/icon/Vector.png">
-          </ion-img>
+          <div class="icon-sound">
+            <div class="img-volume">
+              <ion-img
+                class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-3"
+                (click)="startAudio(CourseDetails.courseTranslations[0]?.introVoicePath)"
+                src="../../../assets/icon/Vector.png"
+              >
+              </ion-img>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- End sound voice -->
+        <!-- End sound voice -->
 
-      <!-- End Details content -->
+        <!-- End Details content -->
       </ion-col>
 
       <!-- Start right block -->
-      <ion-col *ngIf="CourseDetails" size-lg="3" size-md="4" size-sm="6" size-xs="12" class="course-right-block">
-
+      <ion-col
+        *ngIf="CourseDetails"
+        size-lg="3"
+        size-md="4"
+        size-sm="6"
+        size-xs="12"
+        class="course-right-block"
+      >
         <div class="card-block">
           <div *ngIf="CourseDetails" class="course-info">
             <ion-img loading="lazy" [src]="CourseDetails.imagePath"></ion-img>
           </div>
 
           <ul *ngIf="userCourseDetails">
-            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> From: </strong> {{ userCourseDetails['startDate'] | date }}  </li>
+            <li>
+              <ion-icon slot="start" name="time-outline"></ion-icon>
+              <strong> From: </strong> {{ userCourseDetails['startDate'] | date
+              }}
+            </li>
             <hr />
-            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> To: </strong> {{ userCourseDetails['endDate'] | date }}  </li>
+            <li>
+              <ion-icon slot="start" name="time-outline"></ion-icon>
+              <strong> To: </strong> {{ userCourseDetails['endDate'] | date }}
+            </li>
             <hr />
-            <li> <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Valid For: </strong>
+            <li>
+              <ion-icon slot="start" name="time-outline"></ion-icon>
+              <strong> Valid For: </strong>
               {{ validCourse }} day
             </li>
             <hr />
             <li>
-              <ion-icon slot="start" name="time-outline"></ion-icon> <strong> Remaining: </strong>
+              <ion-icon slot="start" name="time-outline"></ion-icon>
+              <strong> Remaining: </strong>
               {{ CourseDetails.remainingDayes }} days
             </li>
           </ul>
-
+          <!-- (click)="startTrackUser()" this function used in amDoneToday in button material -->
           <div class="btn-button" *ngIf="CourseDetails">
-              <ion-button [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'" [routerLink]="['/courses/course-material',
-              CourseDetails.courseTranslations[0].courseId]"  (click)="startTrackUser()" [queryParams]="{offset: offset}" routerDirection="root"> Material </ion-button>
+            <ion-button
+              [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'"
+              [routerLink]="['/courses/course-material',
+              CourseDetails.courseTranslations[0].courseId]"
+              [queryParams]="{offset: offset}"
+              routerDirection="root"
+            >
+              Material
+            </ion-button>
 
-              <ion-button [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'" (click)="sendIdToExercisePage()"> Exercise </ion-button>
+            <ion-button
+              [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'"
+              (click)="sendIdToExercisePage()"
+            >
+              Exercise
+            </ion-button>
 
-              <ion-button [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'"  (click)="sendIdToFinalTestPage()">
-                <ion-icon name="lock-closed-outline" class="final"></ion-icon>
-                  Final Test
-              </ion-button>
+            <ion-button
+              [disabled]="CourseDetails.remainingDayes === 0 && userType !== 'Admin'"
+              (click)="sendIdToFinalTestPage()"
+            >
+              <ion-icon name="lock-closed-outline" class="final"></ion-icon>
+              Final Test
+            </ion-button>
 
-              <ion-button *ngIf="CourseDetails.status === 1"  (click)="toggleModal()">
-                <img class="img-icon" src="../../../assets/images/rating.png" alt="rating" />
-                Rating
-              </ion-button>
+            <ion-button
+              *ngIf="CourseDetails.status === 1"
+              (click)="toggleModal()"
+            >
+              <img
+                class="img-icon"
+                src="../../../assets/images/rating.png"
+                alt="rating"
+              />
+              Rating
+            </ion-button>
           </div>
         </div>
 
         <div class="video-inro card-block" *ngIf="CourseDetails">
-          <video *ngIf="CourseDetails?.courseTranslations[0]?.introVideoPath" width="100%" height="230" controls>
-            <source [src]="CourseDetails.courseTranslations[0].introVideoPath" type="video/mp4">
+          <video
+            *ngIf="CourseDetails?.courseTranslations[0]?.introVideoPath"
+            width="100%"
+            height="230"
+            controls
+          >
+            <source
+              [src]="CourseDetails.courseTranslations[0].introVideoPath"
+              type="video/mp4"
+            />
           </video>
         </div>
-
       </ion-col>
       <!-- End Right block -->
     </ion-row>
@@ -96,10 +156,13 @@
 
   <ion-grid *ngIf="CourseDetails">
     <div [ngClass]="!isOpen ? 'overlay hide' : 'overlay show' ">
-      <div class="close" (click)="closeModal()"> <ion-icon name="close-circle"></ion-icon> </div>
-      <app-course-rating  [courseName]="CourseDetails.courseTranslations[0].title" [courseIdRate]="courseId"></app-course-rating>
+      <div class="close" (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </div>
+      <app-course-rating
+        [courseName]="CourseDetails.courseTranslations[0].title"
+        [courseIdRate]="courseId"
+      ></app-course-rating>
     </div>
-</ion-grid>
-
+  </ion-grid>
 </ion-content>
-

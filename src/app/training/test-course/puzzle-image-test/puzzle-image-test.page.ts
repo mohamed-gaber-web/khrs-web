@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { PuzzleImageTranslations } from 'src/app/shared/models/puzzleImageTranslation';
 import { PuzzleImageZoomComponent } from './puzzle-image-zoom/puzzle-image-zoom.component';
 
+import { Howl } from 'howler';
+
 @Component({
   selector: 'app-puzzle-image-test',
   templateUrl: './puzzle-image-test.page.html',
@@ -39,6 +41,13 @@ export class PuzzleImageTestPage implements OnInit {
   currentIndex: number = 0;
   audio = new Audio('../../../assets/iphone_ding.mp3');
 
+  //howler
+  player: Howl = null;
+  isPlaying: boolean = false;
+  voicePath: string;
+  voicePathDanish: string;
+  activeTrack: string;
+
   @ViewChild('slides') slides: IonSlides;
   @ViewChild('image') image: ElementRef;
 
@@ -65,6 +74,7 @@ export class PuzzleImageTestPage implements OnInit {
   ngOnInit() {
     this.courseId = +this.route.snapshot.paramMap.get('courseId');
     this.getQuestionAndAnswer();
+    this.userInfo = this.storageService.getUser();
   }
 
 // ** get question and answer puzzle image
@@ -136,6 +146,17 @@ getQuestionAndAnswer() {
               ].imageGuidId;
             apz.type = 'answer';
             apz.disabled = false;
+
+            // Sound
+            apz.voicePath =
+              this.questionAndAnswerItems.puzzleImagesTranslation[
+                index
+              ].voicePath;
+            apz.voicePathDanish =
+              this.questionAndAnswerItems.puzzleImagesTranslation[
+                index
+              ].voicePathDanish;
+            // Sound
 
             this.answersArray.push(apz);
           }
@@ -211,7 +232,11 @@ slideNext() {
       }
     )
     .subscribe((response) => {
-      console.log(response)
+      // Stop sound when next questin
+      if (this.player) {
+        this.player.stop();
+      }
+      // Stop sound when next questin
       this.userTestId = response['result'].userTestId;
       this.pageNumber += 1;
       // ** check last question
@@ -231,7 +256,6 @@ slideNext() {
 }
 
 slidePrev() {
-
   this.pageNumber -= 1;
   this.getQuestionAndAnswer();
   this.slides.slidePrev();
@@ -287,12 +311,32 @@ finishedTest() {
   })
 }
 
+// Start Audio
+startAudio(voicePath: string) {
+  if (this.player) {
+    this.player.stop();
+  }
+  this.player = new Howl({
+    html5: true,
+    src: voicePath,
+    onplay: () => {
+      this.activeTrack = voicePath;
+      this.isPlaying = true;
+    },
+    onend: () => {},
+  });
+  this.player.play();
+}
+
 
 
 ngOnDestroy() {
   this.subs.forEach(e => {
     e.unsubscribe();
-  })
+  });
+  if (this.player) {
+    this.player.stop();
+  }
 }
 
 }

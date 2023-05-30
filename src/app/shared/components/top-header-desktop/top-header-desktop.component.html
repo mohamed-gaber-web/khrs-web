@@ -60,7 +60,7 @@
         </button>
       </mat-menu>
     </ul>
-    <div class="user-notification">
+    <!-- <div class="user-notification">
       <ion-icon (click)="toggleModal()" name="notifications"> </ion-icon>
       <span> {{ notifiCount }} </span>
       <div *ngIf="toggle" class="user-noti-card">
@@ -76,12 +76,12 @@
           <hr />
         </div>
       </div>
-    </div>
-    <li>
+    </div> -->
+    <div>
       <ion-toggle
         (ionChange)="onToggleColorTheme($event)"
         color="primary"
       ></ion-toggle>
-    </li>
+    </div>
   </div>
 </header>

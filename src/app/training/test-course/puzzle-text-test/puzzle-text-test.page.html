@@ -5,104 +5,124 @@
 </ion-header> -->
 
 <ion-content>
+  <ion-spinner *ngIf="isLoading" color="primary" name="crescent"></ion-spinner>
 
-  <ion-spinner *ngIf='isLoading' color="primary" name="crescent"></ion-spinner>
-
-  <ion-slides  [pager]="false" #slides [options]="slideOpts">
+  <ion-slides [pager]="false" #slides [options]="slideOpts">
     <ion-slide>
-
       <div cdkDropListGroup class="drag-group">
         <ion-grid class="puzzle-text">
-
           <ion-row>
-
-            <ion-col size="12"
+            <ion-col
+              size="12"
               class="block"
               cdkDropList
               *ngFor="let item of questionsArray"
               [cdkDropListData]="item"
               cdkDropListSortingDisabled
               cdkDropListOrientation="horizontal"
-              (cdkDropListDropped)="drop($event)">
-
-              <div *ngFor="let item2 of item" [cdkDragDisabled]="item2.disabled" cdkDrag>
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                *ngFor="let item2 of item"
+                [cdkDragDisabled]="item2.disabled"
+                cdkDrag
+              >
+                <!-- Sound -->
+                <div class="sound" *ngIf="item2.voicePath">
+                  <div class="sound-bg">
+                    <div class="img-volume">
+                      <ion-icon
+                        class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2"
+                        [name]="!item2.audioElement.status? 'play' : 'stop'"
+                        (click)="playAudio(item2)"
+                      >
+                      </ion-icon>
+                    </div>
+                  </div>
+                  <img class="danish-flag" [src]="item2.flag" alt="" />
+                </div>
+                <!-- Sound -->
                 <ion-text color="primary"> {{ item2.text }} </ion-text>
               </div>
             </ion-col>
-
           </ion-row>
         </ion-grid>
 
-      <ion-grid class="puzzle-answer">
-        <ion-row>
-            <ion-col color="primary"
-            size="12"
-            cdkDropList
-            [cdkDropListData]="answersArray"
-            (cdkDropListDropped)="drop($event)">
+        <ion-grid class="puzzle-answer">
+          <ion-row>
+            <ion-col
+              color="primary"
+              size="12"
+              cdkDropList
+              [cdkDropListData]="answersArray"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div class="puzzle-fix" *ngFor="let item of answersArray" cdkDrag>
+                <div class="title">{{ item.text }}</div>
+                <!-- Sound -->
+                <div class="sound" *ngIf="item.voicePath">
+                  <div class="sound-bg">
+                    <div class="img-volume">
+                      <ion-icon
+                        class="animate__animated animate__jello animate__delay-2s animate__bounce animate__repeat-2"
+                        [name]="!item.audioElement.status? 'play' : 'stop'"
+                        (click)="playAudio(item)"
+                      >
+                      </ion-icon>
+                    </div>
+                  </div>
+                  <img [src]="item.flag" alt="" />
+                </div>
+                <!-- Sound -->
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-            <div class="puzzle-fix" *ngFor="let item of answersArray" cdkDrag>
-
-              <div class="title"> {{ item.text }} </div>
-            </div>
-
-          </ion-col>
-
-        </ion-row>
-      </ion-grid>
-
-      <!-- Button next and prev -->
-
+        <!-- Button next and prev -->
       </div>
-
     </ion-slide>
-    </ion-slides>
-    <app-test-finished *ngIf="lengthItems === pageNumber"></app-test-finished>
+  </ion-slides>
+  <app-test-finished *ngIf="lengthItems === pageNumber"></app-test-finished>
 
+  <ion-grid *ngIf="lengthItems !== pageNumber">
+    <ion-row class="ion-align-items-center slide-button">
+      <ion-col size="4">
+        <ion-button *ngIf="nextButton" (click)="slidePrev()">
+          <ion-icon name="chevron-back-outline"></ion-icon> prev
+        </ion-button>
+      </ion-col>
 
-    <ion-grid *ngIf="lengthItems !== pageNumber">
-      <ion-row class="ion-align-items-center slide-button">
+      <ion-col size="4">
+        <ion-button (click)="ScapeSlidePrev()">
+          Escape <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
 
-        <ion-col size="4">
-          <ion-button
-          *ngIf="nextButton"
-          (click)="slidePrev()"> <ion-icon name="chevron-back-outline"></ion-icon> prev </ion-button>
-        </ion-col>
+      <ion-col size="4">
+        <ion-button *ngIf="nextButton" (click)="slideNext()">
+          next <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-        <ion-col size="4">
-          <ion-button
-            (click)="ScapeSlidePrev()"
-            >  Escape <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
-        </ion-col>
+  <ion-grid
+    style="position: relative; top: -150px"
+    *ngIf="lengthItems === pageNumber"
+  >
+    <ion-row class="ion-align-items-center slide-button">
+      <ion-col size="6">
+        <ion-button *ngIf="nextButton" (click)="finishSlidePrev()">
+          <ion-icon name="chevron-back-outline"></ion-icon> prev
+        </ion-button>
+      </ion-col>
 
-        <ion-col size="4">
-          <ion-button
-          *ngIf="nextButton"
-            (click)="slideNext()"
-            >  next <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
-        </ion-col>
-
-      </ion-row>
-    </ion-grid>
-
-    <ion-grid style="position: relative; top: -150px;" *ngIf="lengthItems === pageNumber">
-      <ion-row class="ion-align-items-center slide-button">
-
-        <ion-col size="6">
-          <ion-button
-          *ngIf="nextButton"
-          (click)="finishSlidePrev()"> <ion-icon name="chevron-back-outline"></ion-icon> prev </ion-button>
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-button
-          *ngIf="nextButton"
-            (click)="finishedTest()"
-            >  Submit <ion-icon name="chevron-forward-outline"></ion-icon> </ion-button>
-        </ion-col>
-
-      </ion-row>
-    </ion-grid>
-
-
+      <ion-col size="6">
+        <ion-button *ngIf="nextButton" (click)="finishedTest()">
+          Submit <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

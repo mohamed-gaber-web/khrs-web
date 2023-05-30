@@ -116,39 +116,37 @@ export class ChooseCourseMaterialPage implements OnInit {
 
   startAudio(x) { }
 
-  // ** start tracking
+  // ** start tracking this function used in amDoneToday
+  // startTrackUser() {
+  //   const startDate = new Date();
+  //   const data: IStartTracking = {
+  //     courseId: this.courseId,
+  //     limit: 1,
+  //     offset: 0,
+  //     type: 0,
+  //     startDate: startDate
+  //   }
+  //   this.trackingService.startTracking(data)
+  //     .subscribe(response => {
+  //     }, (error) => {
+  //     }, () => {
 
-  startTrackUser() {
-    const startDate = new Date();
-    const data: IStartTracking = {
-      courseId: this.courseId,
-      limit: 1,
-      offset: 0,
-      type: 0,
-      startDate: startDate
-    }
-    this.trackingService.startTracking(data)
-      .subscribe(response => {
-      }, (error) => {
-      }, () => {
+  //     })
+  // }
 
-      })
-  }
-
-  getUserOffset(course_ID:number) {
-
-  this.trackingService.getAllUser(0,10)
-  .subscribe(r =>
-    {
-      r['result'].forEach(element => {
-        if (element.courseId===course_ID){
-          this.offset=element.offset
-        }
-        else if (element.courseId!==course_ID){
-        }
-      })
-    })
-}
+// getUserOffset(course_ID:number) {
+//   this.trackingService.getAllUser(0,10)
+//   .subscribe(r =>
+//     {
+//       r['result'].forEach(element => {
+//         if (element.courseId===course_ID){
+//           this.offset=element.offset
+//         }
+//         else if (element.courseId!==course_ID){
+//         }
+//       })
+//     })
+// }
 
   // ** open course rating component
   toggleModal() {
